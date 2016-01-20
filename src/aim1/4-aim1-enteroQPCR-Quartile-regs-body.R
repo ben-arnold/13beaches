@@ -31,7 +31,7 @@ library(sandwich)
 library(lmtest)
 
 # source the base functions
-source("~/dropbox/13beaches/src/aim1/0-aim1-base-functions.R")
+source("~/13beaches/src/aim1/0-aim1-base-functions.R")
 
 # --------------------------------------
 # load the and pre-preprocess the 

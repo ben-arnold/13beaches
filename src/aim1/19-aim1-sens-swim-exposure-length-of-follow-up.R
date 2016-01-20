@@ -29,7 +29,7 @@ library(lmtest)
 library(RColorBrewer)
 
 # source the base functions
-source("~/dropbox/13beaches/src/aim1/0-aim1-base-functions.R")
+source("~/13beaches/src/aim1/0-aim1-base-functions.R")
 
 
 # --------------------------------------

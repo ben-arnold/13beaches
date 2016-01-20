@@ -12,8 +12,10 @@ R CMD BATCH 7-aim1-entero1600-noswim470cce-regs-body.R
 R CMD BATCH 8-aim1-descriptive-stat.R
 R CMD BATCH 9-aim1-homogeneity-tests.R
 R CMD BATCH 10-aim1-wq-summary-tables.R
-R CMD BATCH 11-aim1-sens-entero1600-35cfu-regs-noswim.R
-R CMD BATCH 12-aim1-sens-entero1600-Quartile-regs-noswim.R
+R CMD BATCH 11-aim1-sens-entero1600-35cfu-regs-noswim-negcontrol.R
+R CMD BATCH 11-aim1-sens-enteroQPCR-470cce-regs-noswim-negcontrol.R
+R CMD BATCH 12-aim1-sens-entero1600-Quartile-regs-noswim-negcontrol.R
+R CMD BATCH 12-aim1-sens-enteroQPCR-Quartile-regs-noswim-negcontrol.R
 R CMD BATCH 13-aim1-sens-entero1600-continuous-regs-body.R
 R CMD BATCH 14-aim1-sens-entero1600-continuous-regs-head.R
 R CMD BATCH 15-aim1-sens-enteroQPCR-continuous-regs-body.R

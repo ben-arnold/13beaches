@@ -1,5 +1,5 @@
 
-R version 3.2.1 (2015-06-18) -- "World-Famous Astronaut"
+R version 3.2.0 (2015-04-16) -- "Full of Ingredients"
 Copyright (C) 2015 The R Foundation for Statistical Computing
 Platform: x86_64-apple-darwin13.4.0 (64-bit)
 
@@ -26,15 +26,8 @@ Type 'q()' to quit R.
 > # Calculate Cochran's Q statistic and
 > # the related Higgens' I squared for
 > # swim exposure analyses and for
-> # the Enterococcus qunitle analyses
+> # the Enterococcus analyses
 > #
-> # version 3 (14 Aug 2015)
-> # updated script to save results to file
-> #
-> # version 2 (21 feb 2015)
-> # added tests for enterococcus 1600 + 1611
-> #
-> # version 1 (16 feb 2015)
 > # ------------------------------------
 > 
 > # ------------------------------------
@@ -181,21 +174,21 @@ Type 'q()' to quit R.
 > # ------------------------------------
 > bI <- I2calc(bCIRs,cir.body)
 
- Cochran's Q = 18.52329
- Pr(Q,df=12)   = 0.1007007
- I squared   = 35.2167
+ Cochran's Q = 18.52469
+ Pr(Q,df=12)   = 0.1006629
+ I squared   = 35.2216
 
 > hI <- I2calc(hCIRs,cir.head)
 
- Cochran's Q = 15.72061
- Pr(Q,df=12)   = 0.2043704
- I squared   = 23.66708
+ Cochran's Q = 15.72582
+ Pr(Q,df=12)   = 0.2041194
+ I squared   = 23.69235
 
 > sI <- I2calc(sCIRs,cir.swall)
 
- Cochran's Q = 21.60436
- Pr(Q,df=12)   = 0.0422007
- I squared   = 44.45567
+ Cochran's Q = 21.6016
+ Pr(Q,df=12)   = 0.0422352
+ I squared   = 44.44856
 
 > 
 > # ------------------------------------
@@ -232,9 +225,9 @@ Type 'q()' to quit R.
 > # run tests for Entero 1600
 > entero1600I <- I2calc(entero1600.cirs,cir.all[3,1])
 
- Cochran's Q = 34.98999
- Pr(Q,df=10)   = 0.0001253574
- I squared   = 71.4204
+ Cochran's Q = 35.25506
+ Pr(Q,df=10)   = 0.0001129474
+ I squared   = 71.63528
 
 > 
 > 
@@ -253,9 +246,9 @@ Type 'q()' to quit R.
 > # run tests for Entero 1611
 > enteroQPCRI <- I2calc(enteroQPCR.cirs,cir.all[3,1])
 
- Cochran's Q = 70.65143
- Pr(Q,df=10)   = 3.318379e-11
- I squared   = 85.84601
+ Cochran's Q = 70.63433
+ Pr(Q,df=10)   = 3.343736e-11
+ I squared   = 85.84258
 
 > 
 > 
@@ -274,4 +267,4 @@ Type 'q()' to quit R.
 > 
 > proc.time()
    user  system elapsed 
-  3.632   0.163   3.821 
+  2.773   0.301   4.770 

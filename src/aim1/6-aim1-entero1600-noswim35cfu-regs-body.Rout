@@ -44,10 +44,6 @@ Type 'q()' to quit R.
 > # non-swimmers as the reference group. In the other program, swimmers <=35 CFU are the
 > # reference group.
 > #
-> # version 2 (12 aug 2015)
-> # cleaned up code by cutting extra lines
-> #
-> # version 1 (5 aug 2015)
 > #
 > # --------------------------------------
 > 
@@ -80,12 +76,12 @@ The following objects are masked from ‘package:base’:
 > ad <- preprocess.13beaches("~/dropbox/13beaches/data/final/13beaches-analysis.csv")
 
 Successfully loaded the data
- Total sample size = 88083 
+ Total sample size = 84411 
 
 Dropping individuals with GI illness at enrollment
- N = 2025 
+ N = 1948 
 
-Final sample size = 86058 
+Final sample size = 82463 
 
 Subsetting the data to relevant variables and completing final variable pre-processing> 
 > # subset to non-missing exposure categories
@@ -93,14 +89,14 @@ Subsetting the data to relevant variables and completing final variable pre-proc
 > table(ad$anycontact,ad$bodycontact)
      
          No   Yes
-  No  26756     0
-  Yes 11722 47580
+  No  25093     0
+  Yes 11055 46315
 > ad <- subset(ad,ad$anycontact=="No" | ad$bodycontact=="Yes")
 > 	dim(ad)
-[1] 74336    50
+[1] 71408    50
 > ad <- subset(ad,is.na(ad$swim35)==FALSE)
 > 	dim(ad)
-[1] 73997    50
+[1] 71162    50
 > 
 > 
 > # --------------------------------------
@@ -161,9 +157,9 @@ Subsetting the data to relevant variables and completing final variable pre-proc
 z test of coefficients:
 
                   Estimate Std. Error  z value  Pr(>|z|)    
-(Intercept)      -3.418007   0.035290 -96.8539 < 2.2e-16 ***
-swim35Below35cfu  0.229718   0.044057   5.2141 1.848e-07 ***
-swim35Above35cfu  0.543589   0.069515   7.8197 5.293e-15 ***
+(Intercept)      -3.353837   0.035219 -95.2285 < 2.2e-16 ***
+swim35Below35cfu  0.188857   0.043985   4.2936 1.758e-05 ***
+swim35Above35cfu  0.516869   0.069352   7.4529 9.133e-14 ***
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
@@ -177,9 +173,9 @@ Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’
 z test of coefficients:
 
                  Estimate Std. Error  z value  Pr(>|z|)    
-(Intercept)      -3.13610    0.12272 -25.5559 < 2.2e-16 ***
-swim35Below35cfu  0.36710    0.14165   2.5916  0.009554 ** 
-swim35Above35cfu  0.81096    0.18045   4.4941 6.985e-06 ***
+(Intercept)      -3.03988    0.12235 -24.8461 < 2.2e-16 ***
+swim35Below35cfu  0.30975    0.14129   2.1923   0.02836 *  
+swim35Above35cfu  0.76217    0.17996   4.2352 2.283e-05 ***
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
@@ -193,9 +189,9 @@ Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’
 z test of coefficients:
 
                  Estimate Std. Error  z value  Pr(>|z|)    
-(Intercept)      -3.99360    0.22198 -17.9911 < 2.2e-16 ***
-swim35Below35cfu  0.63580    0.23203   2.7402  0.006141 ** 
-swim35Above35cfu  1.05542    0.25224   4.1841 2.863e-05 ***
+(Intercept)      -3.85545    0.22168 -17.3921 < 2.2e-16 ***
+swim35Below35cfu  0.53643    0.23173   2.3149 0.0206161 *  
+swim35Above35cfu  0.96143    0.25186   3.8173 0.0001349 ***
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
@@ -209,9 +205,9 @@ Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’
 z test of coefficients:
 
                   Estimate Std. Error  z value  Pr(>|z|)    
-(Intercept)      -3.413894   0.036350 -93.9186 < 2.2e-16 ***
-swim35Below35cfu  0.206024   0.046931   4.3899 1.134e-05 ***
-swim35Above35cfu  0.483913   0.081119   5.9655 2.439e-09 ***
+(Intercept)      -3.355109   0.036298 -92.4322 < 2.2e-16 ***
+swim35Below35cfu  0.164830   0.046877   3.5162 0.0004377 ***
+swim35Above35cfu  0.457849   0.081002   5.6524 1.583e-08 ***
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
@@ -228,9 +224,9 @@ Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’
 z test of coefficients:
 
                   Estimate Std. Error  z value  Pr(>|z|)    
-(Intercept)      -3.584559   0.057100 -62.7769 < 2.2e-16 ***
-swim35Below35cfu  0.412170   0.070295   5.8634 4.534e-09 ***
-swim35Above35cfu  0.139544   0.200940   0.6945    0.4874    
+(Intercept)      -3.441858   0.056871 -60.5207 < 2.2e-16 ***
+swim35Below35cfu  0.324264   0.070052   4.6289 3.676e-06 ***
+swim35Above35cfu  0.249583   0.199285   1.2524    0.2104    
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
@@ -244,9 +240,9 @@ Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’
 z test of coefficients:
 
                  Estimate Std. Error  z value Pr(>|z|)    
-(Intercept)      -3.21888    0.17502 -18.3920  < 2e-16 ***
-swim35Below35cfu  0.41064    0.20576   1.9957  0.04596 *  
-swim35Above35cfu  0.51083    0.40763   1.2532  0.21014    
+(Intercept)      -3.04939    0.17408 -17.5169   <2e-16 ***
+swim35Below35cfu  0.32711    0.20482   1.5971   0.1102    
+swim35Above35cfu  0.63860    0.40383   1.5813   0.1138    
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
@@ -259,10 +255,10 @@ Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’
 
 z test of coefficients:
 
-                 Estimate Std. Error  z value  Pr(>|z|)    
-(Intercept)      -4.33892    0.35138 -12.3482 < 2.2e-16 ***
-swim35Below35cfu  0.99237    0.36451   2.7225  0.006479 ** 
-swim35Above35cfu -0.14971    0.67140  -0.2230  0.823546    
+                 Estimate Std. Error  z value Pr(>|z|)    
+(Intercept)      -4.07965    0.35059 -11.6366  < 2e-16 ***
+swim35Below35cfu  0.81221    0.36369   2.2333  0.02553 *  
+swim35Above35cfu -0.14474    0.66942  -0.2162  0.82881    
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
@@ -276,9 +272,9 @@ Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’
 z test of coefficients:
 
                   Estimate Std. Error  z value  Pr(>|z|)    
-(Intercept)      -3.584444   0.059183 -60.5657 < 2.2e-16 ***
-swim35Below35cfu  0.405092   0.074353   5.4482 5.088e-08 ***
-swim35Above35cfu  0.265312   0.242737   1.0930    0.2744    
+(Intercept)      -3.450728   0.059020 -58.4676 < 2.2e-16 ***
+swim35Below35cfu  0.314471   0.074165   4.2402 2.234e-05 ***
+swim35Above35cfu  0.363826   0.241275   1.5079    0.1316    
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
@@ -992,7 +988,7 @@ agecat75+             -15.9601  4018.5610  -0.004  0.99683
 agecatMissing         -15.8019  1189.0054  -0.013  0.98940    
 female                 -0.2014     0.2625  -0.767  0.44302    
 racewhiteYes            0.4170     0.3282   1.270  0.20397    
-racewhiteMissing       17.2252  1189.0065   0.014  0.98844    
+racewhiteMissing       17.2252  1189.0064   0.014  0.98844    
 gichronYes              1.1781     0.6132   1.921  0.05472 .  
 gichronMissing          0.4965     1.6475   0.301  0.76313    
 anim_anyYes             0.1647     0.3117   0.529  0.59711    
@@ -1028,10 +1024,10 @@ agecat45-54           -0.35780    0.57299  -0.6244  0.532339
 agecat55-64          -15.86480    0.47580 -33.3437 < 2.2e-16 ***
 agecat65-74            0.22649    1.08411   0.2089  0.834514    
 agecat75+            -15.96008    0.81871 -19.4942 < 2.2e-16 ***
-agecatMissing        -15.80186    0.56395 -28.0201 < 2.2e-16 ***
+agecatMissing        -15.80186    0.56398 -28.0183 < 2.2e-16 ***
 female                -0.20136    0.26531  -0.7589  0.447889    
 racewhiteYes           0.41698    0.33679   1.2381  0.215679    
-racewhiteMissing      17.22520    0.98288  17.5253 < 2.2e-16 ***
+racewhiteMissing      17.22520    0.98283  17.5261 < 2.2e-16 ***
 gichronYes             1.17805    0.50941   2.3126  0.020746 *  
 gichronMissing         0.49652    0.90865   0.5464  0.584768    
 anim_anyYes            0.16474    0.32391   0.5086  0.611028    
@@ -1267,8 +1263,8 @@ Call:
 glm(formula = formula, family = poisson(link = "log"), data = dat)
 
 Deviance Residuals: 
-     Min        1Q    Median        3Q       Max  
--0.74331  -0.26777  -0.21165  -0.00004   2.69738  
+    Min       1Q   Median       3Q      Max  
+-0.7433  -0.2930  -0.2468  -0.2102   2.6974  
 
 Coefficients:
                       Estimate Std. Error z value Pr(>|z|)    
@@ -1286,7 +1282,7 @@ agecat75+             -0.74722    1.01667  -0.735  0.46236
 agecatMissing         -2.01599    1.01086  -1.994  0.04612 *  
 female                -0.09474    0.12951  -0.732  0.46444    
 racewhiteYes           0.42490    0.14888   2.854  0.00432 ** 
-racewhiteMissing     -17.80492  468.66086  -0.038  0.96969    
+racewhiteMissing     -12.74572  321.79822  -0.040  0.96841    
 gichronYes             0.87814    0.28143   3.120  0.00181 ** 
 anim_anyYes            0.31655    0.14740   2.148  0.03174 *  
 gicontactbaseYes       0.33172    0.34221   0.969  0.33239    
@@ -1297,11 +1293,11 @@ Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’
 
 (Dispersion parameter for poisson family taken to be 1)
 
-    Null deviance: 1807.5  on 9588  degrees of freedom
-Residual deviance: 1557.0  on 9569  degrees of freedom
+    Null deviance: 1634.4  on 6753  degrees of freedom
+Residual deviance: 1557.0  on 6734  degrees of freedom
 AIC: 2091
 
-Number of Fisher Scoring iterations: 19
+Number of Fisher Scoring iterations: 14
 
 
 
@@ -1309,27 +1305,27 @@ Robust, Sandwich Standard Errors Account for Clustering:
 
 z test of coefficients:
 
-                       Estimate Std. Error   z value  Pr(>|z|)    
-(Intercept)           -3.101725   0.209426  -14.8106 < 2.2e-16 ***
-swim35Below35cfu       0.572064   0.153355    3.7303 0.0001912 ***
-swim35Above35cfu       0.233391   0.331149    0.7048 0.4809404    
-agecat5-14            -0.867431   0.230254   -3.7673 0.0001650 ***
-agecat15-24           -0.845951   0.270108   -3.1319 0.0017368 ** 
-agecat25-34           -0.376370   0.211502   -1.7795 0.0751556 .  
-agecat35-44           -0.518898   0.243180   -2.1338 0.0328590 *  
-agecat45-54           -0.376993   0.284286   -1.3261 0.1848041    
-agecat55-64           -1.526427   0.607054   -2.5145 0.0119207 *  
-agecat65-74           -1.439689   0.972312   -1.4807 0.1386904    
-agecat75+             -0.747223   1.025078   -0.7289 0.4660368    
-agecatMissing         -2.015988   0.983060   -2.0507 0.0402935 *  
-female                -0.094741   0.119890   -0.7902 0.4293905    
-racewhiteYes           0.424897   0.177433    2.3947 0.0166345 *  
-racewhiteMissing     -17.804922   0.100674 -176.8575 < 2.2e-16 ***
-gichronYes             0.878137   0.280139    3.1347 0.0017206 ** 
-anim_anyYes            0.316555   0.170177    1.8602 0.0628636 .  
-gicontactbaseYes       0.331716   0.295725    1.1217 0.2619890    
-gicontactbaseMissing   0.252848   0.346527    0.7297 0.4655959    
-rawfood               -0.320696   0.143577   -2.2336 0.0255083 *  
+                       Estimate Std. Error  z value  Pr(>|z|)    
+(Intercept)           -3.101725   0.209524 -14.8036 < 2.2e-16 ***
+swim35Below35cfu       0.572064   0.153427   3.7286 0.0001926 ***
+swim35Above35cfu       0.233391   0.331305   0.7045 0.4811463    
+agecat5-14            -0.867431   0.230363  -3.7655 0.0001662 ***
+agecat15-24           -0.845951   0.270235  -3.1304 0.0017455 ** 
+agecat25-34           -0.376370   0.211601  -1.7787 0.0752925 .  
+agecat35-44           -0.518898   0.243294  -2.1328 0.0329411 *  
+agecat45-54           -0.376993   0.284419  -1.3255 0.1850103    
+agecat55-64           -1.526427   0.607339  -2.5133 0.0119607 *  
+agecat65-74           -1.439689   0.972768  -1.4800 0.1388756    
+agecat75+             -0.747223   1.025559  -0.7286 0.4662460    
+agecatMissing         -2.015988   0.983521  -2.0498 0.0403873 *  
+female                -0.094741   0.119946  -0.7899 0.4296071    
+racewhiteYes           0.424897   0.177517   2.3936 0.0166855 *  
+racewhiteMissing     -12.745723   0.291937 -43.6591 < 2.2e-16 ***
+gichronYes             0.878137   0.280270   3.1332 0.0017292 ** 
+anim_anyYes            0.316555   0.170257   1.8593 0.0629871 .  
+gicontactbaseYes       0.331716   0.295864   1.1212 0.2622129    
+gicontactbaseMissing   0.252848   0.346690   0.7293 0.4658053    
+rawfood               -0.320696   0.143644  -2.2326 0.0255774 *  
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
@@ -1428,92 +1424,92 @@ glm(formula = diarrheaci10 ~ swim35 + agecat + female + racewhite +
 
 Deviance Residuals: 
     Min       1Q   Median       3Q      Max  
--1.0550  -0.3044  -0.2578  -0.2213   2.9768  
+-1.0567  -0.3071  -0.2612  -0.2275   2.6368  
 
 Coefficients:
                      Estimate Std. Error z value Pr(>|z|)    
-(Intercept)          -3.07543    0.09949 -30.911  < 2e-16 ***
-swim35Below35cfu      0.33772    0.04599   7.343 2.09e-13 ***
-swim35Above35cfu      0.52395    0.06884   7.611 2.71e-14 ***
-agecat5-14           -0.73491    0.07063 -10.405  < 2e-16 ***
-agecat15-24          -0.70562    0.07607  -9.276  < 2e-16 ***
-agecat25-34          -0.30766    0.07130  -4.315 1.60e-05 ***
-agecat35-44          -0.34730    0.06995  -4.965 6.88e-07 ***
-agecat45-54          -0.49794    0.07717  -6.453 1.10e-10 ***
-agecat55-64          -0.58242    0.09899  -5.884 4.01e-09 ***
-agecat65-74          -0.86999    0.17292  -5.031 4.88e-07 ***
-agecat75+            -0.94152    0.30800  -3.057 0.002236 ** 
-agecatMissing        -0.64969    0.19129  -3.396 0.000683 ***
-female                0.06510    0.03747   1.737 0.082357 .  
-racewhiteYes          0.18840    0.05389   3.496 0.000472 ***
-racewhiteMissing     -1.73579    0.23646  -7.341 2.12e-13 ***
-gichronYes            0.80509    0.07929  10.154  < 2e-16 ***
-gichronMissing        0.69947    0.70848   0.987 0.323505    
-anim_anyYes           0.21106    0.04430   4.764 1.90e-06 ***
-gicontactbaseYes      0.65839    0.06735   9.775  < 2e-16 ***
-gicontactbaseMissing  0.31096    0.19116   1.627 0.103799    
-rawfood               0.19985    0.04571   4.372 1.23e-05 ***
-beachBoqueron        -0.51404    0.09152  -5.617 1.95e-08 ***
-beachDoheny          -0.24662    0.08549  -2.885 0.003916 ** 
-beachEdgewater        0.04787    0.14246   0.336 0.736843    
-beachFairhope         0.09017    0.11977   0.753 0.451539    
-beachGoddard         -0.53609    0.13140  -4.080 4.51e-05 ***
-beachHuntington       0.30154    0.10367   2.909 0.003629 ** 
-beachMalibu          -0.02449    0.09405  -0.260 0.794598    
-beachMission Bay     -0.28124    0.09432  -2.982 0.002866 ** 
-beachSilver          -0.46990    0.08445  -5.564 2.63e-08 ***
-beachSurfside        -0.42603    0.08389  -5.078 3.81e-07 ***
-beachWashington Park -0.16243    0.09847  -1.650 0.099029 .  
-beachWest             0.14421    0.10446   1.381 0.167410    
+(Intercept)          -3.09914    0.09971 -31.082  < 2e-16 ***
+swim35Below35cfu      0.33608    0.04600   7.306 2.75e-13 ***
+swim35Above35cfu      0.52660    0.06887   7.647 2.06e-14 ***
+agecat5-14           -0.73612    0.07063 -10.422  < 2e-16 ***
+agecat15-24          -0.70489    0.07608  -9.266  < 2e-16 ***
+agecat25-34          -0.30725    0.07130  -4.309 1.64e-05 ***
+agecat35-44          -0.34996    0.06996  -5.002 5.66e-07 ***
+agecat45-54          -0.49945    0.07716  -6.473 9.63e-11 ***
+agecat55-64          -0.58322    0.09899  -5.892 3.83e-09 ***
+agecat65-74          -0.87209    0.17292  -5.043 4.57e-07 ***
+agecat75+            -0.94512    0.30800  -3.069 0.002150 ** 
+agecatMissing        -0.68505    0.19162  -3.575 0.000350 ***
+female                0.06565    0.03747   1.752 0.079787 .  
+racewhiteYes          0.20720    0.05409   3.831 0.000128 ***
+racewhiteMissing     -0.10158    0.23508  -0.432 0.665672    
+gichronYes            0.80242    0.07928  10.121  < 2e-16 ***
+gichronMissing        0.54860    0.70972   0.773 0.439530    
+anim_anyYes           0.20773    0.04429   4.690 2.73e-06 ***
+gicontactbaseYes      0.66100    0.06736   9.814  < 2e-16 ***
+gicontactbaseMissing  0.31791    0.19113   1.663 0.096250 .  
+rawfood               0.19651    0.04573   4.297 1.73e-05 ***
+beachBoqueron        -0.48632    0.09173  -5.302 1.15e-07 ***
+beachDoheny          -0.24478    0.08550  -2.863 0.004196 ** 
+beachEdgewater        0.06304    0.14251   0.442 0.658241    
+beachFairhope         0.10403    0.11983   0.868 0.385280    
+beachGoddard         -0.52168    0.13146  -3.968 7.24e-05 ***
+beachHuntington       0.31086    0.10371   2.997 0.002723 ** 
+beachMalibu          -0.03536    0.09413  -0.376 0.707197    
+beachMission Bay     -0.19964    0.09341  -2.137 0.032573 *  
+beachSilver          -0.46029    0.08449  -5.448 5.10e-08 ***
+beachSurfside        -0.41536    0.08395  -4.948 7.52e-07 ***
+beachWashington Park -0.15089    0.09853  -1.531 0.125669    
+beachWest             0.15067    0.10445   1.442 0.149169    
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
 (Dispersion parameter for poisson family taken to be 1)
 
-    Null deviance: 18869  on 73996  degrees of freedom
-Residual deviance: 18037  on 73964  degrees of freedom
-AIC: 23939
+    Null deviance: 18641  on 71161  degrees of freedom
+Residual deviance: 17974  on 71129  degrees of freedom
+AIC: 23876
 
-Number of Fisher Scoring iterations: 7
+Number of Fisher Scoring iterations: 6
 
 > 	overall.fit
 
 z test of coefficients:
 
                       Estimate Std. Error  z value  Pr(>|z|)    
-(Intercept)          -3.075432   0.108191 -28.4259 < 2.2e-16 ***
-swim35Below35cfu      0.337716   0.048732   6.9300 4.208e-12 ***
-swim35Above35cfu      0.523953   0.073836   7.0961 1.283e-12 ***
-agecat5-14           -0.734912   0.072983 -10.0696 < 2.2e-16 ***
-agecat15-24          -0.705621   0.076500  -9.2238 < 2.2e-16 ***
-agecat25-34          -0.307662   0.069411  -4.4324 9.317e-06 ***
-agecat35-44          -0.347304   0.070276  -4.9420 7.732e-07 ***
-agecat45-54          -0.497941   0.077404  -6.4330 1.251e-10 ***
-agecat55-64          -0.582421   0.099276  -5.8667 4.445e-09 ***
-agecat65-74          -0.869991   0.170943  -5.0894 3.593e-07 ***
-agecat75+            -0.941522   0.302493  -3.1125  0.001855 ** 
-agecatMissing        -0.649688   0.241221  -2.6933  0.007074 ** 
-female                0.065096   0.035680   1.8244  0.068084 .  
-racewhiteYes          0.188399   0.060043   3.1377  0.001703 ** 
-racewhiteMissing     -1.735792   0.259280  -6.6947 2.162e-11 ***
-gichronYes            0.805092   0.077493  10.3892 < 2.2e-16 ***
-gichronMissing        0.699470   0.687906   1.0168  0.309244    
-anim_anyYes           0.211057   0.048189   4.3798 1.188e-05 ***
-gicontactbaseYes      0.658388   0.071808   9.1687 < 2.2e-16 ***
-gicontactbaseMissing  0.310956   0.183471   1.6949  0.090104 .  
-rawfood               0.199852   0.048539   4.1174 3.832e-05 ***
-beachBoqueron        -0.514038   0.104789  -4.9055 9.321e-07 ***
-beachDoheny          -0.246623   0.095361  -2.5862  0.009704 ** 
-beachEdgewater        0.047871   0.152307   0.3143  0.753291    
-beachFairhope         0.090167   0.132406   0.6810  0.495879    
-beachGoddard         -0.536092   0.149043  -3.5969  0.000322 ***
-beachHuntington       0.301536   0.116035   2.5987  0.009359 ** 
-beachMalibu          -0.024486   0.102131  -0.2398  0.810521    
-beachMission Bay     -0.281235   0.112657  -2.4964  0.012546 *  
-beachSilver          -0.469901   0.091637  -5.1278 2.931e-07 ***
-beachSurfside        -0.426031   0.093465  -4.5582 5.160e-06 ***
-beachWashington Park -0.162429   0.111209  -1.4606  0.144132    
-beachWest             0.144209   0.117431   1.2280  0.219435    
+(Intercept)          -3.099142   0.108588 -28.5402 < 2.2e-16 ***
+swim35Below35cfu      0.336077   0.048749   6.8940 5.425e-12 ***
+swim35Above35cfu      0.526601   0.073897   7.1261 1.032e-12 ***
+agecat5-14           -0.736118   0.072957 -10.0897 < 2.2e-16 ***
+agecat15-24          -0.704894   0.076497  -9.2146 < 2.2e-16 ***
+agecat25-34          -0.307251   0.069388  -4.4280 9.510e-06 ***
+agecat35-44          -0.349958   0.070282  -4.9794 6.379e-07 ***
+agecat45-54          -0.499445   0.077396  -6.4531 1.096e-10 ***
+agecat55-64          -0.583218   0.099278  -5.8746 4.239e-09 ***
+agecat65-74          -0.872089   0.170928  -5.1021 3.359e-07 ***
+agecat75+            -0.945121   0.302496  -3.1244 0.0017816 ** 
+agecatMissing        -0.685046   0.238968  -2.8667 0.0041480 ** 
+female                0.065651   0.035654   1.8413 0.0655715 .  
+racewhiteYes          0.207198   0.060472   3.4263 0.0006118 ***
+racewhiteMissing     -0.101578   0.241186  -0.4212 0.6736381    
+gichronYes            0.802423   0.077429  10.3633 < 2.2e-16 ***
+gichronMissing        0.548605   0.670302   0.8184 0.4131036    
+anim_anyYes           0.207733   0.048142   4.3150 1.596e-05 ***
+gicontactbaseYes      0.661005   0.071710   9.2178 < 2.2e-16 ***
+gicontactbaseMissing  0.317915   0.182981   1.7374 0.0823126 .  
+rawfood               0.196508   0.048567   4.0461 5.207e-05 ***
+beachBoqueron        -0.486318   0.105298  -4.6185 3.865e-06 ***
+beachDoheny          -0.244782   0.095357  -2.5670 0.0102582 *  
+beachEdgewater        0.063038   0.152342   0.4138 0.6790275    
+beachFairhope         0.104034   0.132496   0.7852 0.4323446    
+beachGoddard         -0.521683   0.149133  -3.4981 0.0004686 ***
+beachHuntington       0.310859   0.116098   2.6775 0.0074163 ** 
+beachMalibu          -0.035357   0.102371  -0.3454 0.7298055    
+beachMission Bay     -0.199644   0.108544  -1.8393 0.0658713 .  
+beachSilver          -0.460294   0.091647  -5.0224 5.102e-07 ***
+beachSurfside        -0.415359   0.093524  -4.4412 8.946e-06 ***
+beachWashington Park -0.150886   0.111283  -1.3559 0.1751358    
+beachWest             0.150671   0.117500   1.2823 0.1997352    
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
@@ -1532,56 +1528,56 @@ glm(formula = diarrheaci10 ~ swim35 * marine + agecat + female +
 
 Deviance Residuals: 
     Min       1Q   Median       3Q      Max  
--1.0735  -0.3044  -0.2583  -0.2215   2.9815  
+-1.0744  -0.3064  -0.2626  -0.2276   2.6249  
 
 Coefficients: (1 not defined because of singularities)
                             Estimate Std. Error z value Pr(>|z|)    
-(Intercept)                -3.028682   0.127484 -23.757  < 2e-16 ***
-swim35Below35cfu            0.462765   0.085045   5.441 5.29e-08 ***
-swim35Above35cfu            0.654931   0.098162   6.672 2.52e-11 ***
-marineYes                   0.005883   0.128376   0.046 0.963449    
-agecat5-14                 -0.732975   0.070635 -10.377  < 2e-16 ***
-agecat15-24                -0.702983   0.076073  -9.241  < 2e-16 ***
-agecat25-34                -0.306727   0.071297  -4.302 1.69e-05 ***
-agecat35-44                -0.345694   0.069942  -4.943 7.71e-07 ***
-agecat45-54                -0.496104   0.077164  -6.429 1.28e-10 ***
-agecat55-64                -0.582214   0.098993  -5.881 4.07e-09 ***
-agecat65-74                -0.876187   0.172964  -5.066 4.07e-07 ***
-agecat75+                  -0.949588   0.308044  -3.083 0.002052 ** 
-agecatMissing              -0.654334   0.191304  -3.420 0.000625 ***
-female                      0.064652   0.037473   1.725 0.084473 .  
-racewhiteYes                0.186410   0.053854   3.461 0.000537 ***
-racewhiteMissing           -1.736110   0.236467  -7.342 2.11e-13 ***
-gichronYes                  0.803891   0.079291  10.139  < 2e-16 ***
-gichronMissing              0.724114   0.708620   1.022 0.306845    
-anim_anyYes                 0.210435   0.044322   4.748 2.06e-06 ***
-gicontactbaseYes            0.658136   0.067360   9.770  < 2e-16 ***
-gicontactbaseMissing        0.311556   0.191169   1.630 0.103155    
-rawfood                     0.200231   0.045714   4.380 1.19e-05 ***
-beachBoqueron              -0.526315   0.093850  -5.608 2.05e-08 ***
-beachDoheny                -0.268435   0.087366  -3.073 0.002123 ** 
-beachEdgewater              0.035037   0.143270   0.245 0.806804    
-beachFairhope               0.077167   0.120012   0.643 0.520226    
-beachGoddard               -0.564305   0.132925  -4.245 2.18e-05 ***
-beachHuntington             0.201696   0.117988   1.709 0.087364 .  
-beachMalibu                -0.045636   0.095998  -0.475 0.634513    
-beachMission Bay           -0.305944   0.095657  -3.198 0.001382 ** 
-beachSilver                -0.607046   0.100181  -6.059 1.37e-09 ***
-beachSurfside              -0.434045   0.086016  -5.046 4.51e-07 ***
-beachWashington Park       -0.301240   0.111649  -2.698 0.006974 ** 
+(Intercept)                -3.045541   0.127554 -23.877  < 2e-16 ***
+swim35Below35cfu            0.461086   0.085060   5.421 5.94e-08 ***
+swim35Above35cfu            0.655566   0.098166   6.678 2.42e-11 ***
+marineYes                  -0.001444   0.128447  -0.011 0.991030    
+agecat5-14                 -0.734234   0.070634 -10.395  < 2e-16 ***
+agecat15-24                -0.702247   0.076076  -9.231  < 2e-16 ***
+agecat25-34                -0.306296   0.071292  -4.296 1.74e-05 ***
+agecat35-44                -0.348377   0.069947  -4.981 6.34e-07 ***
+agecat45-54                -0.497612   0.077161  -6.449 1.13e-10 ***
+agecat55-64                -0.583071   0.098997  -5.890 3.87e-09 ***
+agecat65-74                -0.878240   0.172955  -5.078 3.82e-07 ***
+agecat75+                  -0.953128   0.308040  -3.094 0.001974 ** 
+agecatMissing              -0.689659   0.191632  -3.599 0.000320 ***
+female                      0.065203   0.037474   1.740 0.081865 .  
+racewhiteYes                0.205108   0.054055   3.794 0.000148 ***
+racewhiteMissing           -0.103856   0.235081  -0.442 0.658642    
+gichronYes                  0.801224   0.079281  10.106  < 2e-16 ***
+gichronMissing              0.570704   0.709882   0.804 0.421431    
+anim_anyYes                 0.207123   0.044311   4.674 2.95e-06 ***
+gicontactbaseYes            0.660763   0.067362   9.809  < 2e-16 ***
+gicontactbaseMissing        0.318412   0.191148   1.666 0.095756 .  
+rawfood                     0.196844   0.045734   4.304 1.68e-05 ***
+beachBoqueron              -0.498155   0.094088  -5.295 1.19e-07 ***
+beachDoheny                -0.266110   0.087403  -3.045 0.002330 ** 
+beachEdgewater              0.050522   0.143334   0.352 0.724481    
+beachFairhope               0.091168   0.120073   0.759 0.447688    
+beachGoddard               -0.549386   0.133006  -4.131 3.62e-05 ***
+beachHuntington             0.204595   0.118015   1.734 0.082983 .  
+beachMalibu                -0.055901   0.096101  -0.582 0.560779    
+beachMission Bay           -0.224092   0.094794  -2.364 0.018079 *  
+beachSilver                -0.603562   0.100199  -6.024 1.71e-09 ***
+beachSurfside              -0.422874   0.086096  -4.912 9.03e-07 ***
+beachWashington Park       -0.295887   0.111669  -2.650 0.008057 ** 
 beachWest                         NA         NA      NA       NA    
-swim35Below35cfu:marineYes -0.173814   0.098524  -1.764 0.077702 .  
-swim35Above35cfu:marineYes -0.231346   0.138547  -1.670 0.094960 .  
+swim35Below35cfu:marineYes -0.173729   0.098533  -1.763 0.077876 .  
+swim35Above35cfu:marineYes -0.227076   0.138610  -1.638 0.101373    
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
 (Dispersion parameter for poisson family taken to be 1)
 
-    Null deviance: 18869  on 73996  degrees of freedom
-Residual deviance: 18033  on 73962  degrees of freedom
-AIC: 23939
+    Null deviance: 18641  on 71161  degrees of freedom
+Residual deviance: 17970  on 71127  degrees of freedom
+AIC: 23876
 
-Number of Fisher Scoring iterations: 7
+Number of Fisher Scoring iterations: 6
 
 > 	lrtest(mf.ref,mf.fit)
 Likelihood ratio test
@@ -1590,9 +1586,9 @@ Model 1: diarrheaci10 ~ swim35 + marine + agecat + female + racewhite +
     gichron + anim_any + gicontactbase + rawfood + beach
 Model 2: diarrheaci10 ~ swim35 * marine + agecat + female + racewhite + 
     gichron + anim_any + gicontactbase + rawfood + beach
-  #Df LogLik Df Chisq Pr(>Chisq)
-1  33 -11936                    
-2  35 -11934  2 4.165     0.1246
+  #Df LogLik Df  Chisq Pr(>Chisq)
+1  33 -11905                     
+2  35 -11903  2 4.0918     0.1293
 > 	
 > # Interaction model with point v. non-point source beaches
 > ps.ref <- glm(diarrheaci10~swim35 +pointsource +agecat+female+racewhite+gichron+anim_any+gicontactbase+rawfood+beach,family=poisson(link="log"),data=ad)
@@ -1608,56 +1604,56 @@ glm(formula = diarrheaci10 ~ swim35 * pointsource + agecat +
 
 Deviance Residuals: 
     Min       1Q   Median       3Q      Max  
--1.0678  -0.3057  -0.2579  -0.2224   2.9778  
+-1.0685  -0.3074  -0.2605  -0.2280   2.6198  
 
 Coefficients: (1 not defined because of singularities)
                                 Estimate Std. Error z value Pr(>|z|)    
-(Intercept)                     -3.56914    0.11414 -31.271  < 2e-16 ***
-swim35Below35cfu                 0.42074    0.07004   6.007 1.89e-09 ***
-swim35Above35cfu                 0.37812    0.18622   2.031 0.042301 *  
-pointsourceYes                   0.52163    0.10941   4.767 1.87e-06 ***
-agecat5-14                      -0.73777    0.07065 -10.442  < 2e-16 ***
-agecat15-24                     -0.70595    0.07609  -9.278  < 2e-16 ***
-agecat25-34                     -0.30679    0.07131  -4.302 1.69e-05 ***
-agecat35-44                     -0.34729    0.06997  -4.963 6.93e-07 ***
-agecat45-54                     -0.49938    0.07719  -6.469 9.85e-11 ***
-agecat55-64                     -0.58289    0.09900  -5.888 3.91e-09 ***
-agecat65-74                     -0.87109    0.17294  -5.037 4.73e-07 ***
-agecat75+                       -0.94572    0.30803  -3.070 0.002139 ** 
-agecatMissing                   -0.64976    0.19129  -3.397 0.000682 ***
-female                           0.06576    0.03748   1.755 0.079291 .  
-racewhiteYes                     0.18890    0.05394   3.502 0.000461 ***
-racewhiteMissing                -1.72989    0.23646  -7.316 2.56e-13 ***
-gichronYes                       0.80500    0.07929  10.152  < 2e-16 ***
-gichronMissing                   0.70076    0.70850   0.989 0.322630    
-anim_anyYes                      0.21157    0.04429   4.777 1.78e-06 ***
-gicontactbaseYes                 0.65802    0.06736   9.769  < 2e-16 ***
-gicontactbaseMissing             0.30278    0.19124   1.583 0.113376    
-rawfood                          0.19933    0.04572   4.360 1.30e-05 ***
-beachBoqueron                   -0.49289    0.09226  -5.343 9.17e-08 ***
-beachDoheny                      0.20296    0.08495   2.389 0.016883 *  
-beachEdgewater                   0.05828    0.14261   0.409 0.682769    
-beachFairhope                    0.08453    0.11992   0.705 0.480868    
-beachGoddard                    -0.53662    0.13180  -4.072 4.67e-05 ***
-beachHuntington                  0.29045    0.10433   2.784 0.005370 ** 
-beachMalibu                      0.41713    0.09263   4.503 6.69e-06 ***
-beachMission Bay                 0.18666    0.09708   1.923 0.054524 .  
-beachSilver                     -0.47371    0.08449  -5.607 2.06e-08 ***
+(Intercept)                     -3.58206    0.11425 -31.352  < 2e-16 ***
+swim35Below35cfu                 0.41856    0.07004   5.976 2.29e-09 ***
+swim35Above35cfu                 0.39553    0.18619   2.124 0.033645 *  
+pointsourceYes                   0.51133    0.10946   4.671 2.99e-06 ***
+agecat5-14                      -0.73895    0.07065 -10.459  < 2e-16 ***
+agecat15-24                     -0.70529    0.07609  -9.269  < 2e-16 ***
+agecat25-34                     -0.30635    0.07131  -4.296 1.74e-05 ***
+agecat35-44                     -0.34993    0.06997  -5.001 5.71e-07 ***
+agecat45-54                     -0.50088    0.07719  -6.489 8.65e-11 ***
+agecat55-64                     -0.58366    0.09900  -5.895 3.74e-09 ***
+agecat65-74                     -0.87321    0.17294  -5.049 4.43e-07 ***
+agecat75+                       -0.94925    0.30803  -3.082 0.002058 ** 
+agecatMissing                   -0.68518    0.19162  -3.576 0.000349 ***
+female                           0.06626    0.03748   1.768 0.077065 .  
+racewhiteYes                     0.20781    0.05414   3.838 0.000124 ***
+racewhiteMissing                -0.10212    0.23510  -0.434 0.664012    
+gichronYes                       0.80237    0.07929  10.120  < 2e-16 ***
+gichronMissing                   0.54978    0.70975   0.775 0.438575    
+anim_anyYes                      0.20824    0.04428   4.702 2.57e-06 ***
+gicontactbaseYes                 0.66066    0.06736   9.808  < 2e-16 ***
+gicontactbaseMissing             0.30994    0.19122   1.621 0.105049    
+rawfood                          0.19600    0.04574   4.286 1.82e-05 ***
+beachBoqueron                   -0.46594    0.09246  -5.039 4.67e-07 ***
+beachDoheny                      0.19396    0.08499   2.282 0.022478 *  
+beachEdgewater                   0.07280    0.14266   0.510 0.609842    
+beachFairhope                    0.09817    0.11998   0.818 0.413216    
+beachGoddard                    -0.52296    0.13185  -3.966 7.30e-05 ***
+beachHuntington                  0.29935    0.10437   2.868 0.004129 ** 
+beachMalibu                      0.39560    0.09286   4.260 2.04e-05 ***
+beachMission Bay                 0.25667    0.09602   2.673 0.007519 ** 
+beachSilver                     -0.46412    0.08453  -5.491 4.01e-08 ***
 beachSurfside                         NA         NA      NA       NA    
-beachWashington Park            -0.16188    0.09849  -1.644 0.100237    
-beachWest                        0.15111    0.10453   1.446 0.148274    
-swim35Below35cfu:pointsourceYes -0.14157    0.08948  -1.582 0.113629    
-swim35Above35cfu:pointsourceYes  0.14067    0.19997   0.703 0.481766    
+beachWashington Park            -0.15054    0.09855  -1.528 0.126608    
+beachWest                        0.15730    0.10453   1.505 0.132340    
+swim35Below35cfu:pointsourceYes -0.14070    0.08948  -1.572 0.115843    
+swim35Above35cfu:pointsourceYes  0.12371    0.19995   0.619 0.536105    
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
 (Dispersion parameter for poisson family taken to be 1)
 
-    Null deviance: 18869  on 73996  degrees of freedom
-Residual deviance: 18033  on 73962  degrees of freedom
-AIC: 23939
+    Null deviance: 18641  on 71161  degrees of freedom
+Residual deviance: 17971  on 71127  degrees of freedom
+AIC: 23877
 
-Number of Fisher Scoring iterations: 7
+Number of Fisher Scoring iterations: 6
 
 > 	lrtest(ps.ref,ps.fit)
 Likelihood ratio test
@@ -1667,8 +1663,8 @@ Model 1: diarrheaci10 ~ swim35 + pointsource + agecat + female + racewhite +
 Model 2: diarrheaci10 ~ swim35 * pointsource + agecat + female + racewhite + 
     gichron + anim_any + gicontactbase + rawfood + beach
   #Df LogLik Df  Chisq Pr(>Chisq)
-1  33 -11936                     
-2  35 -11934  2 3.9529     0.1386
+1  33 -11905                     
+2  35 -11903  2 3.7057     0.1568
 > 	
 > # --------------------------------------
 > # Age-stratified estimates and LR tests of
@@ -1690,8 +1686,8 @@ Model 1: diarrheaci10 ~ swim35 + agestrat + female + racewhite + gichron +
 Model 2: diarrheaci10 ~ swim35 * agestrat + female + racewhite + gichron + 
     anim_any + gicontactbase + rawfood + beach
   #Df LogLik Df  Chisq Pr(>Chisq)  
-1  27 -11975                       
-2  33 -11970  6 11.586    0.07187 .
+1  27 -11944                       
+2  33 -11938  6 11.297    0.07962 .
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 > 
@@ -1710,43 +1706,43 @@ glm(formula = formula, family = poisson(link = "log"), data = dat)
 
 Deviance Residuals: 
     Min       1Q   Median       3Q      Max  
--0.8564  -0.2962  -0.2558  -0.2276   3.1989  
+-0.8504  -0.3000  -0.2608  -0.2394   2.7170  
 
 Coefficients:
                      Estimate Std. Error z value Pr(>|z|)    
-(Intercept)          -3.30261    0.12709 -25.986  < 2e-16 ***
-swim35Below35cfu      0.42706    0.07236   5.901 3.60e-09 ***
-swim35Above35cfu      0.38995    0.18712   2.084 0.037170 *  
-agecat5-14           -0.75444    0.11127  -6.780 1.20e-11 ***
-agecat15-24          -0.67096    0.12472  -5.380 7.45e-08 ***
-agecat25-34          -0.24667    0.11245  -2.194 0.028270 *  
-agecat35-44          -0.38272    0.11151  -3.432 0.000599 ***
-agecat45-54          -0.41573    0.11979  -3.470 0.000520 ***
-agecat55-64          -0.61624    0.15831  -3.893 9.92e-05 ***
-agecat65-74          -0.80986    0.28371  -2.855 0.004309 ** 
-agecat75+            -1.46197    0.71399  -2.048 0.040599 *  
-agecatMissing        -0.64266    0.36433  -1.764 0.077742 .  
-female                0.03198    0.06017   0.531 0.595095    
-racewhiteYes          0.17787    0.07929   2.243 0.024885 *  
-racewhiteMissing     -2.56501    0.35885  -7.148 8.82e-13 ***
-gichronYes            0.96613    0.12876   7.503 6.22e-14 ***
-anim_anyYes           0.09377    0.07359   1.274 0.202563    
-gicontactbaseYes      0.53052    0.12093   4.387 1.15e-05 ***
-gicontactbaseMissing  0.10905    0.28085   0.388 0.697794    
-rawfood               0.10926    0.06889   1.586 0.112745    
-beachMalibu           0.20952    0.09306   2.251 0.024358 *  
-beachMission Bay      0.03125    0.09708   0.322 0.747540    
-beachSurfside        -0.13966    0.09304  -1.501 0.133341    
+(Intercept)          -3.32091    0.12729 -26.089  < 2e-16 ***
+swim35Below35cfu      0.42602    0.07238   5.886 3.96e-09 ***
+swim35Above35cfu      0.39958    0.18713   2.135 0.032734 *  
+agecat5-14           -0.75626    0.11126  -6.797 1.07e-11 ***
+agecat15-24          -0.67073    0.12473  -5.378 7.55e-08 ***
+agecat25-34          -0.24558    0.11246  -2.184 0.028981 *  
+agecat35-44          -0.38641    0.11153  -3.465 0.000531 ***
+agecat45-54          -0.41623    0.11980  -3.474 0.000512 ***
+agecat55-64          -0.61701    0.15833  -3.897 9.74e-05 ***
+agecat65-74          -0.81448    0.28368  -2.871 0.004090 ** 
+agecat75+            -1.46613    0.71391  -2.054 0.040009 *  
+agecatMissing        -0.67378    0.36455  -1.848 0.064564 .  
+female                0.03234    0.06017   0.537 0.590958    
+racewhiteYes          0.19492    0.07948   2.452 0.014191 *  
+racewhiteMissing     -0.51835    0.36023  -1.439 0.150161    
+gichronYes            0.96343    0.12875   7.483 7.28e-14 ***
+anim_anyYes           0.09090    0.07356   1.236 0.216588    
+gicontactbaseYes      0.53441    0.12095   4.418 9.95e-06 ***
+gicontactbaseMissing  0.12033    0.28085   0.428 0.668311    
+rawfood               0.10702    0.06893   1.552 0.120549    
+beachMalibu           0.20023    0.09314   2.150 0.031576 *  
+beachMission Bay      0.07298    0.09666   0.755 0.450244    
+beachSurfside        -0.13382    0.09305  -1.438 0.150408    
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
 (Dispersion parameter for poisson family taken to be 1)
 
-    Null deviance: 7477.5  on 31286  degrees of freedom
-Residual deviance: 7113.4  on 31264  degrees of freedom
-AIC: 9407.4
+    Null deviance: 7264.0  on 28451  degrees of freedom
+Residual deviance: 7080.7  on 28429  degrees of freedom
+AIC: 9374.7
 
-Number of Fisher Scoring iterations: 7
+Number of Fisher Scoring iterations: 6
 
 
 
@@ -1755,29 +1751,29 @@ Robust, Sandwich Standard Errors Account for Clustering:
 z test of coefficients:
 
                       Estimate Std. Error  z value  Pr(>|z|)    
-(Intercept)          -3.302614   0.142350 -23.2006 < 2.2e-16 ***
-swim35Below35cfu      0.427058   0.076939   5.5506 2.847e-08 ***
-swim35Above35cfu      0.389946   0.200528   1.9446 0.0518234 .  
-agecat5-14           -0.754437   0.119035  -6.3380 2.328e-10 ***
-agecat15-24          -0.670955   0.124946  -5.3700 7.874e-08 ***
-agecat25-34          -0.246671   0.110068  -2.2411 0.0250215 *  
-agecat35-44          -0.382724   0.113643  -3.3678 0.0007578 ***
-agecat45-54          -0.415725   0.119786  -3.4706 0.0005193 ***
-agecat55-64          -0.616236   0.158110  -3.8975 9.719e-05 ***
-agecat65-74          -0.809864   0.278281  -2.9102 0.0036116 ** 
-agecat75+            -1.461971   0.713783  -2.0482 0.0405403 *  
-agecatMissing        -0.642660   0.572472  -1.1226 0.2616059    
-female                0.031980   0.057531   0.5559 0.5783007    
-racewhiteYes          0.177867   0.089854   1.9795 0.0477582 *  
-racewhiteMissing     -2.565014   0.367556  -6.9786 2.982e-12 ***
-gichronYes            0.966133   0.124582   7.7550 8.834e-15 ***
-anim_anyYes           0.093769   0.080818   1.1602 0.2459511    
-gicontactbaseYes      0.530523   0.128463   4.1298 3.631e-05 ***
-gicontactbaseMissing  0.109054   0.264886   0.4117 0.6805577    
-rawfood               0.109261   0.073111   1.4945 0.1350569    
-beachMalibu           0.209523   0.102317   2.0478 0.0405810 *  
-beachMission Bay      0.031248   0.120137   0.2601 0.7947823    
-beachSurfside        -0.139658   0.102489  -1.3627 0.1729895    
+(Intercept)          -3.320912   0.142295 -23.3382 < 2.2e-16 ***
+swim35Below35cfu      0.426024   0.076994   5.5332 3.144e-08 ***
+swim35Above35cfu      0.399577   0.200574   1.9922 0.0463527 *  
+agecat5-14           -0.756258   0.118988  -6.3557 2.074e-10 ***
+agecat15-24          -0.670730   0.124940  -5.3684 7.943e-08 ***
+agecat25-34          -0.245577   0.110032  -2.2319 0.0256240 *  
+agecat35-44          -0.386407   0.113697  -3.3986 0.0006774 ***
+agecat45-54          -0.416226   0.119769  -3.4752 0.0005104 ***
+agecat55-64          -0.617008   0.158134  -3.9018 9.548e-05 ***
+agecat65-74          -0.814479   0.278267  -2.9270 0.0034228 ** 
+agecat75+            -1.466127   0.713752  -2.0541 0.0399650 *  
+agecatMissing        -0.673785   0.573759  -1.1743 0.2402616    
+female                0.032339   0.057509   0.5623 0.5738905    
+racewhiteYes          0.194916   0.090069   2.1641 0.0304585 *  
+racewhiteMissing     -0.518352   0.359799  -1.4407 0.1496772    
+gichronYes            0.963430   0.124582   7.7333 1.048e-14 ***
+anim_anyYes           0.090900   0.080795   1.1251 0.2605561    
+gicontactbaseYes      0.534405   0.128439   4.1608 3.172e-05 ***
+gicontactbaseMissing  0.120334   0.264673   0.4547 0.6493601    
+rawfood               0.107017   0.073136   1.4633 0.1433983    
+beachMalibu           0.200225   0.102652   1.9505 0.0511145 .  
+beachMission Bay      0.072979   0.117322   0.6220 0.5339170    
+beachSurfside        -0.133821   0.102398  -1.3069 0.1912594    
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
@@ -1880,42 +1876,42 @@ glm(formula = formula, family = poisson(link = "log"), data = dat)
 
 Deviance Residuals: 
     Min       1Q   Median       3Q      Max  
--0.7309  -0.3796  -0.3266  -0.2801   2.8908  
+-0.7305  -0.3816  -0.3353  -0.2847   2.4504  
 
 Coefficients:
-                     Estimate Std. Error z value Pr(>|z|)    
-(Intercept)           -2.8345     0.2427 -11.678  < 2e-16 ***
-swim35Below35cfu       0.3484     0.1416   2.460 0.013893 *  
-swim35Above35cfu       0.6916     0.1900   3.640 0.000273 ***
-female                -0.1838     0.1098  -1.674 0.094107 .  
-racewhiteYes           0.2273     0.1453   1.565 0.117657    
-racewhiteMissing      -2.3392     0.7206  -3.246 0.001170 ** 
-gichronYes             0.6010     0.5839   1.029 0.303328    
-gichronMissing        -9.2693   284.6592  -0.033 0.974023    
-anim_anyYes            0.4247     0.1280   3.319 0.000904 ***
-gicontactbaseYes       0.3546     0.2437   1.455 0.145634    
-gicontactbaseMissing   0.5384     0.4555   1.182 0.237205    
-rawfood               -0.5218     0.2360  -2.211 0.027037 *  
-beachBoqueron         -0.5689     0.2661  -2.138 0.032531 *  
-beachDoheny           -0.3476     0.2402  -1.447 0.147798    
-beachEdgewater        -0.1503     0.4487  -0.335 0.737677    
-beachFairhope         -0.1539     0.2874  -0.535 0.592347    
-beachGoddard          -0.7441     0.3835  -1.940 0.052345 .  
-beachHuntington       -0.4330     0.3547  -1.221 0.222193    
-beachMalibu           -0.3239     0.2811  -1.152 0.249208    
-beachMission Bay      -0.1279     0.2489  -0.514 0.607440    
-beachSilver           -0.8508     0.2400  -3.545 0.000393 ***
-beachSurfside         -0.8623     0.2660  -3.241 0.001190 ** 
-beachWashington Park  -0.7840     0.3098  -2.530 0.011392 *  
-beachWest             -0.1313     0.3036  -0.432 0.665439    
+                      Estimate Std. Error z value Pr(>|z|)    
+(Intercept)           -2.85358    0.24328 -11.729  < 2e-16 ***
+swim35Below35cfu       0.34663    0.14160   2.448 0.014369 *  
+swim35Above35cfu       0.69475    0.19011   3.654 0.000258 ***
+female                -0.18221    0.10977  -1.660 0.096953 .  
+racewhiteYes           0.24445    0.14581   1.676 0.093649 .  
+racewhiteMissing      -0.09391    0.72083  -0.130 0.896345    
+gichronYes             0.59546    0.58377   1.020 0.307718    
+gichronMissing        -9.26938  284.65924  -0.033 0.974023    
+anim_anyYes            0.42167    0.12785   3.298 0.000973 ***
+gicontactbaseYes       0.35382    0.24372   1.452 0.146579    
+gicontactbaseMissing   0.54910    0.45549   1.206 0.228007    
+rawfood               -0.52869    0.23606  -2.240 0.025111 *  
+beachBoqueron         -0.54714    0.26663  -2.052 0.040165 *  
+beachDoheny           -0.35234    0.24033  -1.466 0.142637    
+beachEdgewater        -0.13864    0.44886  -0.309 0.757416    
+beachFairhope         -0.14504    0.28746  -0.505 0.613865    
+beachGoddard          -0.73266    0.38362  -1.910 0.056152 .  
+beachHuntington       -0.43054    0.35477  -1.214 0.224913    
+beachMalibu           -0.34665    0.28190  -1.230 0.218814    
+beachMission Bay      -0.07296    0.24772  -0.295 0.768346    
+beachSilver           -0.84575    0.24010  -3.522 0.000428 ***
+beachSurfside         -0.85581    0.26620  -3.215 0.001305 ** 
+beachWashington Park  -0.77588    0.30989  -2.504 0.012290 *  
+beachWest             -0.13238    0.30351  -0.436 0.662718    
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
 (Dispersion parameter for poisson family taken to be 1)
 
-    Null deviance: 1894.5  on 5571  degrees of freedom
-Residual deviance: 1800.7  on 5548  degrees of freedom
-AIC: 2524.7
+    Null deviance: 1856.3  on 5265  degrees of freedom
+Residual deviance: 1791.7  on 5242  degrees of freedom
+AIC: 2515.7
 
 Number of Fisher Scoring iterations: 10
 
@@ -1925,31 +1921,31 @@ Robust, Sandwich Standard Errors Account for Clustering:
 
 z test of coefficients:
 
-                     Estimate Std. Error  z value  Pr(>|z|)    
-(Intercept)          -2.83446    0.24405 -11.6144 < 2.2e-16 ***
-swim35Below35cfu      0.34844    0.14815   2.3520 0.0186722 *  
-swim35Above35cfu      0.69157    0.19019   3.6362 0.0002767 ***
-female               -0.18377    0.10582  -1.7366 0.0824533 .  
-racewhiteYes          0.22728    0.14621   1.5544 0.1200862    
-racewhiteMissing     -2.33921    0.74598  -3.1358 0.0017141 ** 
-gichronYes            0.60098    0.51250   1.1726 0.2409410    
-gichronMissing       -9.26927    1.02474  -9.0455 < 2.2e-16 ***
-anim_anyYes           0.42471    0.13938   3.0472 0.0023100 ** 
-gicontactbaseYes      0.35463    0.24055   1.4743 0.1404123    
-gicontactbaseMissing  0.53843    0.43936   1.2255 0.2203931    
-rawfood              -0.52177    0.23264  -2.2428 0.0249077 *  
-beachBoqueron        -0.56890    0.27529  -2.0665 0.0387783 *  
-beachDoheny          -0.34761    0.23898  -1.4546 0.1457916    
-beachEdgewater       -0.15030    0.43922  -0.3422 0.7322063    
-beachFairhope        -0.15386    0.28106  -0.5474 0.5840813    
-beachGoddard         -0.74407    0.41225  -1.8049 0.0710915 .  
-beachHuntington      -0.43297    0.37218  -1.1633 0.2446924    
-beachMalibu          -0.32385    0.28370  -1.1415 0.2536526    
-beachMission Bay     -0.12787    0.26530  -0.4820 0.6298315    
-beachSilver          -0.85085    0.25664  -3.3153 0.0009154 ***
-beachSurfside        -0.86230    0.28052  -3.0740 0.0021122 ** 
-beachWashington Park -0.78397    0.30653  -2.5576 0.0105400 *  
-beachWest            -0.13126    0.30836  -0.4257 0.6703365    
+                      Estimate Std. Error  z value  Pr(>|z|)    
+(Intercept)          -2.853585   0.245337 -11.6313 < 2.2e-16 ***
+swim35Below35cfu      0.346627   0.147916   2.3434 0.0191085 *  
+swim35Above35cfu      0.694752   0.190500   3.6470 0.0002653 ***
+female               -0.182205   0.105772  -1.7226 0.0849551 .  
+racewhiteYes          0.244453   0.146877   1.6643 0.0960451 .  
+racewhiteMissing     -0.093910   0.713945  -0.1315 0.8953511    
+gichronYes            0.595461   0.511514   1.1641 0.2443774    
+gichronMissing       -9.269381   1.024876  -9.0444 < 2.2e-16 ***
+anim_anyYes           0.421675   0.139235   3.0285 0.0024576 ** 
+gicontactbaseYes      0.353817   0.240580   1.4707 0.1413763    
+gicontactbaseMissing  0.549098   0.439423   1.2496 0.2114496    
+rawfood              -0.528692   0.232815  -2.2709 0.0231551 *  
+beachBoqueron        -0.547135   0.276221  -1.9808 0.0476151 *  
+beachDoheny          -0.352336   0.238881  -1.4749 0.1402285    
+beachEdgewater       -0.138641   0.439565  -0.3154 0.7524548    
+beachFairhope        -0.145040   0.281415  -0.5154 0.6062773    
+beachGoddard         -0.732659   0.412695  -1.7753 0.0758481 .  
+beachHuntington      -0.430536   0.372490  -1.1558 0.2477507    
+beachMalibu          -0.346654   0.286311  -1.2108 0.2259867    
+beachMission Bay     -0.072964   0.260155  -0.2805 0.7791212    
+beachSilver          -0.845747   0.256926  -3.2918 0.0009955 ***
+beachSurfside        -0.855812   0.280992  -3.0457 0.0023215 ** 
+beachWashington Park -0.775877   0.306857  -2.5285 0.0114564 *  
+beachWest            -0.132382   0.308666  -0.4289 0.6680082    
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
@@ -1960,42 +1956,42 @@ glm(formula = formula, family = poisson(link = "log"), data = dat)
 
 Deviance Residuals: 
     Min       1Q   Median       3Q      Max  
--0.6578  -0.2985  -0.2471  -0.2036   3.0112  
+-0.6603  -0.2980  -0.2541  -0.2133   2.7205  
 
 Coefficients:
                       Estimate Std. Error z value Pr(>|z|)    
-(Intercept)           -4.16770    0.30928 -13.476  < 2e-16 ***
-swim35Below35cfu       0.65844    0.23654   2.784 0.005375 ** 
-swim35Above35cfu       0.90676    0.26084   3.476 0.000508 ***
-female                -0.09943    0.10677  -0.931 0.351684    
-racewhiteYes           0.43788    0.14629   2.993 0.002761 ** 
-racewhiteMissing      -1.72543    0.59452  -2.902 0.003705 ** 
-gichronYes             0.85962    0.45264   1.899 0.057548 .  
-gichronMissing        -9.76663  254.43982  -0.038 0.969381    
-anim_anyYes            0.11865    0.13054   0.909 0.363398    
-gicontactbaseYes       0.40942    0.21737   1.884 0.059628 .  
-gicontactbaseMissing   0.10014    0.58453   0.171 0.863974    
-rawfood               -0.15553    0.17567  -0.885 0.375966    
-beachBoqueron         -0.38947    0.28305  -1.376 0.168833    
-beachDoheny           -0.16519    0.23042  -0.717 0.473433    
-beachEdgewater         0.01448    0.48292   0.030 0.976082    
-beachFairhope          0.01837    0.33847   0.054 0.956712    
-beachGoddard          -0.11046    0.38210  -0.289 0.772517    
-beachHuntington        0.68081    0.28107   2.422 0.015428 *  
-beachMalibu            0.47505    0.25381   1.872 0.061248 .  
-beachMission Bay       0.12070    0.24933   0.484 0.628304    
-beachSilver           -0.15855    0.22237  -0.713 0.475843    
-beachSurfside         -0.58673    0.26691  -2.198 0.027932 *  
-beachWashington Park  -0.05116    0.26736  -0.191 0.848256    
-beachWest              0.29169    0.30646   0.952 0.341191    
+(Intercept)           -4.19751    0.31012 -13.535  < 2e-16 ***
+swim35Below35cfu       0.65369    0.23648   2.764 0.005705 ** 
+swim35Above35cfu       0.90908    0.26089   3.485 0.000493 ***
+female                -0.09870    0.10677  -0.924 0.355284    
+racewhiteYes           0.46478    0.14733   3.155 0.001607 ** 
+racewhiteMissing       0.06674    0.59472   0.112 0.910652    
+gichronYes             0.86253    0.45265   1.906 0.056714 .  
+gichronMissing       -10.07028  268.40054  -0.038 0.970071    
+anim_anyYes            0.11258    0.13055   0.862 0.388479    
+gicontactbaseYes       0.41095    0.21745   1.890 0.058773 .  
+gicontactbaseMissing   0.12038    0.58442   0.206 0.836799    
+rawfood               -0.15565    0.17571  -0.886 0.375705    
+beachBoqueron         -0.35210    0.28391  -1.240 0.214908    
+beachDoheny           -0.16138    0.23036  -0.701 0.483586    
+beachEdgewater         0.03469    0.48304   0.072 0.942751    
+beachFairhope          0.03450    0.33867   0.102 0.918850    
+beachGoddard          -0.08880    0.38229  -0.232 0.816312    
+beachHuntington        0.69327    0.28125   2.465 0.013704 *  
+beachMalibu            0.45346    0.25435   1.783 0.074616 .  
+beachMission Bay       0.20932    0.24750   0.846 0.397703    
+beachSilver           -0.14893    0.22257  -0.669 0.503407    
+beachSurfside         -0.57362    0.26704  -2.148 0.031712 *  
+beachWashington Park  -0.03793    0.26756  -0.142 0.887267    
+beachWest              0.29248    0.30665   0.954 0.340186    
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
 (Dispersion parameter for poisson family taken to be 1)
 
-    Null deviance: 2367.3  on 9959  degrees of freedom
-Residual deviance: 2266.9  on 9936  degrees of freedom
-AIC: 3024.9
+    Null deviance: 2331.8  on 9474  degrees of freedom
+Residual deviance: 2256.2  on 9451  degrees of freedom
+AIC: 3014.2
 
 Number of Fisher Scoring iterations: 11
 
@@ -2005,31 +2001,31 @@ Robust, Sandwich Standard Errors Account for Clustering:
 
 z test of coefficients:
 
-                      Estimate Std. Error  z value  Pr(>|z|)    
-(Intercept)          -4.167701   0.310224 -13.4345 < 2.2e-16 ***
-swim35Below35cfu      0.658437   0.243957   2.6990 0.0069551 ** 
-swim35Above35cfu      0.906757   0.262850   3.4497 0.0005612 ***
-female               -0.099433   0.104980  -0.9472 0.3435568    
-racewhiteYes          0.437883   0.166612   2.6282 0.0085848 ** 
-racewhiteMissing     -1.725431   0.619020  -2.7874 0.0053140 ** 
-gichronYes            0.859622   0.419066   2.0513 0.0402395 *  
-gichronMissing       -9.766627   0.711652 -13.7239 < 2.2e-16 ***
-anim_anyYes           0.118648   0.133015   0.8920 0.3723995    
-gicontactbaseYes      0.409419   0.220243   1.8589 0.0630353 .  
-gicontactbaseMissing  0.100140   0.575113   0.1741 0.8617694    
-rawfood              -0.155531   0.186006  -0.8362 0.4030648    
-beachBoqueron        -0.389472   0.300144  -1.2976 0.1944190    
-beachDoheny          -0.165192   0.239593  -0.6895 0.4905294    
-beachEdgewater        0.014479   0.472891   0.0306 0.9755744    
-beachFairhope         0.018372   0.353357   0.0520 0.9585349    
-beachGoddard         -0.110459   0.405462  -0.2724 0.7852939    
-beachHuntington       0.680807   0.299171   2.2756 0.0228674 *  
-beachMalibu           0.475052   0.255062   1.8625 0.0625333 .  
-beachMission Bay      0.120704   0.292369   0.4128 0.6797189    
-beachSilver          -0.158552   0.222359  -0.7130 0.4758163    
-beachSurfside        -0.586732   0.280950  -2.0884 0.0367630 *  
-beachWashington Park -0.051158   0.277833  -0.1841 0.8539107    
-beachWest             0.291689   0.305018   0.9563 0.3389205    
+                       Estimate Std. Error  z value  Pr(>|z|)    
+(Intercept)           -4.197515   0.311635 -13.4693 < 2.2e-16 ***
+swim35Below35cfu       0.653686   0.243823   2.6810 0.0073406 ** 
+swim35Above35cfu       0.909079   0.262994   3.4567 0.0005469 ***
+female                -0.098696   0.104998  -0.9400 0.3472266    
+racewhiteYes           0.464782   0.168120   2.7646 0.0056996 ** 
+racewhiteMissing       0.066736   0.569298   0.1172 0.9066810    
+gichronYes             0.862531   0.420102   2.0531 0.0400582 *  
+gichronMissing       -10.070285   0.636401 -15.8238 < 2.2e-16 ***
+anim_anyYes            0.112584   0.132971   0.8467 0.3971737    
+gicontactbaseYes       0.410946   0.219467   1.8725 0.0611413 .  
+gicontactbaseMissing   0.120384   0.574862   0.2094 0.8341259    
+rawfood               -0.155655   0.185932  -0.8372 0.4025017    
+beachBoqueron         -0.352096   0.300625  -1.1712 0.2415133    
+beachDoheny           -0.161379   0.239041  -0.6751 0.4996059    
+beachEdgewater         0.034688   0.472771   0.0734 0.9415099    
+beachFairhope          0.034504   0.353468   0.0976 0.9222367    
+beachGoddard          -0.088802   0.405197  -0.2192 0.8265279    
+beachHuntington        0.693270   0.299176   2.3173 0.0204893 *  
+beachMalibu            0.453460   0.255977   1.7715 0.0764792 .  
+beachMission Bay       0.209320   0.280337   0.7467 0.4552600    
+beachSilver           -0.148927   0.222428  -0.6696 0.5031429    
+beachSurfside         -0.573616   0.280683  -2.0436 0.0409885 *  
+beachWashington Park  -0.037930   0.277826  -0.1365 0.8914063    
+beachWest              0.292480   0.305485   0.9574 0.3383511    
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
@@ -2040,44 +2036,44 @@ glm(formula = formula, family = poisson(link = "log"), data = dat)
 
 Deviance Residuals: 
     Min       1Q   Median       3Q      Max  
--0.8876  -0.2955  -0.2561  -0.2233   3.1234  
+-0.8871  -0.3007  -0.2605  -0.2276   2.5787  
 
 Coefficients:
                      Estimate Std. Error z value Pr(>|z|)    
-(Intercept)          -3.59362    0.09743 -36.883  < 2e-16 ***
-swim35Below35cfu      0.28162    0.04979   5.656 1.55e-08 ***
-swim35Above35cfu      0.41860    0.08194   5.109 3.24e-07 ***
-female                0.14942    0.04362   3.426 0.000613 ***
-racewhiteYes          0.12174    0.06318   1.927 0.053998 .  
-racewhiteMissing     -2.05433    0.34077  -6.029 1.65e-09 ***
-gichronYes            0.84323    0.08125  10.378  < 2e-16 ***
-gichronMissing        0.27759    1.00105   0.277 0.781553    
-anim_anyYes           0.18815    0.05090   3.696 0.000219 ***
-gicontactbaseYes      0.70442    0.07531   9.354  < 2e-16 ***
-gicontactbaseMissing  0.21512    0.23791   0.904 0.365889    
-rawfood               0.31977    0.04896   6.531 6.54e-11 ***
-beachBoqueron        -0.52937    0.10493  -5.045 4.54e-07 ***
-beachDoheny          -0.22716    0.09980  -2.276 0.022833 *  
-beachEdgewater        0.10772    0.15949   0.675 0.499435    
-beachFairhope         0.14384    0.14394   0.999 0.317642    
-beachGoddard         -0.56088    0.15030  -3.732 0.000190 ***
-beachHuntington       0.33529    0.11877   2.823 0.004756 ** 
-beachMalibu          -0.03672    0.10851  -0.338 0.735062    
-beachMission Bay     -0.32833    0.11237  -2.922 0.003480 ** 
-beachSilver          -0.45450    0.09937  -4.574 4.79e-06 ***
-beachSurfside        -0.36348    0.09490  -3.830 0.000128 ***
-beachWashington Park -0.04227    0.11314  -0.374 0.708728    
-beachWest             0.18114    0.11905   1.522 0.128109    
+(Intercept)          -3.60928    0.09762 -36.971  < 2e-16 ***
+swim35Below35cfu      0.28048    0.04979   5.633 1.77e-08 ***
+swim35Above35cfu      0.41954    0.08196   5.119 3.08e-07 ***
+female                0.14913    0.04361   3.419 0.000628 ***
+racewhiteYes          0.13312    0.06333   2.102 0.035553 *  
+racewhiteMissing     -0.47596    0.33844  -1.406 0.159615    
+gichronYes            0.84136    0.08125  10.356  < 2e-16 ***
+gichronMissing        0.25737    1.00108   0.257 0.797107    
+anim_anyYes           0.18663    0.05090   3.666 0.000246 ***
+gicontactbaseYes      0.70737    0.07532   9.392  < 2e-16 ***
+gicontactbaseMissing  0.22311    0.23789   0.938 0.348310    
+rawfood               0.31747    0.04898   6.482 9.06e-11 ***
+beachBoqueron        -0.51141    0.10511  -4.865 1.14e-06 ***
+beachDoheny          -0.22627    0.09981  -2.267 0.023384 *  
+beachEdgewater        0.11781    0.15954   0.738 0.460228    
+beachFairhope         0.15341    0.14399   1.065 0.286683    
+beachGoddard         -0.55110    0.15035  -3.666 0.000247 ***
+beachHuntington       0.34142    0.11880   2.874 0.004055 ** 
+beachMalibu          -0.04378    0.10858  -0.403 0.686773    
+beachMission Bay     -0.27196    0.11147  -2.440 0.014701 *  
+beachSilver          -0.44842    0.09940  -4.511 6.44e-06 ***
+beachSurfside        -0.35575    0.09496  -3.746 0.000180 ***
+beachWashington Park -0.03439    0.11319  -0.304 0.761266    
+beachWest             0.18632    0.11905   1.565 0.117578    
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
 (Dispersion parameter for poisson family taken to be 1)
 
-    Null deviance: 14331  on 57432  degrees of freedom
-Residual deviance: 13754  on 57409  degrees of freedom
-AIC: 18192
+    Null deviance: 14175  on 55433  degrees of freedom
+Residual deviance: 13725  on 55410  degrees of freedom
+AIC: 18163
 
-Number of Fisher Scoring iterations: 7
+Number of Fisher Scoring iterations: 6
 
 
 
@@ -2086,30 +2082,30 @@ Robust, Sandwich Standard Errors Account for Clustering:
 z test of coefficients:
 
                       Estimate Std. Error  z value  Pr(>|z|)    
-(Intercept)          -3.593618   0.102157 -35.1774 < 2.2e-16 ***
-swim35Below35cfu      0.281619   0.050647   5.5604 2.691e-08 ***
-swim35Above35cfu      0.418598   0.084524   4.9524 7.330e-07 ***
-female                0.149425   0.040982   3.6461 0.0002662 ***
-racewhiteYes          0.121740   0.065279   1.8649 0.0621937 .  
-racewhiteMissing     -2.054331   0.351724  -5.8407 5.197e-09 ***
-gichronYes            0.843232   0.079032  10.6695 < 2.2e-16 ***
-gichronMissing        0.277587   0.941222   0.2949 0.7680535    
-anim_anyYes           0.188148   0.051896   3.6254 0.0002885 ***
-gicontactbaseYes      0.704419   0.075342   9.3496 < 2.2e-16 ***
-gicontactbaseMissing  0.215118   0.228913   0.9397 0.3473518    
-rawfood               0.319775   0.050749   6.3012 2.954e-10 ***
-beachBoqueron        -0.529367   0.113330  -4.6710 2.997e-06 ***
-beachDoheny          -0.227161   0.105727  -2.1486 0.0316695 *  
-beachEdgewater        0.107718   0.164018   0.6567 0.5113463    
-beachFairhope         0.143843   0.146371   0.9827 0.3257430    
-beachGoddard         -0.560883   0.158981  -3.5280 0.0004187 ***
-beachHuntington       0.335295   0.122384   2.7397 0.0061497 ** 
-beachMalibu          -0.036721   0.113610  -0.3232 0.7465269    
-beachMission Bay     -0.328333   0.123164  -2.6658 0.0076799 ** 
-beachSilver          -0.454499   0.101374  -4.4834 7.346e-06 ***
-beachSurfside        -0.363481   0.099600  -3.6494 0.0002628 ***
-beachWashington Park -0.042266   0.118262  -0.3574 0.7208006    
-beachWest             0.181141   0.126445   1.4326 0.1519812    
+(Intercept)          -3.609280   0.102319 -35.2747 < 2.2e-16 ***
+swim35Below35cfu      0.280483   0.050659   5.5367 3.083e-08 ***
+swim35Above35cfu      0.419542   0.084587   4.9599 7.053e-07 ***
+female                0.149129   0.040982   3.6389 0.0002738 ***
+racewhiteYes          0.133119   0.065472   2.0332 0.0420290 *  
+racewhiteMissing     -0.475964   0.337806  -1.4090 0.1588389    
+gichronYes            0.841356   0.078974  10.6536 < 2.2e-16 ***
+gichronMissing        0.257371   0.942607   0.2730 0.7848211    
+anim_anyYes           0.186625   0.051902   3.5957 0.0003235 ***
+gicontactbaseYes      0.707368   0.075339   9.3891 < 2.2e-16 ***
+gicontactbaseMissing  0.223110   0.228823   0.9750 0.3295443    
+rawfood               0.317466   0.050762   6.2540 4.001e-10 ***
+beachBoqueron        -0.511406   0.113496  -4.5059 6.608e-06 ***
+beachDoheny          -0.226270   0.105735  -2.1400 0.0323565 *  
+beachEdgewater        0.117813   0.164052   0.7181 0.4726664    
+beachFairhope         0.153406   0.146414   1.0478 0.2947490    
+beachGoddard         -0.551096   0.159029  -3.4654 0.0005295 ***
+beachHuntington       0.341422   0.122420   2.7889 0.0052881 ** 
+beachMalibu          -0.043782   0.113829  -0.3846 0.7005150    
+beachMission Bay     -0.271959   0.119325  -2.2792 0.0226581 *  
+beachSilver          -0.448422   0.101403  -4.4222 9.770e-06 ***
+beachSurfside        -0.355748   0.099673  -3.5691 0.0003582 ***
+beachWashington Park -0.034389   0.118313  -0.2907 0.7713138    
+beachWest             0.186316   0.126490   1.4730 0.1407588    
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
@@ -2122,34 +2118,34 @@ glm(formula = formula, family = poisson(link = "log"), data = dat)
 
 Deviance Residuals: 
     Min       1Q   Median       3Q      Max  
--0.7052  -0.3665  -0.3167  -0.2747   2.8594  
+-0.7042  -0.3671  -0.3334  -0.2894   2.3247  
 
 Coefficients:
-                      Estimate Std. Error z value Pr(>|z|)    
-(Intercept)          -3.117716   0.260795 -11.955  < 2e-16 ***
-swim35Below35cfu      0.377282   0.196535   1.920  0.05490 .  
-swim35Above35cfu      0.619338   0.414066   1.496  0.13472    
-female               -0.112851   0.171072  -0.660  0.50946    
-racewhiteYes          0.067358   0.212443   0.317  0.75120    
-racewhiteMissing     -2.341478   0.722155  -3.242  0.00119 ** 
-gichronYes            0.734588   1.009778   0.727  0.46694    
-anim_anyYes           0.488999   0.202981   2.409  0.01599 *  
-gicontactbaseYes     -0.251754   0.508613  -0.495  0.62061    
-gicontactbaseMissing  0.732247   0.514308   1.424  0.15452    
-rawfood              -0.491364   0.312003  -1.575  0.11529    
-beachMalibu           0.006902   0.267158   0.026  0.97939    
-beachMission Bay      0.125229   0.244209   0.513  0.60810    
-beachSurfside        -0.516462   0.273888  -1.886  0.05934 .  
+                     Estimate Std. Error z value Pr(>|z|)    
+(Intercept)          -3.15514    0.26232 -12.028   <2e-16 ***
+swim35Below35cfu      0.37335    0.19643   1.901   0.0573 .  
+swim35Above35cfu      0.63784    0.41419   1.540   0.1236    
+female               -0.10797    0.17108  -0.631   0.5280    
+racewhiteYes          0.10210    0.21354   0.478   0.6326    
+racewhiteMissing      0.12965    0.73068   0.177   0.8592    
+gichronYes            0.71389    1.00967   0.707   0.4795    
+anim_anyYes           0.47639    0.20277   2.349   0.0188 *  
+gicontactbaseYes     -0.25807    0.50881  -0.507   0.6120    
+gicontactbaseMissing  0.74891    0.51430   1.456   0.1453    
+rawfood              -0.49804    0.31220  -1.595   0.1107    
+beachMalibu          -0.01772    0.26809  -0.066   0.9473    
+beachMission Bay      0.19707    0.24348   0.809   0.4183    
+beachSurfside        -0.49973    0.27412  -1.823   0.0683 .  
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
 (Dispersion parameter for poisson family taken to be 1)
 
-    Null deviance: 816.55  on 2621  degrees of freedom
-Residual deviance: 775.10  on 2608  degrees of freedom
-AIC: 1081.1
+    Null deviance: 782.05  on 2315  degrees of freedom
+Residual deviance: 765.26  on 2302  degrees of freedom
+AIC: 1071.3
 
-Number of Fisher Scoring iterations: 7
+Number of Fisher Scoring iterations: 6
 
 
 
@@ -2157,21 +2153,21 @@ Robust, Sandwich Standard Errors Account for Clustering:
 
 z test of coefficients:
 
-                       Estimate Std. Error  z value  Pr(>|z|)    
-(Intercept)          -3.1177163  0.2842420 -10.9685 < 2.2e-16 ***
-swim35Below35cfu      0.3772822  0.2143664   1.7600  0.078410 .  
-swim35Above35cfu      0.6193385  0.4100271   1.5105  0.130920    
-female               -0.1128513  0.1682179  -0.6709  0.502307    
-racewhiteYes          0.0673578  0.2303418   0.2924  0.769961    
-racewhiteMissing     -2.3414784  0.7478162  -3.1311  0.001742 ** 
-gichronYes            0.7345881  0.9311531   0.7889  0.430170    
-anim_anyYes           0.4889992  0.2202012   2.2207  0.026372 *  
-gicontactbaseYes     -0.2517539  0.4903292  -0.5134  0.607645    
-gicontactbaseMissing  0.7322474  0.4832690   1.5152  0.129723    
-rawfood              -0.4913639  0.3071706  -1.5996  0.109677    
-beachMalibu           0.0069019  0.2694737   0.0256  0.979566    
-beachMission Bay      0.1252286  0.2780037   0.4505  0.652381    
-beachSurfside        -0.5164619  0.2721650  -1.8976  0.057748 .  
+                      Estimate Std. Error  z value Pr(>|z|)    
+(Intercept)          -3.155138   0.284243 -11.1001  < 2e-16 ***
+swim35Below35cfu      0.373352   0.213414   1.7494  0.08022 .  
+swim35Above35cfu      0.637841   0.410349   1.5544  0.12009    
+female               -0.107968   0.167816  -0.6434  0.51998    
+racewhiteYes          0.102096   0.231042   0.4419  0.65856    
+racewhiteMissing      0.129647   0.724070   0.1791  0.85790    
+gichronYes            0.713889   0.929891   0.7677  0.44266    
+anim_anyYes           0.476388   0.219881   2.1666  0.03027 *  
+gicontactbaseYes     -0.258070   0.491319  -0.5253  0.59940    
+gicontactbaseMissing  0.748908   0.483435   1.5491  0.12135    
+rawfood              -0.498035   0.307595  -1.6191  0.10542    
+beachMalibu          -0.017717   0.274144  -0.0646  0.94847    
+beachMission Bay      0.197074   0.266367   0.7399  0.45939    
+beachSurfside        -0.499728   0.271449  -1.8410  0.06563 .  
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
@@ -2183,34 +2179,34 @@ glm(formula = formula, family = poisson(link = "log"), data = dat)
 
 Deviance Residuals: 
     Min       1Q   Median       3Q      Max  
--0.6935  -0.2744  -0.2463  -0.1876   3.0495  
+-0.6910  -0.2844  -0.2552  -0.2050   2.8338  
 
 Coefficients:
                      Estimate Std. Error z value Pr(>|z|)    
-(Intercept)          -4.35991    0.42590 -10.237  < 2e-16 ***
-swim35Below35cfu      0.88500    0.37170   2.381  0.01727 *  
-swim35Above35cfu     -0.09034    0.67769  -0.133  0.89395    
-female               -0.37115    0.17276  -2.148  0.03169 *  
-racewhiteYes          0.42215    0.21193   1.992  0.04638 *  
-racewhiteMissing     -2.77387    1.01163  -2.742  0.00611 ** 
-gichronYes            1.39615    0.71460   1.954  0.05073 .  
-anim_anyYes           0.14010    0.20252   0.692  0.48907    
-gicontactbaseYes     -0.06292    0.45758  -0.138  0.89062    
-gicontactbaseMissing  0.10357    0.71692   0.144  0.88513    
-rawfood              -0.31359    0.25322  -1.238  0.21557    
-beachMalibu           0.60268    0.23991   2.512  0.01200 *  
-beachMission Bay      0.42673    0.25441   1.677  0.09348 .  
-beachSurfside        -0.44244    0.27107  -1.632  0.10264    
+(Intercept)          -4.37591    0.42653 -10.259   <2e-16 ***
+swim35Below35cfu      0.88228    0.37163   2.374   0.0176 *  
+swim35Above35cfu     -0.08557    0.67768  -0.126   0.8995    
+female               -0.37141    0.17277  -2.150   0.0316 *  
+racewhiteYes          0.44030    0.21259   2.071   0.0384 *  
+racewhiteMissing     -0.70165    1.01865  -0.689   0.4909    
+gichronYes            1.40265    0.71462   1.963   0.0497 *  
+anim_anyYes           0.13579    0.20251   0.671   0.5025    
+gicontactbaseYes     -0.05745    0.45769  -0.126   0.9001    
+gicontactbaseMissing  0.11873    0.71682   0.166   0.8685    
+rawfood              -0.31157    0.25332  -1.230   0.2187    
+beachMalibu           0.58975    0.24049   2.452   0.0142 *  
+beachMission Bay      0.46172    0.25389   1.819   0.0690 .  
+beachSurfside        -0.43797    0.27108  -1.616   0.1062    
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
 (Dispersion parameter for poisson family taken to be 1)
 
-    Null deviance: 987.81  on 4600  degrees of freedom
-Residual deviance: 926.53  on 4587  degrees of freedom
-AIC: 1238.5
+    Null deviance: 956.17  on 4115  degrees of freedom
+Residual deviance: 922.40  on 4102  degrees of freedom
+AIC: 1234.4
 
-Number of Fisher Scoring iterations: 8
+Number of Fisher Scoring iterations: 6
 
 
 
@@ -2218,21 +2214,21 @@ Robust, Sandwich Standard Errors Account for Clustering:
 
 z test of coefficients:
 
-                      Estimate Std. Error z value  Pr(>|z|)    
-(Intercept)          -4.359906   0.444654 -9.8052 < 2.2e-16 ***
-swim35Below35cfu      0.885000   0.393605  2.2484  0.024548 *  
-swim35Above35cfu     -0.090339   0.671326 -0.1346  0.892953    
-female               -0.371147   0.165447 -2.2433  0.024877 *  
-racewhiteYes          0.422149   0.250652  1.6842  0.092142 .  
-racewhiteMissing     -2.773871   1.023480 -2.7102  0.006724 ** 
-gichronYes            1.396147   0.563032  2.4797  0.013150 *  
-anim_anyYes           0.140097   0.215179  0.6511  0.515000    
-gicontactbaseYes     -0.062923   0.454460 -0.1385  0.889879    
-gicontactbaseMissing  0.103572   0.697929  0.1484  0.882028    
-rawfood              -0.313591   0.270141 -1.1608  0.245706    
-beachMalibu           0.602680   0.246521  2.4447  0.014495 *  
-beachMission Bay      0.426730   0.320164  1.3328  0.182582    
-beachSurfside        -0.442436   0.296899 -1.4902  0.136174    
+                      Estimate Std. Error z value Pr(>|z|)    
+(Intercept)          -4.375915   0.446353 -9.8037  < 2e-16 ***
+swim35Below35cfu      0.882284   0.393650  2.2413  0.02501 *  
+swim35Above35cfu     -0.085566   0.671754 -0.1274  0.89864    
+female               -0.371413   0.165483 -2.2444  0.02481 *  
+racewhiteYes          0.440301   0.251583  1.7501  0.08010 .  
+racewhiteMissing     -0.701654   0.991141 -0.7079  0.47899    
+gichronYes            1.402653   0.566124  2.4776  0.01323 *  
+anim_anyYes           0.135793   0.215216  0.6310  0.52806    
+gicontactbaseYes     -0.057455   0.454396 -0.1264  0.89938    
+gicontactbaseMissing  0.118726   0.697621  0.1702  0.86486    
+rawfood              -0.311571   0.270381 -1.1523  0.24918    
+beachMalibu           0.589748   0.246387  2.3936  0.01668 *  
+beachMission Bay      0.461719   0.317384  1.4548  0.14573    
+beachSurfside        -0.437968   0.297026 -1.4745  0.14034    
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
@@ -2244,34 +2240,34 @@ glm(formula = formula, family = poisson(link = "log"), data = dat)
 
 Deviance Residuals: 
     Min       1Q   Median       3Q      Max  
--0.8357  -0.2823  -0.2636  -0.2274   3.2877  
+-0.8299  -0.2869  -0.2637  -0.2393   2.6334  
 
 Coefficients:
                      Estimate Std. Error z value Pr(>|z|)    
-(Intercept)          -3.82131    0.11835 -32.287  < 2e-16 ***
-swim35Below35cfu      0.33180    0.07890   4.205 2.61e-05 ***
-swim35Above35cfu      0.42465    0.22225   1.911  0.05604 .  
-female                0.13718    0.07027   1.952  0.05092 .  
-racewhiteYes          0.16628    0.09342   1.780  0.07509 .  
-racewhiteMissing     -2.58165    0.45431  -5.683 1.33e-08 ***
-gichronYes            0.98789    0.13168   7.502 6.28e-14 ***
-anim_anyYes           0.03057    0.08532   0.358  0.72010    
-gicontactbaseYes      0.68141    0.12980   5.250 1.52e-07 ***
-gicontactbaseMissing -0.13961    0.38140  -0.366  0.71433    
-rawfood               0.24071    0.07449   3.232  0.00123 ** 
-beachMalibu           0.19328    0.10859   1.780  0.07508 .  
-beachMission Bay     -0.02630    0.11691  -0.225  0.82199    
-beachSurfside        -0.06718    0.10683  -0.629  0.52948    
+(Intercept)          -3.83706    0.11862 -32.348  < 2e-16 ***
+swim35Below35cfu      0.33070    0.07890   4.191 2.77e-05 ***
+swim35Above35cfu      0.43276    0.22225   1.947  0.05152 .  
+female                0.13672    0.07027   1.946  0.05169 .  
+racewhiteYes          0.17941    0.09359   1.917  0.05524 .  
+racewhiteMissing     -0.61864    0.45447  -1.361  0.17344    
+gichronYes            0.98542    0.13167   7.484 7.22e-14 ***
+anim_anyYes           0.02871    0.08533   0.336  0.73651    
+gicontactbaseYes      0.68543    0.12982   5.280 1.29e-07 ***
+gicontactbaseMissing -0.12975    0.38139  -0.340  0.73371    
+rawfood               0.23849    0.07452   3.200  0.00137 ** 
+beachMalibu           0.18605    0.10867   1.712  0.08688 .  
+beachMission Bay      0.01101    0.11635   0.095  0.92459    
+beachSurfside        -0.06098    0.10689  -0.570  0.56835    
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
 (Dispersion parameter for poisson family taken to be 1)
 
-    Null deviance: 5590.7  on 23745  degrees of freedom
-Residual deviance: 5344.7  on 23732  degrees of freedom
-AIC: 7042.7
+    Null deviance: 5443.9  on 21746  degrees of freedom
+Residual deviance: 5325.0  on 21733  degrees of freedom
+AIC: 7023
 
-Number of Fisher Scoring iterations: 8
+Number of Fisher Scoring iterations: 6
 
 
 
@@ -2280,20 +2276,20 @@ Robust, Sandwich Standard Errors Account for Clustering:
 z test of coefficients:
 
                       Estimate Std. Error  z value  Pr(>|z|)    
-(Intercept)          -3.821307   0.127553 -29.9586 < 2.2e-16 ***
-swim35Below35cfu      0.331798   0.079382   4.1798 2.918e-05 ***
-swim35Above35cfu      0.424648   0.240687   1.7643  0.077679 .  
-female                0.137179   0.066105   2.0752  0.037971 *  
-racewhiteYes          0.166277   0.097991   1.6969  0.089722 .  
-racewhiteMissing     -2.581648   0.463455  -5.5704 2.541e-08 ***
-gichronYes            0.987890   0.127041   7.7761 7.478e-15 ***
-anim_anyYes           0.030572   0.087228   0.3505  0.725974    
-gicontactbaseYes      0.681405   0.132731   5.1337 2.840e-07 ***
-gicontactbaseMissing -0.139611   0.373078  -0.3742  0.708246    
-rawfood               0.240711   0.077866   3.0913  0.001993 ** 
-beachMalibu           0.193280   0.113732   1.6994  0.089237 .  
-beachMission Bay     -0.026303   0.130832  -0.2010  0.840665    
-beachSurfside        -0.067177   0.108434  -0.6195  0.535572    
+(Intercept)          -3.837063   0.127545 -30.0840 < 2.2e-16 ***
+swim35Below35cfu      0.330704   0.079423   4.1639 3.129e-05 ***
+swim35Above35cfu      0.432762   0.240718   1.7978  0.072209 .  
+female                0.136717   0.066108   2.0681  0.038633 *  
+racewhiteYes          0.179408   0.098117   1.8285  0.067474 .  
+racewhiteMissing     -0.618640   0.453943  -1.3628  0.172941    
+gichronYes            0.985415   0.127031   7.7573 8.677e-15 ***
+anim_anyYes           0.028710   0.087256   0.3290  0.742128    
+gicontactbaseYes      0.685435   0.132717   5.1646 2.409e-07 ***
+gicontactbaseMissing -0.129749   0.372897  -0.3479  0.727879    
+rawfood               0.238490   0.077840   3.0638  0.002185 ** 
+beachMalibu           0.186049   0.114114   1.6304  0.103023    
+beachMission Bay      0.011014   0.127443   0.0864  0.931133    
+beachSurfside        -0.060979   0.108447  -0.5623  0.573915    
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
@@ -2559,29 +2555,29 @@ Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’
 > # --------------------------------------
 > N.all
                 n     N
-Non-swimmers  877 26756
-Below35cfu   1697 41147
-Above35cfu    344  6094
+Non-swimmers  877 25093
+Below35cfu   1697 40199
+Above35cfu    344  5870
 > N.age0to4
                n    N
-Non-swimmers  72 1657
-Below35cfu   209 3332
-Above35cfu    57  583
+Non-swimmers  72 1505
+Below35cfu   209 3205
+Above35cfu    57  556
 > N.age5to10
                n    N
-Non-swimmers  20 1085
-Below35cfu   259 7440
-Above35cfu    76 1435
+Non-swimmers  20  945
+Below35cfu   259 7157
+Above35cfu    76 1373
 > N.age11plus
                 n     N
-Non-swimmers  780 23699
-Below35cfu   1206 29820
-Above35cfu    209  3914
+Non-swimmers  780 22346
+Below35cfu   1206 29300
+Above35cfu    209  3788
 > N.nps
                n     N
-Non-swimmers 347 12505
-Below35cfu   745 17779
-Above35cfu    32  1003
+Non-swimmers 347 10842
+Below35cfu   745 16831
+Above35cfu    32   779
 > N.ps
                n     N
 Non-swimmers 530 14251
@@ -2589,19 +2585,19 @@ Below35cfu   952 23368
 Above35cfu   312  5091
 > N.nps0to4
               n    N
-Non-swimmers 39  975
-Below35cfu   93 1542
-Above35cfu    7  105
+Non-swimmers 39  823
+Below35cfu   93 1415
+Above35cfu    7   78
 > N.nps5to10
                n    N
-Non-swimmers   8  613
-Below35cfu   131 3721
-Above35cfu     3  267
+Non-swimmers   8  473
+Below35cfu   131 3438
+Above35cfu     3  205
 > N.nps11plus
                n     N
-Non-swimmers 300 10810
-Below35cfu   513 12328
-Above35cfu    22   608
+Non-swimmers 300  9457
+Below35cfu   513 11808
+Above35cfu    22   482
 > N.ps0to4
                n    N
 Non-swimmers  33  682
@@ -2624,45 +2620,45 @@ Above35cfu   187  3306
 > # --------------------------------------
 > ci.all
                       CI       CIlb       CIub
-Non-swimmers  0.03277769 0.03058713 0.03512515
-Entero<=35cfu 0.04124237 0.03904599 0.04356230
-Entero>35cfu  0.05644897 0.05013588 0.06355699
+Non-swimmers  0.03494999 0.03261881 0.03744776
+Entero<=35cfu 0.04221498 0.03996920 0.04458695
+Entero>35cfu  0.05860307 0.05206526 0.06596183
 > ci.0to4
                       CI       CIlb       CIub
-Non-swimmers  0.04345202 0.03416275 0.05526716
-Entero<=35cfu 0.06272509 0.05450087 0.07219035
-Entero>35cfu  0.09777015 0.07526313 0.12700778
+Non-swimmers  0.04784053 0.03764011 0.06080525
+Entero<=35cfu 0.06521061 0.05667330 0.07503398
+Entero>35cfu  0.10251799 0.07897318 0.13308236
 > ci.5to10
                       CI       CIlb       CIub
-Non-swimmers  0.01843318 0.01193026 0.02848070
-Entero<=35cfu 0.03481183 0.03050417 0.03972779
-Entero>35cfu  0.05296167 0.04187173 0.06698884
+Non-swimmers  0.02116402 0.01370573 0.03268091
+Entero<=35cfu 0.03618835 0.03171502 0.04129263
+Entero>35cfu  0.05535324 0.04378472 0.06997832
 > ci.11plus
                       CI       CIlb       CIub
-Non-swimmers  0.03291278 0.03064949 0.03534320
-Entero<=35cfu 0.04044266 0.03807964 0.04295231
-Entero>35cfu  0.05339806 0.04627850 0.06161290
+Non-swimmers  0.03490558 0.03250853 0.03747937
+Entero<=35cfu 0.04116041 0.03875685 0.04371303
+Entero>35cfu  0.05517423 0.04782846 0.06364821
 > 
 > ci.nps
                       CI       CIlb       CIub
-Non-swimmers  0.02774890 0.02481083 0.03103490
-Entero<=35cfu 0.04190337 0.03854888 0.04554976
-Entero>35cfu  0.03190429 0.02185772 0.04656861
+Non-swimmers  0.03200517 0.02862930 0.03577910
+Entero<=35cfu 0.04426356 0.04072919 0.04810463
+Entero>35cfu  0.04107831 0.02823694 0.05975956
 > ci.nps0to4
                       CI       CIlb       CIub
-Non-swimmers  0.04000000 0.02838469 0.05636842
-Entero<=35cfu 0.06031128 0.04878585 0.07455955
-Entero>35cfu  0.06666667 0.03241812 0.13709755
+Non-swimmers  0.04738761 0.03368852 0.06665728
+Entero<=35cfu 0.06572438 0.05320161 0.08119480
+Entero>35cfu  0.08974359 0.04396728 0.18317965
 > ci.nps5to10
                       CI        CIlb       CIub
-Non-swimmers  0.01305057 0.006554331 0.02598548
-Entero<=35cfu 0.03520559 0.029111762 0.04257501
-Entero>35cfu  0.01123596 0.003660867 0.03448547
+Non-swimmers  0.01691332 0.008507501 0.03362449
+Entero<=35cfu 0.03810355 0.031521807 0.04605956
+Entero>35cfu  0.01463415 0.004785628 0.04475029
 > ci.nps11plus
                       CI       CIlb       CIub
-Non-swimmers  0.02775208 0.02471258 0.03116542
-Entero<=35cfu 0.04161259 0.03797625 0.04559712
-Entero>35cfu  0.03618421 0.02281546 0.05738640
+Non-swimmers  0.03172253 0.02825722 0.03561282
+Entero<=35cfu 0.04344512 0.03965477 0.04759777
+Entero>35cfu  0.04564315 0.02886406 0.07217617
 > 
 > ci.ps
                       CI       CIlb       CIub
@@ -2681,9 +2677,9 @@ Entero<=35cfu 0.03441785 0.02865136 0.04134494
 Entero>35cfu  0.06250000 0.04922740 0.07935113
 > ci.ps11plus
                       CI       CIlb       CIub
-Non-swimmers  0.03724106 0.03316230 0.04182148
-Entero<=35cfu 0.03961811 0.03615606 0.04341166
-Entero>35cfu  0.05656382 0.03566555 0.08970747
+Non-swimmers  0.03724106 0.03317291 0.04180810
+Entero<=35cfu 0.03961811 0.03616165 0.04340496
+Entero>35cfu  0.05656382 0.03577014 0.08944518
 > 
 > 
 > # --------------------------------------
@@ -2692,40 +2688,40 @@ Entero>35cfu  0.05656382 0.03566555 0.08970747
 > # --------------------------------------
 > cir.all
                  CIRbelow35 CIRbelow35lb CIRbelow35ub CIRabove35 CIRabove35lb
-Non-point source   1.532741     1.318187     1.782217   1.476901    0.9969161
-Point source       1.316238     1.162926     1.489761   1.676693    1.4280592
-Overall            1.401743     1.274050     1.542233   1.688690    1.4611646
+Non-point source   1.531157     1.316684     1.780567   1.491194     1.006473
+Point source       1.316238     1.162926     1.489761   1.676693     1.428059
+Overall            1.399447     1.271921     1.539758   1.693167     1.464864
                  CIRabove35ub
-Non-point source     2.187985
+Non-point source     2.209359
 Point source         1.968614
-Overall              1.951644
+Overall              1.957051
 > cir.age0to4
                  CIRbelow35 CIRbelow35lb CIRbelow35ub CIRabove35 CIRabove35lb
-Non-point source   1.458316    0.9580301     2.219852   1.857699    0.8316742
+Non-point source   1.452595    0.9560547     2.207021   1.892391    0.8466719
 Point source       1.344724    0.9040195     2.000270   1.947174    1.2466777
-Overall            1.416861    1.0597948     1.894231   1.996854    1.3754737
+Overall            1.414289    1.0583511     1.889935   2.003211    1.3790183
                  CIRabove35ub
-Non-point source     4.149515
+Non-point source     4.229673
 Point source         3.041274
-Overall              2.898946
+Overall              2.909937
 > cir.age5to10
                  CIRbelow35 CIRbelow35lb CIRbelow35ub CIRabove35 CIRabove35lb
-Non-point source   2.422985    1.1202300     5.240760  0.9136213    0.2450878
-Point source       1.609446    0.8798061     2.944191  2.4865645    1.3235302
-Overall            1.931770    1.1975536     3.116131  2.4762801    1.4793025
+Non-point source   2.416411    1.1170922     5.227003  0.9179928     0.246054
+Point source       1.609446    0.8798061     2.944191  2.4865645     1.323530
+Overall            1.922615    1.1921910     3.100552  2.4820356     1.482324
                  CIRabove35ub
-Non-point source     3.405735
+Non-point source     3.424902
 Point source         4.671600
-Overall              4.145172
+Overall              4.155973
 > cir.age11plus
                  CIRbelow35 CIRbelow35lb CIRbelow35ub CIRabove35 CIRabove35lb
-Non-point source   1.393472     1.192687     1.628057   1.529052    0.9539932
+Non-point source   1.391948     1.191289     1.626406   1.541509    0.9617078
 Point source       1.283316     1.127554     1.460595   1.502271    1.2556817
-Overall            1.325274     1.200035     1.463583   1.519829    1.2877938
+Overall            1.323769     1.198644     1.461956   1.521265    1.2888520
                  CIRabove35ub
-Non-point source     2.450752
+Non-point source     2.470865
 Point source         1.797286
-Overall              1.793674
+Overall              1.795588
 > 
 > 
 > 
@@ -2764,4 +2760,4 @@ Overall              1.793674
 > 
 > proc.time()
    user  system elapsed 
-185.709  16.132 210.874 
+179.974  16.999 201.974 
