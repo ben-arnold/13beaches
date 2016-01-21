@@ -63,13 +63,13 @@ Type 'q()' to quit R.
 > load("~/dropbox/13beaches/aim2-results/rawoutput/aim2-PARswimex-diar.RData")
 > PARcomp(PARswimex.diar.0to4,PARswimex.diar.5to10)
         diff       SEdiff            Z            P 
--0.002332225  0.006604373 -0.353133515  0.723988348 
+-0.002221490  0.007149887 -0.310702768  0.756026593 
 > PARcomp(PARswimex.diar.0to4, PARswimex.diar.11plus)
        diff      SEdiff           Z           P 
-0.006854361 0.005128142 1.336616980 0.181347694 
+0.007729564 0.005576060 1.386205250 0.165684239 
 > PARcomp(PARswimex.diar.5to10, PARswimex.diar.11plus)
        diff      SEdiff           Z           P 
-0.009186587 0.004578220 2.006584625 0.044793910 
+0.009951054 0.004696292 2.118916986 0.034097483 
 > 
 > # --------------------------------------
 > # GI illness
@@ -77,17 +77,17 @@ Type 'q()' to quit R.
 > load("~/dropbox/13beaches/aim2-results/rawoutput/aim2-PARswimex-gi.RData")
 > PARcomp(PARswimex.gi.0to4,PARswimex.gi.5to10)
        diff      SEdiff           Z           P 
-0.010059520 0.008854634 1.136074029 0.255925583 
+0.010598358 0.009276526 1.142492144 0.253249510 
 > PARcomp(PARswimex.gi.0to4, PARswimex.gi.11plus)
        diff      SEdiff           Z           P 
-0.013248529 0.005897982 2.246281940 0.024685955 
+0.014599836 0.006449939 2.263561971 0.023601069 
 > PARcomp(PARswimex.gi.5to10, PARswimex.gi.11plus)
        diff      SEdiff           Z           P 
-0.003189010 0.006985495 0.456518785 0.648016966 
+0.004001477 0.007198567 0.555871343 0.578298810 
 > 
 > 
 > 
 > 
 > proc.time()
    user  system elapsed 
-  0.698   0.062   1.769 
+  0.432   0.055   0.969 

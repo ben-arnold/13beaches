@@ -48,13 +48,6 @@ Type 'q()' to quit R.
 > # and medical visits associated with GI illness
 > # are too rare to stratify the data by age, unfortunately.
 > #
-> # version 2 (5 jun 2015)
-> # added stratification by point vs. non-point sources
-> # to be consistent with the presentation of the Entero - Diarrhea results
-> # by this likely effect modifier
-> #
-> # version 1 (28 apr 2015)
-> #
 > # --------------------------------------
 > 
 > # --------------------------------------
@@ -87,8 +80,8 @@ The following objects are masked from ‘package:base’:
 
 > 
 > # source the base functions
-> source("~/dropbox/13beaches/src/aim1/0-aim1-base-functions.R")
-> source("~/dropbox/13beaches/src/aim2/0-aim2-base-functions.R")
+> source("~/13beaches/src/aim1/0-aim1-base-functions.R")
+> source("~/13beaches/src/aim2/0-aim2-base-functions.R")
 > 
 > # set the number of iterations for the bootstraps
 > Nboot <- 1000
@@ -103,26 +96,26 @@ The following objects are masked from ‘package:base’:
 > ad <- preprocess.13beaches("~/dropbox/13beaches/data/final/13beaches-analysis.csv")
 
 Successfully loaded the data
- Total sample size = 88083 
+ Total sample size = 84411 
 
 Dropping individuals with GI illness at enrollment
- N = 2025 
+ N = 1948 
 
-Final sample size = 86058 
+Final sample size = 82463 
 
 Subsetting the data to relevant variables and completing final variable pre-processing> 
 > # subset to non-missing exposure categories
 > table(ad$swim35)
 
 Non-swimmers   Below35cfu   Above35cfu 
-       26756        50480         8213 
+       25093        49021         7907 
 > table(is.na(ad$swim35))
 
 FALSE  TRUE 
-85449   609 
+82021   442 
 > ad <- subset(ad,is.na(ad$swim35)==FALSE)
 > 	dim(ad)
-[1] 85449    50
+[1] 82021    50
 > 
 > 
 > 
@@ -184,14 +177,14 @@ Bootstrap Iterations (1000)
 ..................................................950 
 ..................................................1000 
 
- Bootstrap Run Time: 86.487  Minutes 
+ Bootstrap Run Time: 74.267  Minutes 
 
 
  Bootstrap Estimates:
 
- Means    : 0.0019 4.7868 0.0397 0.0378 0.0389 
- Lower 95%: 0.0013 3.1884 0.0381 0.0363 0.0373 
- Upper 95%: 0.0025 6.2920 0.0412 0.0394 0.0405 
+ Means    : 0.0020 4.7981 0.0413 0.0393 0.0405 
+ Lower 95%: 0.0014 3.2846 0.0398 0.0377 0.0389 
+ Upper 95%: 0.0026 6.2888 0.0429 0.0410 0.0421 
 There were 50 or more warnings (use warnings() to see the first 50)
 > 
 > 	# remove age category from the adjustment covariates
@@ -225,14 +218,14 @@ Bootstrap Iterations (1000)
 ..................................................950 
 ..................................................1000 
 
- Bootstrap Run Time: 5.204  Minutes 
+ Bootstrap Run Time: 4.641  Minutes 
 
 
  Bootstrap Estimates:
 
- Means    : 0.0053 8.9265 0.0589 0.0537 0.0554 
- Lower 95%: 0.0021 3.6159 0.0530 0.0478 0.0493 
- Upper 95%: 0.0085 14.2803 0.0650 0.0598 0.0618 
+ Means    : 0.0055 8.7618 0.0624 0.0570 0.0588 
+ Lower 95%: 0.0021 3.2588 0.0559 0.0506 0.0520 
+ Upper 95%: 0.0087 13.7335 0.0688 0.0637 0.0659 
 There were 50 or more warnings (use warnings() to see the first 50)
 > 
 > AR35noswim.diar.5to10 <- bootAR(fn="AR35noswim",fmla=fmla,data=subset(ad,agestrat=="(4, 10]"),ID=ad$hhid[ad$agestrat=="(4, 10]"],strata=ad$beach[ad$agestrat=="(4, 10]"],iter=Nboot)
@@ -262,14 +255,14 @@ Bootstrap Iterations (1000)
 ..................................................950 
 ..................................................1000 
 
- Bootstrap Run Time: 10.022  Minutes 
+ Bootstrap Run Time: 9.225  Minutes 
 
 
  Bootstrap Estimates:
 
- Means    : 0.0042 11.9083 0.0351 0.0309 0.0336 
- Lower 95%: 0.0021 5.7647 0.0314 0.0271 0.0297 
- Upper 95%: 0.0064 18.2902 0.0394 0.0350 0.0381 
+ Means    : 0.0045 12.0427 0.0370 0.0325 0.0354 
+ Lower 95%: 0.0019 5.1437 0.0331 0.0285 0.0312 
+ Upper 95%: 0.0068 18.0875 0.0407 0.0367 0.0395 
 There were 50 or more warnings (use warnings() to see the first 50)
 > 
 > AR35noswim.diar.11plus <- bootAR(fn="AR35noswim",fmla=fmla,data=subset(ad,agestrat==">10"),ID=ad$hhid[ad$agestrat==">10"],strata=ad$beach[ad$agestrat==">10"],iter=Nboot)
@@ -299,14 +292,14 @@ Bootstrap Iterations (1000)
 ..................................................950 
 ..................................................1000 
 
- Bootstrap Run Time: 62.825  Minutes 
+ Bootstrap Run Time: 56.456  Minutes 
 
 
  Bootstrap Estimates:
 
- Means    : 0.0013 3.4394 0.0386 0.0373 0.0382 
- Lower 95%: 0.0008 1.9504 0.0369 0.0357 0.0365 
- Upper 95%: 0.0019 4.8771 0.0402 0.0390 0.0399 
+ Means    : 0.0014 3.4623 0.0401 0.0388 0.0397 
+ Lower 95%: 0.0008 1.8669 0.0385 0.0370 0.0379 
+ Upper 95%: 0.0020 5.0336 0.0418 0.0405 0.0415 
 There were 50 or more warnings (use warnings() to see the first 50)
 > 
 > 	# add age category to the adjustment covariates, remove pointsource and marine
@@ -339,14 +332,14 @@ Bootstrap Iterations (1000)
 ..................................................950 
 ..................................................1000 
 
- Bootstrap Run Time: 38.211  Minutes 
+ Bootstrap Run Time: 36.716  Minutes 
 
 
  Bootstrap Estimates:
 
- Means    : 0.0029 6.7497 0.0424 0.0395 0.0409 
- Lower 95%: 0.0018 4.3676 0.0402 0.0373 0.0386 
- Upper 95%: 0.0039 9.0354 0.0444 0.0418 0.0433 
+ Means    : 0.0029 6.8881 0.0424 0.0395 0.0409 
+ Lower 95%: 0.0019 4.4975 0.0403 0.0372 0.0386 
+ Upper 95%: 0.0040 9.2814 0.0446 0.0416 0.0432 
 > 
 > AR35noswim.diar.nps <- bootAR(fn="AR35noswim",fmla=fmla,data=subset(ad,pointsource=="No"),ID=ad$hhid[ad$pointsource=="No"],strata=ad$beach[ad$pointsource=="No"],iter=Nboot)
 
@@ -375,14 +368,14 @@ Bootstrap Iterations (1000)
 ..................................................950 
 ..................................................1000 
 
- Bootstrap Run Time: 28.256  Minutes 
+ Bootstrap Run Time: 22.754  Minutes 
 
 
  Bootstrap Estimates:
 
- Means    : 0.0005 1.3324 0.0362 0.0357 0.0361 
- Lower 95%: 0.0001 0.1805 0.0340 0.0335 0.0339 
- Upper 95%: 0.0009 2.5578 0.0383 0.0378 0.0383 
+ Means    : 0.0005 1.3531 0.0398 0.0393 0.0398 
+ Lower 95%: 0.0001 0.1982 0.0372 0.0367 0.0372 
+ Upper 95%: 0.0010 2.6511 0.0422 0.0418 0.0423 
 > 
 > # save results down
 > save(N.all,N.age0to4,N.age5to10,N.age11plus,N.ps,N.nps,AR35noswim.diar,AR35noswim.diar.0to4,AR35noswim.diar.5to10,AR35noswim.diar.11plus,AR35noswim.diar.ps,AR35noswim.diar.nps,file="~/dropbox/13beaches/aim2-results/rawoutput/aim2-PARentero1600noswim-diar.RData")
@@ -433,14 +426,14 @@ Bootstrap Iterations (1000)
 ..................................................950 
 ..................................................1000 
 
- Bootstrap Run Time: 87.839  Minutes 
+ Bootstrap Run Time: 78.085  Minutes 
 
 
  Bootstrap Estimates:
 
- Means    : 0.0020 3.3469 0.0584 0.0565 0.0577 
- Lower 95%: 0.0012 2.1380 0.0566 0.0545 0.0558 
- Upper 95%: 0.0027 4.5924 0.0602 0.0584 0.0596 
+ Means    : 0.0020 3.3472 0.0609 0.0589 0.0601 
+ Lower 95%: 0.0013 2.1125 0.0591 0.0570 0.0582 
+ Upper 95%: 0.0028 4.5962 0.0628 0.0608 0.0621 
 There were 50 or more warnings (use warnings() to see the first 50)
 > 
 > 	# remove age category from the adjustment covariates
@@ -474,14 +467,14 @@ Bootstrap Iterations (1000)
 ..................................................950 
 ..................................................1000 
 
- Bootstrap Run Time: 5.164  Minutes 
+ Bootstrap Run Time: 4.525  Minutes 
 
 
  Bootstrap Estimates:
 
- Means    : 0.0069 8.3202 0.0833 0.0764 0.0793 
- Lower 95%: 0.0036 4.3059 0.0761 0.0693 0.0720 
- Upper 95%: 0.0104 12.3091 0.0905 0.0842 0.0872 
+ Means    : 0.0073 8.2008 0.0885 0.0812 0.0842 
+ Lower 95%: 0.0035 3.9498 0.0808 0.0736 0.0762 
+ Upper 95%: 0.0111 12.3544 0.0956 0.0890 0.0923 
 There were 50 or more warnings (use warnings() to see the first 50)
 > 
 > AR35noswim.gi.5to10 <- bootAR(fn="AR35noswim",fmla=fmla,data=subset(ad,agestrat=="(4, 10]"),ID=ad$hhid[ad$agestrat=="(4, 10]"],strata=ad$beach[ad$agestrat=="(4, 10]"],iter=Nboot)
@@ -511,14 +504,14 @@ Bootstrap Iterations (1000)
 ..................................................950 
 ..................................................1000 
 
- Bootstrap Run Time: 9.718  Minutes 
+ Bootstrap Run Time: 8.906  Minutes 
 
 
  Bootstrap Estimates:
 
- Means    : 0.0031 5.0094 0.0622 0.0591 0.0609 
- Lower 95%: 0.0001 0.0970 0.0575 0.0539 0.0557 
- Upper 95%: 0.0062 9.9592 0.0673 0.0642 0.0660 
+ Means    : 0.0033 5.0003 0.0656 0.0623 0.0642 
+ Lower 95%: -0.0001 -0.1570 0.0604 0.0561 0.0585 
+ Upper 95%: 0.0064 9.8229 0.0705 0.0685 0.0697 
 There were 50 or more warnings (use warnings() to see the first 50)
 > 
 > AR35noswim.gi.11plus <- bootAR(fn="AR35noswim",fmla=fmla,data=subset(ad,agestrat==">10"),ID=ad$hhid[ad$agestrat==">10"],strata=ad$beach[ad$agestrat==">10"],iter=Nboot)
@@ -548,14 +541,14 @@ Bootstrap Iterations (1000)
 ..................................................950 
 ..................................................1000 
 
- Bootstrap Run Time: 62.092  Minutes 
+ Bootstrap Run Time: 55.999  Minutes 
 
 
  Bootstrap Estimates:
 
- Means    : 0.0014 2.5408 0.0555 0.0541 0.0551 
- Lower 95%: 0.0007 1.2517 0.0536 0.0521 0.0532 
- Upper 95%: 0.0020 3.6538 0.0574 0.0561 0.0571 
+ Means    : 0.0015 2.5556 0.0577 0.0562 0.0573 
+ Lower 95%: 0.0008 1.3576 0.0558 0.0541 0.0552 
+ Upper 95%: 0.0022 3.7842 0.0597 0.0581 0.0593 
 There were 50 or more warnings (use warnings() to see the first 50)
 > 
 > 	# add age category to the adjustment covariates, remove pointsource and marine
@@ -588,14 +581,14 @@ Bootstrap Iterations (1000)
 ..................................................950 
 ..................................................1000 
 
- Bootstrap Run Time: 37.418  Minutes 
+ Bootstrap Run Time: 36.537  Minutes 
 
 
  Bootstrap Estimates:
 
- Means    : 0.0032 5.2184 0.0609 0.0577 0.0595 
- Lower 95%: 0.0020 3.2849 0.0585 0.0553 0.0569 
- Upper 95%: 0.0044 7.1961 0.0634 0.0602 0.0622 
+ Means    : 0.0032 5.3149 0.0609 0.0576 0.0594 
+ Lower 95%: 0.0021 3.3963 0.0584 0.0550 0.0568 
+ Upper 95%: 0.0045 7.2719 0.0633 0.0601 0.0620 
 > 
 > AR35noswim.gi.nps <- bootAR(fn="AR35noswim",fmla=fmla,data=subset(ad,pointsource=="No"),ID=ad$hhid[ad$pointsource=="No"],strata=ad$beach[ad$pointsource=="No"],iter=Nboot)
 
@@ -624,14 +617,14 @@ Bootstrap Iterations (1000)
 ..................................................950 
 ..................................................1000 
 
- Bootstrap Run Time: 27.877  Minutes 
+ Bootstrap Run Time: 21.228  Minutes 
 
 
  Bootstrap Estimates:
 
- Means    : 0.0004 0.7586 0.0553 0.0548 0.0553 
- Lower 95%: -0.0001 -0.2234 0.0524 0.0520 0.0524 
- Upper 95%: 0.0010 1.7247 0.0578 0.0575 0.0580 
+ Means    : 0.0005 0.7738 0.0609 0.0604 0.0609 
+ Lower 95%: -0.0001 -0.1975 0.0577 0.0571 0.0576 
+ Upper 95%: 0.0011 1.8323 0.0635 0.0633 0.0638 
 > 
 > # save results down
 > save(N.all,N.age0to4,N.age5to10,N.age11plus,N.ps,N.nps,AR35noswim.gi,AR35noswim.gi.0to4,AR35noswim.gi.5to10,AR35noswim.gi.11plus,AR35noswim.gi.ps,AR35noswim.gi.nps,file="~/dropbox/13beaches/aim2-results/rawoutput/aim2-PARentero1600noswim-gi.RData")
@@ -683,14 +676,14 @@ Bootstrap Iterations (1000)
 ..................................................950 
 ..................................................1000 
 
- Bootstrap Run Time: 95.202  Minutes 
+ Bootstrap Run Time: 74.84  Minutes 
 
 
  Bootstrap Estimates:
 
- Means    : 0.0012 2.3105 0.0527 0.0515 0.0520 
- Lower 95%: 0.0002 0.4114 0.0497 0.0484 0.0488 
- Upper 95%: 0.0023 4.3620 0.0557 0.0547 0.0552 
+ Means    : 0.0013 2.3892 0.0550 0.0536 0.0541 
+ Lower 95%: 0.0002 0.4028 0.0518 0.0503 0.0508 
+ Upper 95%: 0.0024 4.3621 0.0580 0.0568 0.0574 
 There were 50 or more warnings (use warnings() to see the first 50)
 > 
 > 	# remove age category from the adjustment covariates
@@ -723,19 +716,19 @@ Bootstrap Iterations (1000)
 ..................................................950 
 ..................................................1000 
 
- Bootstrap Run Time: 6.863  Minutes 
+ Bootstrap Run Time: 5.763  Minutes 
 
 
-   Warning:  41  bootstrap replicates failed to converge to sensible estimates 
+   Warning:  35  bootstrap replicates failed to converge to sensible estimates 
 
-   Bootstrap estimates are based on the remaining  959  replicates
+   Bootstrap estimates are based on the remaining  965  replicates
 
 
  Bootstrap Estimates:
 
- Means    : 0.0070 10.7590 0.0653 0.0583 0.0607 
- Lower 95%: 0.0025 3.8832 0.0538 0.0472 0.0485 
- Upper 95%: 0.0122 18.3909 0.0784 0.0708 0.0739 
+ Means    : 0.0078 10.6929 0.0703 0.0625 0.0653 
+ Lower 95%: 0.0025 3.7164 0.0571 0.0501 0.0520 
+ Upper 95%: 0.0134 18.5665 0.0826 0.0751 0.0790 
 There were 50 or more warnings (use warnings() to see the first 50)
 > 
 > AR35noswim.dailygi.5to10 <- bootAR(fn="AR35noswim",fmla=fmla,data=subset(ad,agestrat=="(4, 10]"),ID=ad$hhid[ad$agestrat=="(4, 10]"],strata=ad$beach[ad$agestrat=="(4, 10]"],iter=Nboot)
@@ -765,14 +758,14 @@ Bootstrap Iterations (1000)
 ..................................................950 
 ..................................................1000 
 
- Bootstrap Run Time: 10.168  Minutes 
+ Bootstrap Run Time: 8.61  Minutes 
 
 
  Bootstrap Estimates:
 
- Means    : 0.0015 2.4446 0.0612 0.0598 0.0608 
- Lower 95%: -0.0028 -4.6137 0.0533 0.0504 0.0519 
- Upper 95%: 0.0058 9.2059 0.0697 0.0698 0.0705 
+ Means    : 0.0015 2.3041 0.0645 0.0630 0.0640 
+ Lower 95%: -0.0030 -4.7168 0.0560 0.0534 0.0547 
+ Upper 95%: 0.0063 9.5914 0.0738 0.0728 0.0742 
 There were 50 or more warnings (use warnings() to see the first 50)
 > 
 > AR35noswim.dailygi.11plus <- bootAR(fn="AR35noswim",fmla=fmla,data=subset(ad,agestrat==">10"),ID=ad$hhid[ad$agestrat==">10"],strata=ad$beach[ad$agestrat==">10"],iter=Nboot)
@@ -802,14 +795,14 @@ Bootstrap Iterations (1000)
 ..................................................950 
 ..................................................1000 
 
- Bootstrap Run Time: 72.573  Minutes 
+ Bootstrap Run Time: 61.248  Minutes 
 
 
  Bootstrap Estimates:
 
- Means    : 0.0010 1.8949 0.0506 0.0497 0.0501 
- Lower 95%: -0.0001 -0.1978 0.0476 0.0464 0.0468 
- Upper 95%: 0.0020 4.0370 0.0539 0.0531 0.0534 
+ Means    : 0.0010 1.8870 0.0524 0.0514 0.0518 
+ Lower 95%: -0.0000 -0.0929 0.0492 0.0480 0.0484 
+ Upper 95%: 0.0021 4.0424 0.0556 0.0547 0.0553 
 There were 50 or more warnings (use warnings() to see the first 50)
 > 
 > 	# add age category to the adjustment covariates, remove pointsource and marine
@@ -842,14 +835,14 @@ Bootstrap Iterations (1000)
 ..................................................950 
 ..................................................1000 
 
- Bootstrap Run Time: 36.159  Minutes 
+ Bootstrap Run Time: 36.717  Minutes 
 
 
  Bootstrap Estimates:
 
- Means    : 0.0021 3.7823 0.0550 0.0529 0.0536 
- Lower 95%: 0.0004 0.7833 0.0509 0.0484 0.0491 
- Upper 95%: 0.0038 6.8534 0.0593 0.0575 0.0582 
+ Means    : 0.0021 3.7739 0.0550 0.0529 0.0536 
+ Lower 95%: 0.0003 0.5795 0.0507 0.0484 0.0488 
+ Upper 95%: 0.0038 6.9081 0.0592 0.0575 0.0587 
 > 
 > AR35noswim.dailygi.nps <- bootAR(fn="AR35noswim",fmla=fmla,data=subset(ad,pointsource=="No"),ID=ad$hhid[ad$pointsource=="No"],strata=ad$beach[ad$pointsource=="No"],iter=Nboot)
 
@@ -878,14 +871,14 @@ Bootstrap Iterations (1000)
 ..................................................950 
 ..................................................1000 
 
- Bootstrap Run Time: 29.26  Minutes 
+ Bootstrap Run Time: 25.131  Minutes 
 
 
  Bootstrap Estimates:
 
- Means    : 0.0003 0.5301 0.0499 0.0497 0.0499 
- Lower 95%: -0.0007 -1.3694 0.0456 0.0452 0.0453 
- Upper 95%: 0.0013 2.6492 0.0546 0.0543 0.0547 
+ Means    : 0.0003 0.5577 0.0549 0.0546 0.0548 
+ Lower 95%: -0.0006 -1.1567 0.0500 0.0495 0.0496 
+ Upper 95%: 0.0015 2.7308 0.0597 0.0596 0.0598 
 > 
 > # save results down
 > save(N.all,N.age0to4,N.age5to10,N.age11plus,N.ps,N.nps,AR35noswim.dailygi,AR35noswim.dailygi.0to4,AR35noswim.dailygi.5to10,AR35noswim.dailygi.11plus,AR35noswim.dailygi.ps,AR35noswim.dailygi.nps,file="~/dropbox/13beaches/aim2-results/rawoutput/aim2-PARentero1600noswim-dailygi.RData")
@@ -937,14 +930,14 @@ Bootstrap Iterations (1000)
 ..................................................950 
 ..................................................1000 
 
- Bootstrap Run Time: 121.85  Minutes 
+ Bootstrap Run Time: 115.227  Minutes 
 
 
  Bootstrap Estimates:
 
- Means    : 0.0000 0.0441 0.0122 0.0122 0.0121 
- Lower 95%: -0.0004 -3.2896 0.0108 0.0107 0.0106 
- Upper 95%: 0.0004 3.5788 0.0136 0.0137 0.0135 
+ Means    : -0.0000 -0.1163 0.0127 0.0127 0.0126 
+ Lower 95%: -0.0004 -3.3705 0.0112 0.0111 0.0110 
+ Upper 95%: 0.0004 3.3592 0.0143 0.0143 0.0141 
 There were 50 or more warnings (use warnings() to see the first 50)
 > 
 > # save results down
@@ -996,14 +989,14 @@ Bootstrap Iterations (1000)
 ..................................................950 
 ..................................................1000 
 
- Bootstrap Run Time: 144.036  Minutes 
+ Bootstrap Run Time: 139.125  Minutes 
 
 
  Bootstrap Estimates:
 
- Means    : 0.0001 0.8503 0.0107 0.0106 0.0107 
- Lower 95%: -0.0002 -2.0579 0.0097 0.0096 0.0096 
- Upper 95%: 0.0004 3.9626 0.0117 0.0116 0.0116 
+ Means    : 0.0001 0.8546 0.0112 0.0111 0.0111 
+ Lower 95%: -0.0002 -1.8933 0.0102 0.0101 0.0102 
+ Upper 95%: 0.0004 3.7580 0.0122 0.0122 0.0122 
 There were 50 or more warnings (use warnings() to see the first 50)
 > 
 > # save results down
@@ -1015,4 +1008,4 @@ There were 50 or more warnings (use warnings() to see the first 50)
 > 
 > proc.time()
      user    system   elapsed 
-50278.299  8311.159 58735.853 
+45204.502  7363.956 52645.969 

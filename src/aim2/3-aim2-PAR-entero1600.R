@@ -51,8 +51,8 @@ library(sandwich)
 library(lmtest)
 
 # source the base functions
-source("~/dropbox/13beaches/src/aim1/0-aim1-base-functions.R")
-source("~/dropbox/13beaches/src/aim2/0-aim2-base-functions.R")
+source("~/13beaches/src/aim1/0-aim1-base-functions.R")
+source("~/13beaches/src/aim2/0-aim2-base-functions.R")
 
 # set the number of iterations for the bootstraps
 Nboot <- 1000

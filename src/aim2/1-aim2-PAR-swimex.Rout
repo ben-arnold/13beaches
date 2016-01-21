@@ -46,8 +46,6 @@ Type 'q()' to quit R.
 > # and medical visits associated with GI illness
 > # are too rare to stratify the data by age, unfortunately.
 > #
-> # version 1 (28 apr 2015)
-> #
 > # --------------------------------------
 > 
 > # --------------------------------------
@@ -96,12 +94,12 @@ The following objects are masked from ‘package:base’:
 > ad <- preprocess.13beaches("~/dropbox/13beaches/data/final/13beaches-analysis.csv")
 
 Successfully loaded the data
- Total sample size = 88083 
+ Total sample size = 84411 
 
 Dropping individuals with GI illness at enrollment
- N = 2025 
+ N = 1948 
 
-Final sample size = 86058 
+Final sample size = 82463 
 
 Subsetting the data to relevant variables and completing final variable pre-processing> 
 > # --------------------------------------
@@ -171,14 +169,14 @@ Bootstrap Iterations (1000)
 ..................................................950 
 ..................................................1000 
 
- Bootstrap Run Time: 86.467  Minutes 
+ Bootstrap Run Time: 86.931  Minutes 
 
 
  Bootstrap Estimates:
 
- Means    : 0.0083 20.8459 0.0397 0.0314 0.0455 
- Lower 95%: 0.0063 15.9180 0.0381 0.0290 0.0431 
- Upper 95%: 0.0102 25.7217 0.0411 0.0336 0.0479 
+ Means    : 0.0086 20.8292 0.0413 0.0327 0.0475 
+ Lower 95%: 0.0066 15.9815 0.0398 0.0304 0.0451 
+ Upper 95%: 0.0106 25.4362 0.0428 0.0350 0.0498 
 There were 50 or more warnings (use warnings() to see the first 50)
 > 
 > 	# remove age category from the adjustment covariates
@@ -211,14 +209,14 @@ Bootstrap Iterations (1000)
 ..................................................950 
 ..................................................1000 
 
- Bootstrap Run Time: 5.236  Minutes 
+ Bootstrap Run Time: 7.035  Minutes 
 
 
  Bootstrap Estimates:
 
- Means    : 0.0135 23.0115 0.0586 0.0451 0.0674 
- Lower 95%: 0.0031 5.0723 0.0526 0.0344 0.0593 
- Upper 95%: 0.0228 38.5730 0.0649 0.0563 0.0759 
+ Means    : 0.0147 23.4851 0.0624 0.0477 0.0717 
+ Lower 95%: 0.0038 6.3147 0.0565 0.0364 0.0630 
+ Upper 95%: 0.0253 40.1556 0.0691 0.0594 0.0813 
 There were 50 or more warnings (use warnings() to see the first 50)
 > 
 > PARswimex.diar.5to10 <- bootAR(fn="ARswimex",fmla=fmla,data=subset(ad,agestrat=="(4, 10]"),ID=ad$hhid[ad$agestrat=="(4, 10]"],strata=ad$beach[ad$agestrat=="(4, 10]"],iter=Nboot)
@@ -248,14 +246,14 @@ Bootstrap Iterations (1000)
 ..................................................950 
 ..................................................1000 
 
- Bootstrap Run Time: 10.132  Minutes 
+ Bootstrap Run Time: 11.428  Minutes 
 
 
  Bootstrap Estimates:
 
- Means    : 0.0158 45.2033 0.0350 0.0192 0.0379 
- Lower 95%: 0.0067 20.1629 0.0312 0.0114 0.0335 
- Upper 95%: 0.0240 67.0316 0.0388 0.0282 0.0426 
+ Means    : 0.0169 45.6050 0.0370 0.0201 0.0401 
+ Lower 95%: 0.0073 20.3454 0.0333 0.0116 0.0357 
+ Upper 95%: 0.0261 69.0560 0.0411 0.0295 0.0450 
 There were 50 or more warnings (use warnings() to see the first 50)
 > 
 > PARswimex.diar.11plus <- bootAR(fn="ARswimex",fmla=fmla,data=subset(ad,agestrat==">10"),ID=ad$hhid[ad$agestrat==">10"],strata=ad$beach[ad$agestrat==">10"],iter=Nboot)
@@ -285,14 +283,14 @@ Bootstrap Iterations (1000)
 ..................................................950 
 ..................................................1000 
 
- Bootstrap Run Time: 59.878  Minutes 
+ Bootstrap Run Time: 68.768  Minutes 
 
 
  Bootstrap Estimates:
 
- Means    : 0.0066 17.1132 0.0387 0.0321 0.0437 
- Lower 95%: 0.0047 12.0990 0.0372 0.0299 0.0414 
- Upper 95%: 0.0085 21.8694 0.0404 0.0345 0.0462 
+ Means    : 0.0069 17.2434 0.0402 0.0333 0.0454 
+ Lower 95%: 0.0048 11.9191 0.0386 0.0308 0.0427 
+ Upper 95%: 0.0089 22.1508 0.0420 0.0358 0.0482 
 There were 50 or more warnings (use warnings() to see the first 50)
 > 
 > # save results down
@@ -340,14 +338,14 @@ Bootstrap Iterations (1000)
 ..................................................950 
 ..................................................1000 
 
- Bootstrap Run Time: 81.62  Minutes 
+ Bootstrap Run Time: 83.652  Minutes 
 
 
  Bootstrap Estimates:
 
- Means    : 0.0088 15.1218 0.0584 0.0496 0.0648 
- Lower 95%: 0.0064 10.9767 0.0566 0.0467 0.0623 
- Upper 95%: 0.0113 19.1991 0.0603 0.0526 0.0678 
+ Means    : 0.0092 15.1295 0.0609 0.0517 0.0676 
+ Lower 95%: 0.0066 10.8691 0.0592 0.0488 0.0648 
+ Upper 95%: 0.0118 19.4235 0.0627 0.0546 0.0704 
 There were 50 or more warnings (use warnings() to see the first 50)
 > 
 > 	# remove age category from the adjustment covariates
@@ -380,14 +378,14 @@ Bootstrap Iterations (1000)
 ..................................................950 
 ..................................................1000 
 
- Bootstrap Run Time: 4.849  Minutes 
+ Bootstrap Run Time: 5.099  Minutes 
 
 
  Bootstrap Estimates:
 
- Means    : 0.0208 25.1757 0.0826 0.0618 0.0957 
- Lower 95%: 0.0092 11.4345 0.0756 0.0497 0.0863 
- Upper 95%: 0.0319 38.6240 0.0895 0.0740 0.1055 
+ Means    : 0.0224 25.4913 0.0880 0.0656 0.1020 
+ Lower 95%: 0.0099 11.5358 0.0803 0.0523 0.0919 
+ Upper 95%: 0.0348 39.8100 0.0955 0.0793 0.1128 
 There were 50 or more warnings (use warnings() to see the first 50)
 > 
 > PARswimex.gi.5to10 <- bootAR(fn="ARswimex",fmla=fmla,data=subset(ad,agestrat=="(4, 10]"),ID=ad$hhid[ad$agestrat=="(4, 10]"],strata=ad$beach[ad$agestrat=="(4, 10]"],iter=Nboot)
@@ -417,14 +415,14 @@ Bootstrap Iterations (1000)
 ..................................................950 
 ..................................................1000 
 
- Bootstrap Run Time: 9.185  Minutes 
+ Bootstrap Run Time: 9.841  Minutes 
 
 
  Bootstrap Estimates:
 
- Means    : 0.0107 17.3307 0.0619 0.0512 0.0652 
- Lower 95%: -0.0028 -4.6874 0.0572 0.0387 0.0598 
- Upper 95%: 0.0234 37.4387 0.0668 0.0648 0.0710 
+ Means    : 0.0118 18.0532 0.0656 0.0538 0.0691 
+ Lower 95%: -0.0026 -3.9192 0.0605 0.0406 0.0628 
+ Upper 95%: 0.0247 37.2093 0.0709 0.0688 0.0751 
 There were 50 or more warnings (use warnings() to see the first 50)
 > 
 > PARswimex.gi.11plus <- bootAR(fn="ARswimex",fmla=fmla,data=subset(ad,agestrat==">10"),ID=ad$hhid[ad$agestrat==">10"],strata=ad$beach[ad$agestrat==">10"],iter=Nboot)
@@ -454,14 +452,14 @@ Bootstrap Iterations (1000)
 ..................................................950 
 ..................................................1000 
 
- Bootstrap Run Time: 54.828  Minutes 
+ Bootstrap Run Time: 60.572  Minutes 
 
 
  Bootstrap Estimates:
 
- Means    : 0.0076 13.5642 0.0557 0.0481 0.0620 
- Lower 95%: 0.0054 9.5605 0.0539 0.0454 0.0593 
- Upper 95%: 0.0098 17.5516 0.0575 0.0507 0.0651 
+ Means    : 0.0078 13.5579 0.0578 0.0500 0.0644 
+ Lower 95%: 0.0054 9.2767 0.0559 0.0471 0.0615 
+ Upper 95%: 0.0101 17.4072 0.0598 0.0529 0.0675 
 There were 50 or more warnings (use warnings() to see the first 50)
 > 
 > # save results down
@@ -511,14 +509,14 @@ Bootstrap Iterations (1000)
 ..................................................950 
 ..................................................1000 
 
- Bootstrap Run Time: 83.309  Minutes 
+ Bootstrap Run Time: 84.845  Minutes 
 
 
  Bootstrap Estimates:
 
- Means    : 0.0047 8.8815 0.0528 0.0481 0.0559 
- Lower 95%: 0.0001 0.2301 0.0498 0.0433 0.0516 
- Upper 95%: 0.0089 16.9146 0.0558 0.0533 0.0604 
+ Means    : 0.0049 8.8633 0.0553 0.0504 0.0585 
+ Lower 95%: 0.0004 0.7281 0.0519 0.0449 0.0540 
+ Upper 95%: 0.0092 16.6634 0.0588 0.0560 0.0636 
 There were 50 or more warnings (use warnings() to see the first 50)
 > 
 > 	# remove age category from the adjustment covariates
@@ -551,19 +549,19 @@ Bootstrap Iterations (1000)
 ..................................................950 
 ..................................................1000 
 
- Bootstrap Run Time: 6.258  Minutes 
+ Bootstrap Run Time: 6.353  Minutes 
 
 
-   Warning:  24  bootstrap replicates failed to converge to sensible estimates 
+   Warning:  40  bootstrap replicates failed to converge to sensible estimates 
 
-   Bootstrap estimates are based on the remaining  976  replicates
+   Bootstrap estimates are based on the remaining  960  replicates
 
 
  Bootstrap Estimates:
 
- Means    : 0.0267 39.8348 21293.0085 21292.9818 37430.9090 
- Lower 95%: 0.0088 12.9355 0.0539 0.0245 0.0639 
- Upper 95%: 0.0427 62.9710 0.0791 0.0566 0.1048 
+ Means    : 0.0271 38.6955 0.0696 0.0426 0.0879 
+ Lower 95%: 0.0077 12.2000 0.0569 0.0264 0.0698 
+ Upper 95%: 0.0445 60.5594 0.0839 0.0616 0.1099 
 There were 50 or more warnings (use warnings() to see the first 50)
 > 
 > PARswimex.dailygi.5to10 <- bootAR(fn="ARswimex",fmla=fmla,data=subset(ad,agestrat=="(4, 10]"),ID=ad$hhid[ad$agestrat=="(4, 10]"],strata=ad$beach[ad$agestrat=="(4, 10]"],iter=Nboot)
@@ -593,14 +591,14 @@ Bootstrap Iterations (1000)
 ..................................................950 
 ..................................................1000 
 
- Bootstrap Run Time: 9.442  Minutes 
+ Bootstrap Run Time: 9.31  Minutes 
 
 
  Bootstrap Estimates:
 
- Means    : 0.0079 12.8059 0.0614 0.0535 0.0638 
- Lower 95%: -0.0171 -27.3474 0.0534 0.0318 0.0548 
- Upper 95%: 0.0285 46.6410 0.0695 0.0800 0.0732 
+ Means    : 0.0072 11.0820 0.0651 0.0579 0.0675 
+ Lower 95%: -0.0170 -26.3539 0.0572 0.0357 0.0580 
+ Upper 95%: 0.0296 44.8609 0.0741 0.0835 0.0784 
 There were 50 or more warnings (use warnings() to see the first 50)
 > 
 > PARswimex.dailygi.11plus <- bootAR(fn="ARswimex",fmla=fmla,data=subset(ad,agestrat==">10"),ID=ad$hhid[ad$agestrat==">10"],strata=ad$beach[ad$agestrat==">10"],iter=Nboot)
@@ -630,14 +628,14 @@ Bootstrap Iterations (1000)
 ..................................................950 
 ..................................................1000 
 
- Bootstrap Run Time: 63.91  Minutes 
+ Bootstrap Run Time: 66.351  Minutes 
 
 
  Bootstrap Estimates:
 
- Means    : 0.0041 8.1897 0.0506 0.0464 0.0536 
- Lower 95%: 0.0003 0.5329 0.0474 0.0415 0.0490 
- Upper 95%: 0.0082 16.5468 0.0536 0.0514 0.0582 
+ Means    : 0.0043 8.1436 0.0526 0.0483 0.0558 
+ Lower 95%: 0.0001 0.1435 0.0494 0.0430 0.0511 
+ Upper 95%: 0.0089 17.0804 0.0559 0.0541 0.0608 
 There were 50 or more warnings (use warnings() to see the first 50)
 > 
 > 
@@ -687,14 +685,14 @@ Bootstrap Iterations (1000)
 ..................................................950 
 ..................................................1000 
 
- Bootstrap Run Time: 121.989  Minutes 
+ Bootstrap Run Time: 115.995  Minutes 
 
 
  Bootstrap Estimates:
 
- Means    : -0.0007 -5.3617 0.0122 0.0129 0.0127 
- Lower 95%: -0.0025 -20.8244 0.0109 0.0105 0.0108 
- Upper 95%: 0.0012 10.1185 0.0137 0.0154 0.0147 
+ Means    : -0.0006 -5.0622 0.0127 0.0134 0.0132 
+ Lower 95%: -0.0028 -22.2411 0.0112 0.0107 0.0112 
+ Upper 95%: 0.0013 11.2003 0.0143 0.0162 0.0152 
 There were 50 or more warnings (use warnings() to see the first 50)
 > 
 > # save results down
@@ -743,14 +741,14 @@ Bootstrap Iterations (1000)
 ..................................................950 
 ..................................................1000 
 
- Bootstrap Run Time: 147.636  Minutes 
+ Bootstrap Run Time: 142.28  Minutes 
 
 
  Bootstrap Estimates:
 
- Means    : 0.0004 3.7821 0.0106 0.0102 0.0109 
- Lower 95%: -0.0012 -11.3577 0.0097 0.0087 0.0097 
- Upper 95%: 0.0019 17.7738 0.0116 0.0121 0.0122 
+ Means    : 0.0004 3.6427 0.0111 0.0107 0.0114 
+ Lower 95%: -0.0013 -11.7253 0.0101 0.0088 0.0102 
+ Upper 95%: 0.0021 18.4546 0.0121 0.0127 0.0127 
 There were 50 or more warnings (use warnings() to see the first 50)
 > 
 > # save results down
@@ -768,4 +766,4 @@ There were 50 or more warnings (use warnings() to see the first 50)
 > 
 > proc.time()
      user    system   elapsed 
-38380.213  6116.637 44771.929 
+38524.692  6205.823 45602.375 
