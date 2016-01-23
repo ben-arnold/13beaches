@@ -1,0 +1,1035 @@
+%--------------------------------------------------------
+% LaTeX preamble
+%--------------------------------------------------------
+
+\documentclass[12pt]{article}
+
+
+% load packages
+\usepackage[T1]{fontenc}
+%\usepackage[english]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{aeguill}
+%\usepackage[pdftex]{graphicx, color}
+\usepackage{fancyhdr, amsfonts, amssymb, amsmath, geometry,setspace,lastpage,pdflscape}
+\usepackage[us]{datetime}
+\usepackage{setspace}
+\usepackage[style=nejm,
+            natbib=true] % compatability with natbib-style references
+{biblatex}
+\bibliography{/Users/benarnold/dropbox/Library/library-paperpile.bib}
+
+\usepackage{hyperref}
+
+
+% document setup
+\geometry{ left = 1in, right = 1in, top = 1in, bottom = 1in }
+\pagestyle{plain}
+
+% nest table and figure numbers within section, and add an "S" prefix for supplementary (not used)
+%\renewcommand{\thesection}{Supp.~Appendix~\arabic{section}\newline}   
+% \renewcommand{\thetable}{S\arabic{section}.\arabic{table}}   
+% \renewcommand{\thefigure}{S\arabic{section}.\arabic{figure}}
+
+% Add an "S" prefix to figures and tables and rename the TOC
+\renewcommand{\contentsname}{Appendix Section}
+\renewcommand{\thesection}{S\arabic{section}} 
+\renewcommand{\thetable}{S\arabic{table}}   
+\renewcommand{\thefigure}{S\arabic{figure}}
+% \renewcommand{\figurename}{eFigure}
+% \renewcommand{\tablename}{eTable}
+
+% TITLE Page Information
+\title{Acute gastroenteritis and health burden attributable to recreational water exposure in the United States: analysis of 13 prospective cohorts}
+\author{Supplemental Appendices}
+\date{}
+
+%--------------------------------------------------------
+% Document begins here
+%--------------------------------------------------------
+\begin{document}
+\maketitle
+\tableofcontents
+
+%--------------------------------------------------------
+% R preamble
+%--------------------------------------------------------
+<<'R preamble', eval=TRUE, echo=FALSE>>=
+# --------------------------------------
+# R preamble
+# --------------------------------------
+
+rm(list=ls())
+library(xtable)
+
+setwd("~/13beaches/src/makeAppendix/")
+#Sys.setenv(TEXINPUTS=getwd(),
+#           BIBINPUTS="~/dropbox/Library/",
+#           BSTINPUTS="~/library/texmf/bibtex/"
+#          )
+
+# --------------------------------------
+# function to strip row/colnames from 
+# table and output contents only
+# for formatting in latex
+# --------------------------------------
+cleantable <- function(x,digits) {
+ print( xtable(x,digits=digits),
+        sanitize.text.function=function(y){y},
+        floating=FALSE,
+        include.rownames=FALSE,
+        include.colnames=FALSE,
+        only.contents=TRUE,
+        hline.after=NULL
+ )
+}
+
+
+# --------------------------------------
+# clean table output, including rownames
+# --------------------------------------
+rowtable <- function(x,digits) {
+ print( xtable(x,digits=digits),
+        sanitize.text.function=function(y){y},
+        floating=FALSE,
+        include.rownames=TRUE,
+        include.colnames=FALSE,
+        only.contents=TRUE,
+        hline.after=NULL
+ )
+}
+
+# --------------------------------------
+# Predicted incidence, PAR and PAF estimate
+# extract from saved results and print
+# into a TeX table row
+# --------------------------------------
+printPAR <- function(x,ns,label) {
+  # x     : Saved Bootstrap Estimates of PAR, PAF, and Predicted incidence
+  # ns    : vector of length 2 with n (events) and N (at risk) for the row
+  # label : text string label for table row
+  n     <- format(ns[1],big.mark=",")
+  N     <- format(ns[2],big.mark=",")
+  CI    <- sprintf("%1.0f",x$bootest[3]*1000)
+  CI0   <- sprintf("%1.0f",x$bootest[4]*1000)
+  CI1   <- sprintf("%1.0f",x$bootest[5]*1000)
+  PAR   <- sprintf("%1.1f",x$bootest[1]*1000)
+  PARci <- paste("(",sprintf("%1.1f",x$boot95lb[1]*1000),", ",sprintf("%1.1f",x$boot95ub[1]*1000),")",sep="")
+  PAF   <- paste(sprintf("%1.0f",x$bootest[2]),"\\%",sep="")
+  PAFci <- paste("(",sprintf("%1.0f",x$boot95lb[2]),"\\%, ",sprintf("%1.0f",x$boot95ub[2]),"\\%)",sep="")
+  # if the PAF is negative, set it to "na"
+    if (x$bootest[2]<0) PAF   <- "na"
+    if (x$bootest[2]<0) PAFci <- ""
+  ar <- cbind(label,n,N,CI,CI0,PAR,PARci,PAF,PAFci)
+  cleantable(ar,digits=0) 
+}
+
+
+@
+
+
+
+
+%--------------------------------------------------------
+% Section 1 - Beach, Water Quality, and Participant Details
+%--------------------------------------------------------
+\clearpage
+\section{Appendix. Beach, Water Quality, and Participant Details}
+
+All of the primary research studies that contributed to the present meta-analysis have been previously published with extensive details about recruitment, locations, sampling, and laboratory methods. Readers seeking additional details beyond those presented here can refer to those previously published articles and technical reports.\supercite{Colford2005-nb, Colford2007-mc,Wade2006-pp,Wade2008-xj,Wade2010-bb,Wade2010-ps,Colford2012-um,Arnold2013-xd,Yau2014-pl} Figure \ref{fig:beachmap} maps the 13 study beaches and summarizes some of their key characteristics. All 4 freshwater beaches in the study were in the great lakes region. 
+
+Field teams collected composite water samples from between 3 and 5 locations per beach. Water samples were collected in the morning (typically 8:00), at mid-day (typically 12:00), and in the afternoon (typically 15:00) at shin depth (0.3 to 0.5 m).  There were a few exceptions to this. At Malibu, samples were only collected twice per day: in the morning and at mid-day. At Mission Bay, samples were collected hourly between 12:00 and 14:00. At Doheny and Malibu there were no samples collected at waist depth (1 m).  The present analyses used all of the samples collected at each beach (across sampling times, locations, depths) when calculating averages.
+
+Water samples placed on ice and were analyzed within 6 hours for \textit{Enterococcus} using the culture-based EPA Method 1600\supercite{Epa2009-dm} on mEI agar.  We quantified \textit{Enterococcus} using colony forming units (CFU) per 100 ml.  The 2003 Mission Bay study analyzed a single sample per day using the EPA 1600 method, but 11 samples per day using the \textit{Enterococcus} Enterolert\textsuperscript{TM} chromogeneic substrate and the Quantitray system (IDEXX, Westbrook, ME). Since there was significantly more information collected using the Enterolert assay in Mission Bay, at a level comparable to the other beaches, the study team decided it was most appropriate to use the Enterolert results from Mission Bay.
+
+In addition to the analysis of samples using culture methods, frozen water samples were filtered, DNA extracted, and then and those samples were tested at the EPA lab (all beaches) for \textit{Enterococcus} using the TaqMan\textcircled{R} quantitative polymerase chain reaction (qPCR) EPA Method 1611.\supercite{Epa2012-fb} The lab used the TaqMan PCR product detection system; PCR amplification was conducted in a thermal cycling instrument (Smart-Cycler System, Cepheid, Sunnyvale, CA) to automate the detection and quantitative measurment of the fluorescent signals produced by the TaqMan probe. We quantified \textit{Enterococcus} using the qPCR assay in calibrator cell equivalents (CCE) using the delta-delta method -- refer to Wade et al.\supercite{Wade2010-bb} and Siefring et al.\supercite{Siefring2008-au} for technical details regarding this calculation.  
+
+Table \ref{tab:wqsamplesum} summarizes the number of water samples analyzed using the different assays at each beach. At some beaches there were fewer samples analyzed using the qPCR assay than the culture assay mainly because of cost. Below, we have also summarized the sample characteristics for \emph{Enterococcus} culture methods (Table \ref{tab:wq1600}) and the \emph{Enterococcus} EPA 1611 qPCR assay (Table \ref{tab:wq1611}). Figure \ref{fig:entero1600v1611} compares daily average values for the two types of \textit{Enterococcus} assays used in the analysis.
+
+At most beaches, we calculated a daily average of log$_{10}$ \textit{Enterococcus} concentrations and then matched those concentrations to swimmers who were exposed on that day.  Before calculating the average, we imputed samples that were below the limit of detection at 0.1.  However, at the California beaches (Avalon, Doheny, Malibu, Mission Bay) the water sampling locations included a diverse set of conditions. We summarized water quality data separately for some sub-locations and matched water quality measures to swimmers with higher spatial resolution to reflect the heterogeneous conditions. Figure \ref{fig:camap} summarizes the sampling locations for the California beaches. At Avalon beach, there was a single site D that was outside the main cove, had much cleaner water, and was retained as a separate location in the analysis.  At Doheny beach,  site E was nearly 1 mile south of the other water sampling points, further from freshwater inputs, and was retained as a separate location in the analysis. At both Doheny and Malibu beaches, sampling site C was in the lagoon, with few individuals exposed but very high concentrations of fecal indicator bacteria -- for this reason, we kept the lagoon data separate from the other pooled averages. Finally, at Mission Bay in San Diego, CA, we kept the 6 beach locations separate for water quality averaging and for matching the water quality data to swimmer exposure. 
+
+
+
+% ----------------------------
+% Map overview figure
+% ----------------------------
+\begin{landscape}
+\begin{figure}
+\begin{center}
+\includegraphics[width=1.3\textwidth]{/users/benarnold/dropbox/13beaches/aim1-results/figs/13beaches-map.pdf}
+\caption{Summary of beach locations, study years, and enrollment totals for all beachgoers and body immersion swimmers. Shape differentiates pollution type: known point source of human sewage discharge (triangles) versus non-point source (circles). \label{fig:beachmap}}
+\end{center}
+\end{figure}
+\end{landscape}
+
+% ----------------------------
+% CA beach wq site figure
+% ----------------------------
+\begin{figure}
+\begin{center}
+\includegraphics[height=2in]{/users/benarnold/dropbox/13beaches/aim1-results/figs/avalon-map.pdf}
+\includegraphics[height=2in]{/users/benarnold/dropbox/13beaches/aim1-results/figs/doheny-map.pdf} \\
+\includegraphics[height=2in]{/users/benarnold/dropbox/13beaches/aim1-results/figs/malibu-map.pdf}
+\includegraphics[height=2in]{/users/benarnold/dropbox/13beaches/aim1-results/figs/missionbay-map.pdf}
+\begin{minipage}{0.9\textwidth}
+\caption{Summary of water quality and participant recruitment sampling locations for the California beaches, where sublocations were retained in the present analysis to match water quality measurements to swimmers. Clockwise from top left: Avalon, Doheny, Mission Bay, and Malibu. \label{fig:camap}}
+\end{minipage}
+\end{center}
+\end{figure}
+
+
+% ----------------------------
+% Water quality summary table
+% Sample Counts by Assay
+% ----------------------------
+
+\clearpage
+\begin{table}[h!tb]
+\begin{center}
+\caption{Summary of the number of samples analyzed and the number of samples below detection for \textit{Enterococcus} measured using EPA 1600 or EPA qPCR 1611 assays.   For Avalon, Dohney, Malibu, and Mission Bay beaches, results are summarized separately for sub-locations within the study beach consistent with how they were assigned to swimmers in the analysis. \label{tab:wqsamplesum}}
+\begin{tabular}{l rr rr}
+ & \\
+  & \multicolumn{2}{c}{\textit{Enterococcus}} & \multicolumn{2}{c}{\textit{Enterococcus}} \\
+ & \multicolumn{2}{c}{EPA 1600$^*$}           & \multicolumn{2}{c}{qPCR EPA 1611} \\
+Beach      & N       & N           & N       & N            \\
+-Locations & Samples & Non-Detects & Samples & Non-Detects   \\
+\hline
+<<'wq table sample counts',echo=FALSE,results='asis'>>=
+load("~/dropbox/13beaches/aim1-results/rawoutput/aim1-wq-summary-tables.Rdata")
+sdata <- cbind(wqtab.1600[,1:2],wqtab.qpcr[,1:2])
+stot <- apply(sdata,2,sum)
+rowtable(sdata,c(0,0,0,0,0))
+@
+\hline
+<<'wq table sample counts total',echo=FALSE,results='asis'>>=
+stotal <- data.frame(t(stot))
+rownames(stotal) <- "Total"
+rowtable(stotal,c(0,0,0,0,0))
+@
+\hline
+\end{tabular}
+
+\medskip
+
+\begin{minipage}{0.7\textwidth}
+\begin{scriptsize}
+$^*$ For all beaches, \textit{Enterococcus} was measured using EPA method 1600 except for Mission Bay, where it was measured using Enterolert\textsuperscript{\scriptsize{TM}} chromogenic substrate on the Quantitray system (IDEXX). 
+\end{scriptsize}
+\end{minipage}
+\end{center}
+\end{table}
+
+
+
+% ----------------------------
+% Water quality summary table
+% Entero EPA 1600
+% ----------------------------
+\clearpage
+\begin{table}[h!tb]
+\begin{center}
+\caption{\textit{Enterococcus} measured using culture methods water sample summary by beach. Min, Max, and Geometric Mean values are in colony forming units (CFU) per 100 ml after values below detection were imputed at 0.1. For Avalon, Dohney, Malibu, and Mission Bay beaches, results are summarized separately for sub-locations within the study beach consistent with how they were assigned to swimmers in the analysis. For all beaches, \textit{Enterococcus} was measured using EPA method 1600 except for Mission Bay, where it was measured using Enterolert\textsuperscript{\scriptsize{TM}} chromogenic substrate on the Quantitray system (IDEXX). \label{tab:wq1600}}
+\begin{tabular}{l rrrrr}
+ & \\
+Beach              & N       & N           & Min & Max & Geometric  \\
+-Locations & Samples & Non-Detects &     &     & Mean \\
+\hline
+<<'wq table entero1600',echo=FALSE,results='asis'>>=
+load("~/dropbox/13beaches/aim1-results/rawoutput/aim1-wq-summary-tables.Rdata")
+rowtable(wqtab.1600,c(0,0,0,1,0,0))
+@
+\hline
+<<'wq total entero1600',echo=FALSE,results='asis'>>=
+tot1600 <- data.frame(t(total.1600))
+rownames(tot1600) <- "Total"
+rowtable(tot1600,c(0,0,0,1,0,0))
+@
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+
+% ----------------------------
+% Water quality summary table
+% Entero EPA qPCR 1611
+% ----------------------------
+\begin{table}[h!tb]
+\begin{center}
+\caption{\textit{Enterococcus} EPA qPCR 1611 water sample summary by beach. Min, Max, and Geometric Mean values are in calibrator cell equivalents (CCE) per 100 ml (delta-delta method) after values below detection were imputed at 0.1. For Avalon, Dohney, Malibu, and Mission Bay beaches, results are summarized separately for sub-locations within the study beach consistent with how they were assigned to swimmers in the analysis. \label{tab:wq1611}}
+\begin{tabular}{l rrrrr}
+ & \\
+Beach              & N       & N           & Min & Max & Geometric  \\
+-Locations & Samples & Non-Detects &     &     & Mean \\
+\hline
+<<'wq table enteroQPCR',echo=FALSE,results='asis'>>=
+load("~/dropbox/13beaches/aim1-results/rawoutput/aim1-wq-summary-tables.Rdata")
+rowtable(wqtab.qpcr,c(0,0,0,1,0,0))
+@
+\hline
+<<'wq total enteroQPCR',echo=FALSE,results='asis'>>=
+totqpcr <- data.frame(t(total.qpcr))
+rownames(totqpcr) <- "Total"
+rowtable(totqpcr,c(0,0,0,1,0,0))
+@
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+
+
+% ----------------------------
+% Scatterplot of Entero 1600 v 1611
+% ----------------------------
+\clearpage
+\begin{figure}
+\begin{center}
+\includegraphics[width=5in]{/users/benarnold/dropbox/13beaches/aim1-results/figs/aim1-Enterococcus-1600-v-qPCR-scatter.pdf}
+\caption{Scatter plot of \emph{Enterococcus} EPA qPCR 1611 values versus \emph{Enterococcus} culture method (EPA 1600 or Enterolert) values in water sample daily averages. The figure includes EPA regulatory guidelines for each type of indicator.
+ \label{fig:entero1600v1611}}
+\end{center}
+\end{figure}
+
+
+\clearpage
+
+The study included 88,083 individuals across the 13 cohorts with outcome measurements. The studies tended to enroll families with children  -- for this reason the age distribution of the study population was approximately bi-modal (Figure \ref{fig:agedist}). Teenagers were under-represented in the cohorts due to the inclusion criteria that required an adult present from the household. 
+
+Figure \ref{fig:enterodist} summarizes the distribution of \emph{Enterococcus} sample concentrations and swimmer exposure concentrations in the study cohort for the EPA 1600 assay and the EPA 1611 qPCR assay. We excluded from the distribution plots 73 water samples from freshwater lagoons at Dohney and Malibu beaches because although our team collected the water samples, very few individuals were actually exposed to that water -- only 54 (Doheny) and 68 (Malibu) participants were exposed to lagoon water.
+
+
+% ----------------------------
+% Participant age distribution
+% ----------------------------
+\begin{figure}
+\begin{center}
+\includegraphics[width=4in]{/users/benarnold/dropbox/13beaches/aim1-results/figs/aim1-age-distributions.pdf}
+\caption{Age distribution of the study population; bin width is 1 year. \textbf{A)} All participants; \textbf{B)} Non-swimmers (no water contact); \textbf{C)} Body immersion swimmers (entered the water to waist depth or more). \label{fig:agedist}}
+\end{center}
+\end{figure}
+
+
+% ----------------------------
+% Enterococcus distributions
+% and participant exposure 
+% distributions
+% ----------------------------
+\begin{figure}
+\begin{center}
+\includegraphics[width=\textwidth]{/users/benarnold/dropbox/13beaches/aim1-results/figs/aim1-Enterococcus-distributions.pdf}
+\caption{Distribution of Enterococcus Water Samples and Enterococcus Exposure Among Body Immersion Swimmers Matched to Water Samples. Bin width is 0.1.  \textbf{A)} Enterococcus EPA 1600 or Enterolert water sample distribution. \textbf{B)} Enterococcus EPA qPCR 1611 water sample distribution. \textbf{C)} Enterococcus EPA 1600 or Enterolert body immersion swimmer distribution. \textbf{D)} Enterococcus EPA qPCR 1611 body immersion swimmer distribution.  All figures exclude 73 water samples from Malibu and Doheny beaches freshwater lagoons.
+\label{fig:enterodist}}
+\end{center}
+\end{figure}
+
+
+
+%--------------------------------------------------------
+% Section 2 - Beach Specific Results
+%--------------------------------------------------------
+\clearpage
+\section{Appendix. Beach-Specific Results}
+
+<<'beach homogeneity tests', eval=TRUE, echo=FALSE, results='hide' >>=
+# load the homogeneity test results
+load("~/dropbox/13beaches/aim1-results/rawoutput/aim1-homogeneity-tests.RData")
+@
+
+This section reports beach-specific estimates of the association between: i) water exposure and diarrhea risk, and ii) \emph{Enterococcus} exposure and diarrhea risk, corresponding to the first two study objectives.
+
+Figure \ref{fig:swimforest} summarizes the adjusted cumulative incidence ratio (CIR) of diarrhea associated with different levels of water exposure at each beach.  The results are sorted by fresh versus marine water and then by the CIR for body immersion swimmers. There was evidence for effect modification by fresh versus marine water conditions, with stronger associations between water exposure and incident diarrhea at freshwater beaches: $P$-value for effect modification = 0.05 (body immersion), 0.08 (head immersion), 0.05 (swallowed water). Summary statistics of heterogeneity across beaches\supercite{Higgins2002-vr, Higgins2003-bh} were consistent with low to moderate levels of effect hetergeneity in the estimates: body immersion (Cohen's Q =
+\Sexpr{sprintf("%1.2f",bI[1])}, 
+Pr(Q,df=12)=\Sexpr{sprintf("%1.2f",bI[2])},
+$I^2=$ \Sexpr{sprintf("%1.0f",bI[3])}\%),
+ head immersion (Cohen's Q=
+ \Sexpr{sprintf("%1.2f",hI[1])}, 
+Pr(Q,df=12)=\Sexpr{sprintf("%1.2f",hI[2])},
+$I^2=$ \Sexpr{sprintf("%1.0f",hI[3])}\%),
+ and swallowed water (Cohen's Q=
+ \Sexpr{sprintf("%1.2f",sI[1])}, 
+Pr(Q,df=12)=\Sexpr{sprintf("%1.2f",sI[2])},
+$I^2=$ \Sexpr{sprintf("%1.0f",sI[3])}\%).
+
+
+Figure \ref{fig:enteroregforest} summarizes the adjusted CIR of diarrhea associated with exposure to water above EPA regulatory guidlines for body imerssion swimmers at each beach.  We observed more heterogeneity in the effects compared to the swim exposure analysis, particularly for the EPA 1611 qPCR indicator analyses.  Part of this is due to relatively small numbers of individuals exposed above the qPCR regulatory guideline of 470 CCE/100ml (Figure \ref{fig:enterodist}). Indeed, we have not presented the beach-specific CIRs associated with quartiles of \emph{Enterococcus} concentrations due to small sample sizes at each beach for that type of granular analysis. There was some evidence for effect modification by point versus non-point source beaches for the culture method (EPA 1600 or Enterolert) exposure ($P$-value for effect modification = 0.07). The indicator was associated with increased diarrhea incidence only at beaches with known point sources of treated human sewage (Figure \ref{fig:enteroregforest}). In contrast, we observed no effect modification by beach type of the relationship between the EPA 1611 qPCR indicator and diarrhea incidence ($P$-value for effect modification = 0.36). Summary statistics of heterogeneity across beaches\supercite{Higgins2002-vr, Higgins2003-bh} were consistent with high levels of effect hetergeneity in the estimates: EPA 1600 (Cohen's Q =
+\Sexpr{sprintf("%1.2f",entero1600I[1])}, 
+Pr(Q,df=12)=\Sexpr{sprintf("%1.2f",entero1600I[2])},
+$I^2=$ \Sexpr{sprintf("%1.0f",entero1600I[3])}\%),
+ EPA qPCR 1611 (Cohen's Q=
+ \Sexpr{sprintf("%1.2f",enteroQPCRI[1])}, 
+Pr(Q,df=12)=\Sexpr{sprintf("%1.2f",enteroQPCRI[2])},
+$I^2=$ \Sexpr{sprintf("%1.0f",enteroQPCRI[3])}\%).
+
+% Swim exposure forest plot
+\begin{landscape}
+\begin{figure}[h!tb]
+\begin{center}
+\includegraphics[width=1.5\textwidth]{/users/benarnold/dropbox/13beaches/aim1-results/figs/aim1-swim-exposure-CIR-forest-beaches.pdf}
+\caption{Forest Plot of Adjusted Cumulative Incidence Ratios (CIR) of Diarrhea Comparing Swimmers with Nonswimmers by Beach, Water Type, and Water Exposure Level. Beach-specific estimates (boxes) are scaled by the inverse of the standard error of the CIR, pooled estimates are represented by diamonds, and horizontal lines mark 95\% confidence intervals. Beaches are sorted by water type (fresh, marine) and by body immersion CIR. \label{fig:swimforest}}
+\end{center}
+\end{figure}
+\end{landscape}
+
+
+% Entero forest plots for regulatory guidelines
+\begin{landscape}
+\begin{figure}[h!tb]
+\begin{center}
+\includegraphics[width=1.5\textwidth]{/users/benarnold/dropbox/13beaches/aim1-results/figs/aim1-entero1600-QPCR-regulatory-beach-forest.pdf}
+\caption{Forest Plot of Adjusted Cumulative Incidence Ratios (CIR) of Diarrhea Among Body Immersion Swimmers Associated with  Levels of \emph{Enterococcus} Above EPA Regulatory Guidelines for culture-based methods (EPA 1600 or Enterolert) and EPA qPCR method 1611. The reference group is swimmers below the regulatory guidelines. There are no estimates for Malibu (either method) or Goddard (culture method) because too few swimmers were exposed above the regulatory level, but those beaches still contributed to combined estimates. Beach-specific estimates (boxes) are scaled by the inverse of the standard error of the CIR, pooled estimates are represented by diamonds, and horizontal lines mark 95\% confidence intervals. Beaches are sorted by pollution type and by \textit{Enterococcus} culture method CIR.\label{fig:enteroregforest}}
+\end{center}
+\end{figure}
+\end{landscape}
+
+%--------------------------------------------------------
+% Section 3 -  Enterococcus Associations with Diarrhea
+%--------------------------------------------------------
+\clearpage
+\section{Appendix. Associations Between \emph{Enterococcus} and Diarrhea Not Presented in the Main Text}
+
+\underline{Analysis by quartiles of \textit{Enterococcus}}: \\
+In this section we summarize the association between \emph{Enterococcus} levels measured using culture methods (EPA 1600 or Enterolert) and using EPA 1611 qPCR and diarrhea incidence among body immersion swimmers, using quartiles of the indicators.  We present results stratified by age and stratified by type of pollution source -- those with a known point-source of human fecal pollution, and those without (``non-point source'' beaches).  
+
+There was effect modification by age of the association between \textit{Enterococcus} measured using culture methods (effect modification $P=0.003$), but not for \textit{Enterococcus} measured using qPCR (effect modification $P=0.62$).  Figure  \ref{fig:Qenteroage} summarizes diarrhea incidence among swimmers by quartile of \textit{Enterococcus} exposure, stratified by age.
+
+There was also effect modification by pollution source: higher Enterococcus concentrations were associated with higher diarrhea incidence at beaches with known point-sources of fecal pollution but not at non-point source beaches with diffuse pollution (Figure \ref{fig:Qenteropol}).
+
+\medskip
+\noindent \underline{Analysis by levels \textit{Enterococcus} above and below regulatory guidelines}: \\
+Figure 2 of the main text presented diarrhea incidence for \textit{Enterococcus} levels above and below regulatory guidelines for the culture based methods, stratified by age. We also summarized the asssociation between \emph{Enterococcus} levels above and below regulatory guidelines and diarrhea incidence for the qPCR 1611 assay, and for both assays stratified by different sources of pollution. Similar to the quartile analysis, there was some evidence for effect modification by age of the association between \textit{Enterococcus} measued by qPCR and diarrhea incidence  (Figure \ref{fig:enteroQCPRage}).  
+
+When stratified by point-source versus non-point source pollution type (Figure \ref{fig:enteropol}), there was some suggestion of effect modification for \textit{Enterococcus} measured using culture methods but not for for \textit{Enterococcus} measured using qPCR. We note that the qPCR indicator consistently measured increases in risk at every quartile increase at point-source beaches, while the monotonic increase in risk for the culture method obtained only in quartiles 2-4 (Figure \ref{fig:enteropol}).
+
+
+% ----------------------------
+% Enterococcus quartiles, by age
+% ----------------------------
+\begin{landscape}
+\begin{figure}
+\begin{center}
+\includegraphics[width=1.55\textwidth]{/users/benarnold/dropbox/13beaches/aim1-results/figs/aim1-entero1600-Quartile-CI-byage.pdf} \\
+\includegraphics[width=1.55\textwidth]{/users/benarnold/dropbox/13beaches/aim1-results/figs/aim1-enteroQPCR-Quartile-CI-byage.pdf}
+\caption{Incident Diarrhea Among Body Immersion Swimmers Associated with Quartiles of Enterococcus, Stratified by Age. The top row summarizes estimates using \textit{Enterococcus} measured using culture methods (EPA 1600 or Enterolert; effect modification $P=0.003$), and the bottom row summarizes estimates using EPA qPCR 1611 (effect modification $P=0.62$).  Cumulative incidence ratios (CIRs) were adjusted for a range of potential confounders and beach-level fixed effects.   \label{fig:Qenteroage}}
+\end{center}
+\end{figure}
+\end{landscape}
+
+% ----------------------------
+% Enterococcus quartiles, by pollution source
+% ----------------------------
+%\begin{landscape}
+\begin{figure}
+\begin{center}
+\includegraphics[width=1\textwidth]{/users/benarnold/dropbox/13beaches/aim1-results/figs/aim1-entero1600-Quartile-CI-bypollution.pdf} \\
+\includegraphics[width=1\textwidth]{/users/benarnold/dropbox/13beaches/aim1-results/figs/aim1-enteroQPCR-Quartile-CI-bypollution.pdf}
+\caption{Incident Diarrhea Among Body Immersion Swimmers Associated with Quartiles of \textit{Enterococcus} Concentration, Stratified by Type of Pollution. The top panel plots incidence data by quartiles of \textit{Enterococcus} measured using culture methods (effect modification $P=0.19$) and the bottom panel plots incidence data by quartiles of \textit{Enterococcus} measured using qPCR (effect modification $P=0.11$).  Cumulative incidence ratios (CIRs) are adjusted for a range of potential confounders and beach level fixed-effects.   \label{fig:Qenteropol}}
+\end{center}
+\end{figure}
+%\end{landscape}
+
+% ----------------------------
+% Enterococcus regulatory, qPCR
+% ----------------------------
+%\begin{landscape}
+\begin{figure}
+\begin{center}
+\includegraphics[width=1\textwidth]{/users/benarnold/dropbox/13beaches/aim1-results/figs/aim1-enteroQPCR-noswim470cce-CI-byage.pdf} \\
+\caption{Incident Diarrhea Among Body Immersion Swimmers Associated with \textit{Enterococcus} qPCR Levels Above and Below Regulatory Guidelines, Stratified by Age (effect modification $P=0.08$). Cumulative incidence ratios (CIRs) are adjusted for a range of potential confounders and beach level fixed-effects. Figure 2 of the main text presents analogous results for \textit{Enterococcus} measured using culture methods. \label{fig:enteroQCPRage}}
+\end{center}
+\end{figure}
+%\end{landscape}
+
+
+% ----------------------------
+% Enterococcus regulatory, by pollution source
+% ----------------------------
+%\begin{landscape}
+\begin{figure}
+\begin{center}
+\includegraphics[width=1\textwidth]{/users/benarnold/dropbox/13beaches/aim1-results/figs/aim1-entero1600-noswim35cfu-CI-bypointsource.pdf} \\
+\includegraphics[width=1\textwidth]{/users/benarnold/dropbox/13beaches/aim1-results/figs/aim1-enteroQPCR-noswim470cce-CI-bypointsource.pdf}
+\caption{Incident Diarrhea Among Body Immersion Swimmers Associated with \textit{Enterococcus} Levels Above and Below Regulatory Guidelines, Stratified by Type of Pollution. The top panel plots incidence data by quartiles of \textit{Enterococcus} measured using culture methods (effect modification $P=0.14$), and the bottom panel plots incidence data by quartiles of \textit{Enterococcus} measured using qPCR (effect modification $P=0.45$).  Cumulative incidence ratios (CIRs) are adjusted for a range of potential confounders and beach level fixed-effects. \label{fig:enteropol}}
+\end{center}
+\end{figure}
+%\end{landscape}
+
+
+
+%--------------------------------------------------------
+% Section 4 - Swim and enterococcus exposure associations with gastrointestinal illness
+%--------------------------------------------------------
+\clearpage
+\section{Appendix. Gastrointestinal Illness Associated With Swim Exposure and \textit{Enterococcus} Exposure}
+
+In addition to our primary outcome of incident diarrhea, we also estimated the association between swim exposure and \textit{Enterococcus} level exposure and gastrointestinal illness. As described in the main text, gastrointestinal illness was defined in the same way as prior studies,\supercite{Wade2010-bb,Wade2010-ps,Colford2012-um,Arnold2013-xd,Yau2014-pl} using the composite definition: i) diarrhea or ii) vomiting or iii) nausea and stomachache, or iv) nausea or stomachache and missed regular activities as a result of illness.  For the gastrointestinal illness outcome, we limited the analyses to our primary exposures delineated in our prespecified analysis plan: levels of swim exposure and \textit{Enterococcus} measured using culture methods.
+
+Overall, the results were highly similar both qualitatively and quantitatively to the diarrhea results. Since diarrhea is an important component of the composite gastrointestinal illness outcome, this is internally consistent.  As with the diarrhea analysis, we observed higher incidence among children ages 0-4 compared with the older age groups, as well as a larger increase in incidence on the absolute and relative scale associated with water exposure (effect modification $P=0.07$;Figure \ref{fig:GIswimex}).  When examining the association between \textit{Enterococcus} levels and illness, we observed a similar pattern for gastrointestinal illness as for diarrhea: stronger associations among younger children (Figure \ref{fig:GIentero35age}). When stratifying beaches by type of pollution source in the gastrointestinal illness analysis, there was no statistical evidence for effect modification ($P=0.56$), though qualitatively incidence patterns were similar for gastrointestinal illness (Figure \ref{fig:GIentero35pol}) and diarrhea (Figure \ref{fig:enteropol}).
+
+% ----------------------------
+% Swim Exposure and GI illness, by Age
+% ----------------------------
+\begin{landscape}
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=1.5\textwidth]{/users/benarnold/dropbox/13beaches/aim1-results/figs/aim1-sens-swim-exposure-GI-illness-byage.pdf}
+\begin{minipage}{1.2\textwidth}
+\caption{Incident GI Illness Associated with Water Exposure Stratified by Age. Cumulative Incidence Ratios (CIRs) are adjusted for a range of potential confounders and beach level fixed-effects. Tests of effect modification by age: body immersion ($P=0.07$), head immersion ($P=0.17$), swallowed water ($P=0.31$).}
+\label{fig:GIswimex}
+\end{minipage}
+\end{center}
+\end{figure}
+\end{landscape}
+
+
+% ----------------------------
+% Entero Exposure and GI illness, by Age
+% ----------------------------
+\begin{landscape}
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=1.5\textwidth]{/users/benarnold/dropbox/13beaches/aim1-results/figs/aim1-entero1600-noswim35cfu-CI-GI-illness-byage.pdf}
+\begin{minipage}{1.2\textwidth}
+\caption{Incident GI illness Among Beachgoers Associated with \textit{Enterococcus} Concentrations Above and Below Regulatory Guidelines, Stratified by Age. Adjusted cumulative incidence ratios (aCIRs) are adjusted for a range of potential confounders and beach level fixed-effects, and are computed using two different reference groups: non-swimmers and swimmers exposed below EPA regulatory guidelines for \textit{Enterococcus}: $\leq$35 colony forming units (CFU) per 100ml. Test of effect modification by age: $P=0.07$.}
+\label{fig:GIentero35age}
+\end{minipage}
+\end{center}
+\end{figure}
+\end{landscape}
+
+% ----------------------------
+% Entero Exposure and GI illness, by Pollution Type
+% ----------------------------
+%\begin{landscape}
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=1\textwidth]{/users/benarnold/dropbox/13beaches/aim1-results/figs/aim1-entero1600-noswim35cfu-CI-GI-illness-bypointsource.pdf}
+\begin{minipage}{1\textwidth}
+\caption{Incident GI illness Among Beachgoers Associated with \textit{Enterococcus} Concentrations Above and Below Regulatory Guidelines, Stratified by Pollution Type. Adjusted cumulative incidence ratios (aCIRs) are adjusted for a range of potential confounders and beach level fixed-effects, and are computed using two different reference groups: non-swimmers and swimmers exposed below EPA regulatory guidelines for \textit{Enterococcus}: $\leq$35 colony forming units (CFU) per 100ml. Test of effect modification by pollution type: $P=0.56$.}
+\label{fig:GIentero35pol}
+\end{minipage}
+\end{center}
+\end{figure}
+%\end{landscape}
+
+
+%--------------------------------------------------------
+% Section 5 - Negative Control and Sensitivity Analyses
+%--------------------------------------------------------
+\clearpage
+\section{Appendix. Negative Control and Sensitivity Analyses}
+
+This section includes a summary of pre-specified negative control analyses to test the robustness of the findings to bias from unmeasured confounding or measurement error, as well as pre-specified sensitivity analyses to ensure that our results were not an artifact of decisions made about swim exposure level, choice of modeling strategy (quartiles versus continuous exposure) or length of follow-up period (ranging from 1 to 10 days).
+
+% negative control analyses
+\bigskip
+\underline{Negative Control Analyses}: We matched \emph{Enterococcus} levels measured in the water to people who were at the beach that day but did not have any water contact as a negative control exposure analysis\supercite{Lipsitch2010-kq,Arnold2016-yr} -- without water exposure, the association between \emph{Enterococcus} levels and diarrhea incidence should be null, and indeed that is what we observed (Table \ref{tab:negcontrol}). This lends additional credibility to the results because it suggests that the effects observed are not an artifact of unobserved confounding or measurement error.\supercite{Lipsitch2010-kq,Arnold2016-yr}
+
+\begin{table}[h!tb]
+\begin{center}
+\begin{footnotesize}
+\begin{minipage}{0.9\textwidth}
+\caption{Negative Control Analyses. The relationship between \emph{Enterococcus} and diarrhea incidence among non-swimmers (no water contact). \emph{Enterococcus} exposures were considered as quartiles and as a categorical exposure above and below EPA regulatory guidelines. \label{tab:negcontrol}}
+\end{minipage}
+\begin{tabular}{l rc c c}
+& \\
+Exposure & N        & N      & Incidence per 1,000 & Adjusted CIR \\
+         & at Risk  & Cases  & (95\% CI)  & (95\% CI)    \\
+\hline
+& \\
+\textbf{Enterococcous} \\
+\textbf{Quartiles} \\
+<<'negative control entero quartiles culture',echo=FALSE,results='asis'>>=
+load("~/dropbox/13beaches/aim1-results/rawoutput/aim1-sens-entero1600-Quartile-regs-noswim.Rdata")
+ciformat <- function(x) {
+  paste(sprintf("%1.0f",x[1]*1000)," (",sprintf("%1.0f",x[2]*1000),", ",sprintf("%1.0f",x[3]*1000),")",sep="")
+}
+CIform <- apply(ci.all,1,ciformat)
+cirformat <- function(x) {
+  paste(sprintf("%1.2f",x[1])," (",sprintf("%1.2f",x[2]),", ",sprintf("%1.2f",x[3]),")",sep="")
+}
+CIRform <- apply(cir.all,1,cirformat)
+CIRform <- c("ref",CIRform)
+
+enteroQtab <- cbind(format(N.all[,c(2,1)],big.mark=","),CIform,CIRform)
+rownames(enteroQtab) <- paste("Q",1:4,sep="")
+rowtable(enteroQtab,digits=0)
+@
+& \\
+\textbf{Enterococcus} \\
+<<'negative control entero 35cfu culture',echo=FALSE,results='asis'>>=
+load("~/dropbox/13beaches/aim1-results/rawoutput/aim1-sens-entero1600-35cfu-regs-noswim.Rdata")
+CIform <- apply(ci.all,1,ciformat)
+CIRform <- cirformat(cir.all)
+CIRform <- c("ref",CIRform)
+entero35tab <- cbind(format(N.all[,c(2,1)],big.mark=","),CIform,CIRform)
+rownames(entero35tab) <- c("$\\leq35$ CFU/100ml",">35 CFU/100ml")
+rowtable(entero35tab,digits=0)
+@
+& \\
+\textbf{Enterococcous qPCR} \\
+\textbf{Quartiles} \\
+<<'negative control entero quartiles qpcr',echo=FALSE,results='asis'>>=
+load("~/dropbox/13beaches/aim1-results/rawoutput/aim1-sens-enteroQPCR-Quartile-regs-noswim-negcontrol.Rdata")
+CIform <- apply(ci.all,1,ciformat)
+CIRform <- apply(cir.all,1,cirformat)
+CIRform <- c("ref",CIRform)
+enteroqpcrQtab <- cbind(format(N.all[,c(2,1)],big.mark=","),CIform,CIRform)
+rownames(enteroqpcrQtab) <- paste("Q",1:4,sep="")
+rowtable(enteroqpcrQtab,digits=0)
+@
+& \\
+\textbf{Enterococcus qPCR} \\
+<<'negative control entero 470cce qpcr',echo=FALSE,results='asis'>>=
+load("~/dropbox/13beaches/aim1-results/rawoutput/aim1-sens-enteroQPCR-470cce-regs-noswim-negcontrol.Rdata")
+CIform <- apply(ci.all,1,ciformat)
+CIRform <- cirformat(cir.all)
+CIRform <- c("ref",CIRform)
+entero470tab <- cbind(format(N.all[,c(2,1)],big.mark=","),CIform,CIRform)
+rownames(entero470tab) <- c("$\\leq470$ CCE/100ml",">470 CCE/100ml")
+rowtable(entero470tab,digits=0)
+@
+& \\
+\hline
+\end{tabular}
+\end{footnotesize}
+\end{center}
+\end{table}
+
+
+
+% sensitivity analysis - water exposure level
+\clearpage
+\underline{Sensitivity Analysis - Water Exposure Level}: As described in our statistical analysis plan (available in the supporting information), we chose body immersion swimming as our primary swim exposure level for the \emph{Enterococcus} analyses and population attributable risk analyses to ensure that we included the largest number of participants in the analysis and because we had observed in the individual studies that contributed to this meta-analysis that the risk was similar for body immersion swimming and head immersion swimming. When we estimated the association between \emph{Enterococcus} levels and illness among swimmers with higher levels of exposure, we found similar results to those observed for body immersion swimmers in terms of relative risk measured by the cumulative incidence ratio, albeit with lower precision due to smaller sample sizes (Figure \ref{fig:enterosens}). Consistent with the swim exposure analyses, the overall incidence of diarrhea was higher among individuals who swallowed water, but the relative increase in risk with increasing concentration of \emph{Enterococcus} was very similar to body immersion swimmers.
+
+\begin{figure}[h!tb]
+\begin{center}
+\includegraphics[width=1.15\textwidth]{/users/benarnold/dropbox/13beaches/aim1-results/figs/aim1-entero1600-Quartile-CI-byage-body.pdf} \\
+\includegraphics[width=1.15\textwidth]{/users/benarnold/dropbox/13beaches/aim1-results/figs/aim1-entero1600-Quartile-CI-byage-head.pdf} \\
+\includegraphics[width=1.15\textwidth]{/users/benarnold/dropbox/13beaches/aim1-results/figs/aim1-entero1600-Quartile-CI-byage-swall.pdf}
+\caption{Association between \emph{Enterococcus} quartiles and diarrhea incidence by age. \textbf{A)} Among body immersion swimmers (identical to Figure 2 in the main text). \textbf{B)} Among head immersion swimmers. \textbf{C)} Among beachgoers who swallowed water. \emph{Enterococcus} was measured using EPA method 1600 except at the Mission Bay beach, where it was measured using the Enterolert assay. \label{fig:enterosens}}
+\end{center}
+\end{figure}
+
+
+% sensitivity analysis - continuous exposure
+\clearpage
+\underline{Sensitivity Analysis - Continuous Exposure}: To provide summary results that were consistent with the modeling approach used in many previously published studies, we estimated the relationship between log$_{10}$ \emph{Enterococcus} concentrations on a continuous scale and the risk of diarrhea during follow-up. This analysis imposes stronger modeling assumptions on the relationship between \emph{Enterococcus} concentrations and diarrhea risk, but is a complementary approach to the quartile analysis used in the main text.  Consistent with our primary analysis, we modeled the probability of diarrhea during the 10 days of follow-up among body immersion swimmers using a log-linear, modified Poisson model with robust standard errors clustered at the household level.  This model estimates the cumulative incidence ratio (CIR) associated with a log$_{10}$ increase in \emph{Enterococcus} concentration.  We estimated adjusted CIRs using the same set of potential confounding variables used in the primary analysis (see the Statistical Analysis Plan in the Supporting Materials for details). 
+
+We calculated marginally adjusted exposure-response curves based on the model fit using marginal standardization over the empirical distribution of covariates in the study population.\supercite{Ahern2009-cv, Muller2014-xn}  We calculated point-wise standard errors and 95\% confidence intervals for the curves using a bootstrap that re-sampled households with replacement, stratified by beach and 1,000 iterations.\supercite{Ahern2009-cv}  
+
+We estimated that a log$_{10}$ increase in \emph{Enterococcus} measured using culture methods was associated with a 15\% relative increase in the probability of diarrhea in the 10 days following the beach visit (CIR=1.15, 95\%CI: 1.05, 1.26; Figure \ref{fig:entero1600curve}). Consistent with the primary analysis, we observed effect modification by age (effect modification $P$=0.07), with no clear relationship among children ages 0-4 years, and the strongest relationship among children ages 5-10 years (Figure \ref{fig:entero1600agecurve}).  Contrary to the primary analysis, we did not observe effect modification by pollution type in this analysis (effect modification $P$=0.97) (Figure \ref{fig:entero1600pscurve}).
+
+The increase in dirrhea incidence associated with a log$_{10}$ increase in \emph{Enterococcus} EPA 1611 qPCR was similar to the EPA 1600 assay (CIR=1.13, 95\%CI: 1.05, 1.22; Figure \ref{fig:enteroQPCRcurve}). We observed no effect modification by age (effect modification $P=0.34$) (Figure \ref{fig:enteroQPCRagecurve}), but consistent with the primary analysis, there was some evidence for effect modification by pollution type  (effect modification $P=0.08$) (Figure \ref{fig:enteroQPCRpscurve}).
+
+% Entero EPA 1600 exposure-response, Total population
+\begin{figure}[h!tb]
+\begin{center}
+\includegraphics[width=0.75\textwidth]{/users/benarnold/dropbox/13beaches/aim1-results/figs/aim1-sens-entero1600-dose-response-curve.pdf}
+\caption{Association between \emph{Enterococcus} concentration (EPA 1600 or Enterolert) and incident diarrhea among body immersion swimmers. The cumulative incidence ratio (CIR) and exposure-response curve were estimated using an adjusted log-linear regression model.  Dashed lines are bootstrapped 95\% confidence intervals. \label{fig:entero1600curve}}
+\end{center}
+\end{figure}
+
+
+% Entero EPA 1600 exposure-response, stratified by age
+\begin{landscape}
+\begin{figure}[h!tb]
+\begin{center}
+\includegraphics[width=0.43\textwidth]{/users/benarnold/dropbox/13beaches/aim1-results/figs/aim1-sens-entero1600-dose-response-curve-age0to4.pdf}
+\includegraphics[width=0.43\textwidth]{/users/benarnold/dropbox/13beaches/aim1-results/figs/aim1-sens-entero1600-dose-response-curve-age5to10.pdf}
+\includegraphics[width=0.43\textwidth]{/users/benarnold/dropbox/13beaches/aim1-results/figs/aim1-sens-entero1600-dose-response-curve-age11plus.pdf}
+\caption{Association between \emph{Enterococcus} concentration (EPA 1600 or Enterolert) and incident diarrhea among body immersion swimmers, stratified by age group. Cumulative incidence ratios (CIRs) and curves were estimated using a log-linear regression model. Note that the Y-scale differs on the number exposed across plots to display the distributions more clearly given differences in sample size across age groups. Dashed lines are bootstrapped 95\% confidence intervals.  \label{fig:entero1600agecurve}}
+\end{center}
+\end{figure}
+\end{landscape}
+
+% Entero EPA 1600 exposure-response, stratified by pollution type
+\begin{landscape}
+\begin{figure}[h!tb]
+\begin{center}
+\includegraphics[width=0.43\textwidth]{/users/benarnold/dropbox/13beaches/aim1-results/figs/aim1-sens-entero1600-dose-response-curve-ps.pdf}
+\includegraphics[width=0.43\textwidth]{/users/benarnold/dropbox/13beaches/aim1-results/figs/aim1-sens-entero1600-dose-response-curve-nps.pdf}
+\caption{Association between \emph{Enterococcus} concentration (EPA 1600 or Enterolert) and incident diarrhea among body immersion swimmers, stratified by type of pollution. Cumulative incidence ratios (CIRs) and curves were estimated using a log-linear regression model. Dashed lines are bootstrapped 95\% confidence intervals.  \label{fig:entero1600pscurve}}
+\end{center}
+\end{figure}
+\end{landscape}
+
+
+
+% Entero EPA QPCR exposure-response, point vs. non-point source
+\begin{figure}[h!tb]
+\begin{center}
+\includegraphics[width=0.75\textwidth]{/users/benarnold/dropbox/13beaches/aim1-results/figs/aim1-sens-enteroQPCR-dose-response-curve.pdf}
+\caption{Association between \emph{Enterococcus} qPCR EPA 1611 qPCR concentration and incident diarrhea among body immersion swimmers. The cumulative incidence ratio (CIR) and exposure-response curves were estimated using a log-linear regression model.  Dashed lines are bootstrapped 95\% confidence intervals. \label{fig:enteroQPCRcurve}}
+\end{center}
+\end{figure}
+
+
+% Entero EPA 1611 exposure-response, stratified by age
+\begin{landscape}
+\begin{figure}[h!tb]
+\begin{center}
+\includegraphics[width=0.43\textwidth]{/users/benarnold/dropbox/13beaches/aim1-results/figs/aim1-sens-enteroQPCR-dose-response-curve-age0to4.pdf}
+\includegraphics[width=0.43\textwidth]{/users/benarnold/dropbox/13beaches/aim1-results/figs/aim1-sens-enteroQPCR-dose-response-curve-age5to10.pdf}
+\includegraphics[width=0.43\textwidth]{/users/benarnold/dropbox/13beaches/aim1-results/figs/aim1-sens-enteroQPCR-dose-response-curve-age11plus.pdf}
+\caption{Association between \emph{Enterococcus} qPCR EPA 1611 concentration and incident diarrhea among body immersion swimmers, stratified by age group. Cumulative incidence ratios (CIRs) and curves were estimated using an adjusted log-linear regression model. Note that the Y-scale differs on the number exposed across plots to display the distributions more clearly given differences in sample size across age groups. Dashed lines are bootstrapped 95\% confidence intervals.  \label{fig:enteroQPCRagecurve}}
+\end{center}
+\end{figure}
+\end{landscape}
+
+% Entero EPA 1611 exposure-response, stratified by pollution type
+\begin{landscape}
+\begin{figure}[h!tb]
+\begin{center}
+\includegraphics[width=0.43\textwidth]{/users/benarnold/dropbox/13beaches/aim1-results/figs/aim1-sens-enteroQPCR-dose-response-curve-ps.pdf}
+\includegraphics[width=0.43\textwidth]{/users/benarnold/dropbox/13beaches/aim1-results/figs/aim1-sens-enteroQPCR-dose-response-curve-nps.pdf}
+\caption{Association between \emph{Enterococcus} qPCR EPA 1611 concentration and incident diarrhea among body immersion swimmers, stratified by type of pollution. Cumulative incidence ratios (CIRs) and curves were estimated using a log-linear regression model. Dashed lines are bootstrapped 95\% confidence intervals.  \label{fig:enteroQPCRpscurve}}
+\end{center}
+\end{figure}
+\end{landscape}
+
+
+
+
+% sensitivity analysis - length of follow-up
+\bigskip
+\underline{Sensitivity Analysis - Length of Follow-up}: An earlier analysis from the Malibu cohort demonstrated that the greatest increase daily diarrhea incidence among swimmers compared to non-swimmers was in the first 3 days following the beach visit.\supercite{Arnold2013-xd} When we examined daily incidence patterns across all cohorts, we observed a similar pattern (Figure \ref{fig:dailydiar}). We additionally re-estimated the association between body immersion swim exposure and incident diarrhea, as well as \emph{Enterococcus} exposure and incident diarrhea among swimmers (Figure \ref{fig:fulengthsens}). Consistent with the analysis of the Malibu cohort,\supercite{Arnold2013-xd} there was an attenuation of the cumulative incidence ratio (CIR) associated with body immersion swim exposure with follow-up longer than 3 days (Figure \ref{fig:fulengthsens}, A). However, length of follow-up period did not strongly influence the magnitude of association between \emph{Enterococcus} levels and diarrhea incidence -- longer follow-up periods had similar CIR estimates to shorter periods, but with narrower confidence intervals due to substantially larger numbers of cumulative incident cases (Figure \ref{fig:fulengthsens}, B-C).
+
+% daily incidence figure
+\begin{figure}[h!tb]
+\begin{center}
+\includegraphics[width=0.6\textwidth]{/users/benarnold/dropbox/13beaches/aim1-results/figs/aim1-daily-incidence-curves.pdf}
+\caption{Daily Incidence of Diarrhea by Level of Water Exposure. \label{fig:dailydiar}}
+\end{center}
+\end{figure}
+
+% length of follow-up sensitivity analyses
+\begin{landscape}
+\begin{figure}[htbp]
+{\large \hspace{1cm} \textbf{A)} \hspace{7cm} \textbf{B)}    \hspace{7cm} \textbf{C)} }\\
+
+\begin{center}
+ \includegraphics[width=0.45\textwidth]{/users/benarnold/dropbox/13beaches/aim1-results/figs/aim1-sens-swim-exposure-length-of-follow-up.pdf} 
+ \includegraphics[width=0.45\textwidth]{/users/benarnold/dropbox/13beaches/aim1-results/figs/aim1-sens-entero1600-Quartile-length-of-follow-up.pdf} 
+  \includegraphics[width=0.45\textwidth]{/users/benarnold/dropbox/13beaches/aim1-results/figs/aim1-sens-entero1600-35cfu-length-of-follow-up.pdf} 
+
+\begin{minipage}{1.2\textwidth}
+
+\caption{Sensitivity analysis of the length of follow-up period on cumulative incidence ratio (CIR) estimates. \textbf{A)} Body immersion swim exposure analysis. \textbf{B)} \textit{Enterococcus} by culture methods (EPA 1600 or Enterolert) quartile analysis. \textbf{C)} \textit{Enterococcus} >35 CFU/100ml analysis, stratified by beach type. \label{fig:fulengthsens} }
+\end{minipage}
+\end{center}
+\end{figure}
+\end{landscape}
+
+%--------------------------------------------------------
+% Section 6  PAR results
+%--------------------------------------------------------
+\clearpage
+\section{Appendix. Population Attributable Risk Results for \textit{Enterococcus} Exposure}
+
+This section includes detailed estimates of population attributable risk (PAR) and population attributable fraction (PAF) among swimmers for exposure to \textit{Enterococcus} levels above 35 colony forming units (CFU) per 100ml (the current EPA regulatory guideline). There are two separate calculations in this section. 
+
+First, we estimated the population attributable risk for exposure to water >35 CFU/100 ml among beachgoers, using non-swimmers as the reference group. The implied intervention is closing beachs when \textit{Enterococcus} levels exceed 35 CFU / 100 ml.  These results are summarized in Figure 3 of the main text and in Table \ref{tab:ARwatexpnoswim} for all outcomes. For acute diarrhea, gastroenteritis, and missed daily activities (work, school, vacation) associated with gastroenteritis, we found that the risk attributable to this exposure was far larger among young children. However, we estimated no attributable of days missed paid work or medical visits/consultations associated with this exposure.
+
+Second, we estimated the population attributable risk for exposure to water >35 CFU/100 ml among \textit{swimmers}, using swimmers exposed below 35 CFU/100 ml as the reference group. The implied intervention in this counterfactual is that beaches would always have water quality that met regulatory guidelines.  Since this is a less extreme change in exposure compared with preventing people from swimming on poor water quality days, the attributable risk and fraction values were smaller (Table \ref{tab:ARwatexp}). 
+
+
+\clearpage
+<<'Percent Exp age Entero 1600 noswim',echo=FALSE,results='asis'>>=
+load("~/dropbox/13beaches/aim2-results/rawoutput/aim2-PARentero1600noswim-diar.Rdata")
+nswim <- sum(N.all[,2])
+pctexp.all <- paste(sprintf("%1.0f",(N.all[3,2]/sum(N.all[,2]))*100),"\\%",sep="")
+pctexp.0to4 <- paste(sprintf("%1.0f",(N.age0to4[3,2]/sum(N.age0to4[,2]))*100),"\\%",sep="")
+pctexp.5to10 <- paste(sprintf("%1.0f",(N.age5to10[3,2]/sum(N.age5to10[,2]))*100),"\\%",sep="")
+pctexp.11plus <- paste(sprintf("%1.0f",(N.age11plus[3,2]/sum(N.age11plus[,2]))*100),"\\%",sep="")
+pctexp <- c(pctexp.all,pctexp.0to4,pctexp.5to10,pctexp.11plus)
+@
+\begin{table}[h!tb]
+\begin{footnotesize}
+\begin{center}
+\begin{minipage}{0.8\textwidth}
+\caption{Population Attributable Risk Among Beachgoers Due to Swimming in Water That Exceeds the EPA Guideline of \textit{Enterococcus} >35 CFU/100ml.   \label{tab:ARwatexpnoswim}}
+\end{minipage}
+\begin{tabular}{l rr cc rl rl}
+ & \\
+ &  &  & \multicolumn{2}{c}{Predicted Incidence$^1$}  & \multicolumn{2}{c}{Population}        & \multicolumn{2}{c}{Population}    \\
+ & &                     & \multicolumn{2}{c}{per 1000}             & \multicolumn{2}{c}{Attributable Risk$^2$} & \multicolumn{2}{c}{Attributable Fraction$^3$} \\
+\cline{4-5}
+ & N        & N          & Observed  & No Swimming                 &  \multicolumn{2}{c}{(95\% CI)}        & \multicolumn{2}{c}{(95\% CI)}   \\
+ &  Events  &  At Risk   & Exposure  & $>$35 CFU/100ml  \\
+\hline
+& \\
+\textbf{Diarrhea, episodes} \\
+<<'AR watexp noswim diarrhea overall',echo=FALSE,results='asis'>>=
+load("~/dropbox/13beaches/aim2-results/rawoutput/aim2-PARentero1600noswim-diar.Rdata")
+printPAR(AR35noswim.diar,colSums(N.all),label="All Ages")
+@
+Age Stratified \\
+<<'AR watexp noswim diarrhea overall ages',echo=FALSE,results='asis'>>=
+printPAR(AR35noswim.diar.0to4,colSums(N.age0to4),label="~~Ages 0 to 4")
+printPAR(AR35noswim.diar.5to10,colSums(N.age5to10),label="~~Ages 5 to 10")
+printPAR(AR35noswim.diar.11plus,colSums(N.age11plus),label="~~Ages >10")
+@
+& \\
+\textbf{Gastrointestinal} \\
+\textbf{illness$^4$, episodes} \\
+<<'AR watexp noswim gi overall',echo=FALSE,results='asis'>>=
+load("~/dropbox/13beaches/aim2-results/rawoutput/aim2-PARentero1600noswim-gi.Rdata")
+printPAR(AR35noswim.gi,colSums(N.all),label="All Ages")
+@
+Age Stratified \\
+<<'AR watexp noswim gi overall ages',echo=FALSE,results='asis'>>=
+printPAR(AR35noswim.gi.0to4,colSums(N.age0to4),label="~~Ages 0 to 4")
+printPAR(AR35noswim.gi.5to10,colSums(N.age5to10),label="~~Ages 5 to 10")
+printPAR(AR35noswim.gi.11plus,colSums(N.age11plus),label="~~Ages >10")
+@
+& \\
+\textbf{Missed Daily} \\
+\textbf{Activities$^5$, days} \\
+<<'AR watexp noswim dailygi overall',echo=FALSE,results='asis'>>=
+load("~/dropbox/13beaches/aim2-results/rawoutput/aim2-PARentero1600noswim-dailygi.Rdata")
+printPAR(AR35noswim.dailygi,colSums(N.all),label="All Ages")
+@
+Age Stratified \\
+<<'AR watexp noswim dailygi overall ages',echo=FALSE,results='asis'>>=
+printPAR(AR35noswim.dailygi.0to4,colSums(N.age0to4),label="~~Ages 0 to 4")
+printPAR(AR35noswim.dailygi.5to10,colSums(N.age5to10),label="~~Ages 5 to 10")
+printPAR(AR35noswim.dailygi.11plus,colSums(N.age11plus),label="~~Ages >10")
+@
+& \\
+\textbf{Missed Paid} \\
+\textbf{Work$^6$, days} \\
+<<'AR watexp noswim workgi overall',echo=FALSE,results='asis'>>=
+load("~/dropbox/13beaches/aim2-results/rawoutput/aim2-PARentero1600noswim-workgi.Rdata")
+printPAR(AR35noswim.workgi,colSums(N.all),label="All Ages\\textsuperscript{8}")
+@
+& \\
+\textbf{Medical Visits$^7$,} \\
+\textbf{events} \\
+<<'AR watexp noswim medgi overall',echo=FALSE,results='asis'>>=
+load("~/dropbox/13beaches/aim2-results/rawoutput/aim2-PARentero1600noswim-medgi.Rdata")
+printPAR(AR35noswim.medgi,colSums(N.all),label="All Ages\\textsuperscript{8}")
+@
+& \\
+\hline
+\end{tabular}
+\end{center}
+\end{footnotesize}
+\begin{scriptsize}
+\begin{minipage}{\textwidth}
+\begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \item Predicted incidence per 1000 among body immersion swimmers under the empirical distribution of \textit{Enterococcus} exposure (observed) and under a counterfactual scenario where nobody entered the water in conditions >35 CFU/100ml. Estimates are from a multivariable regression model adjusted for a range of potential confounders and beach level fixed-effects (see statistical analysis plan for details).
+  \item Population Attributable Risk is the number of events per 1000 swimmers that would be prevented if the exposure of swimming in water with \textit{Enterococcus} $\geq$35 CFU/100ml were removed from the population. The proportion of beachgoers who swam in water with \textit{Enterococcus} >35 CFU/100ml was: all ages (\Sexpr{pctexp[1]}), ages 0-4 (\Sexpr{pctexp[2]}), ages 5-10 (\Sexpr{pctexp[3]}), ages >10 (\Sexpr{pctexp[4]}). 
+  \item Population Attributable Fraction is the percentage of events among beachgoers attributable to swimming in water with \textit{Enterococcus} $\geq$35 CFU/100ml.
+  \item Gastrointestinal illness was defined as (i) diarrhea or (ii) vomiting or (iii) stomach cramps and missed daily activities or (iv) nausea and missed daily activities.
+  \item Includes days of school, work, or vacation missed because of gastrointestinal illness.
+  \item Includes work days missed because of gastrointestinal illness.
+  \item Includes phone consultations, outpatient visits, and emergency room visits due to gastrointestinal illness. 
+  \item Outcome incidence was too rare to calculate age-stratified estimates.
+\end{enumerate}
+\end{minipage}
+\end{scriptsize}
+\end{table}
+
+
+
+\clearpage
+<<'Percent Exp age Entero 1600',echo=FALSE,results='asis'>>=
+load("~/dropbox/13beaches/aim2-results/rawoutput/aim2-PARentero1600-diar.Rdata")
+nswim <- sum(N.all[,2])
+pctexp.all <- paste(sprintf("%1.0f",(N.all[2,2]/sum(N.all[,2]))*100),"\\%",sep="")
+pctexp.0to4 <- paste(sprintf("%1.0f",(N.age0to4[2,2]/sum(N.age0to4[,2]))*100),"\\%",sep="")
+pctexp.5to10 <- paste(sprintf("%1.0f",(N.age5to10[2,2]/sum(N.age5to10[,2]))*100),"\\%",sep="")
+pctexp.11plus <- paste(sprintf("%1.0f",(N.age11plus[2,2]/sum(N.age11plus[,2]))*100),"\\%",sep="")
+pctexp <- c(pctexp.all,pctexp.0to4,pctexp.5to10,pctexp.11plus)
+@
+\begin{table}[h!tb]
+\begin{footnotesize}
+\begin{center}
+\begin{minipage}{0.8\textwidth}
+\caption{Population Attributable Risk Among Body Immersion Swimmers Due to Swimming in Water That Exceeds the EPA Guideline of \textit{Enterococcus} >35 CFU/100ml.   \label{tab:ARwatexp}}
+\end{minipage}
+\begin{tabular}{l rr cc rl rl}
+ & \\
+ &  &  & \multicolumn{2}{c}{Predicted Incidence$^1$}  & \multicolumn{2}{c}{Population}        & \multicolumn{2}{c}{Population}    \\
+ & &                     & \multicolumn{2}{c}{per 1000}             & \multicolumn{2}{c}{Attributable Risk$^2$} & \multicolumn{2}{c}{Attributable Fraction$^3$} \\
+\cline{4-5}
+ & N        & N          & Observed  & All $\leq$35                &  \multicolumn{2}{c}{(95\% CI)}        & \multicolumn{2}{c}{(95\% CI)}   \\
+ &  Events  &  At Risk   & Exposure  & CFU/100ml  \\
+\hline
+& \\
+\textbf{Diarrhea, episodes} \\
+<<'AR watexp diarrhea overall',echo=FALSE,results='asis'>>=
+load("~/dropbox/13beaches/aim2-results/rawoutput/aim2-PARentero1600-diar.Rdata")
+printPAR(AR35cfu.diar,colSums(N.all),label="All Ages")
+@
+Age Stratified \\
+<<'AR watexp diarrhea overall ages',echo=FALSE,results='asis'>>=
+printPAR(AR35cfu.diar.0to4,colSums(N.age0to4),label="~~Ages 0 to 4")
+printPAR(AR35cfu.diar.5to10,colSums(N.age5to10),label="~~Ages 5 to 10")
+printPAR(AR35cfu.diar.11plus,colSums(N.age11plus),label="~~Ages >10")
+@
+& \\
+\textbf{Gastrointestinal} \\
+\textbf{illness$^4$, episodes} \\
+<<'AR watexp gi overall',echo=FALSE,results='asis'>>=
+load("~/dropbox/13beaches/aim2-results/rawoutput/aim2-PARentero1600-gi.Rdata")
+printPAR(AR35cfu.gi,colSums(N.all),label="All Ages")
+@
+Age Stratified \\
+<<'AR watexp gi overall ages',echo=FALSE,results='asis'>>=
+printPAR(AR35cfu.gi.0to4,colSums(N.age0to4),label="~~Ages 0 to 4")
+printPAR(AR35cfu.gi.5to10,colSums(N.age5to10),label="~~Ages 5 to 10")
+printPAR(AR35cfu.gi.11plus,colSums(N.age11plus),label="~~Ages >10")
+@
+& \\
+\textbf{Missed Daily} \\
+\textbf{Activities$^5$, days} \\
+<<'AR watexp dailygi overall',echo=FALSE,results='asis'>>=
+load("~/dropbox/13beaches/aim2-results/rawoutput/aim2-PARentero1600-dailygi.Rdata")
+printPAR(AR35cfu.dailygi,colSums(N.all),label="All Ages")
+@
+Age Stratified \\
+<<'AR watexp dailygi overall ages',echo=FALSE,results='asis'>>=
+# TEMP CODE
+# zero-out a few unrealistic estimates that weren't filtered in ARboot
+#AR35cfu.dailygi.0to4$stats[(AR35cfu.dailygi.0to4$stats[,3]>10), ] <- NA
+  AR35cfu.dailygi.0to4$bootest  <- apply(AR35cfu.dailygi.0to4$stats,2,function(x) mean(x,na.rm=T))
+  AR35cfu.dailygi.0to4$boot95lb <- apply(AR35cfu.dailygi.0to4$stats,2,function(x) quantile(x,prob=c(0.025),na.rm=T))
+  AR35cfu.dailygi.0to4$boot95ub <- apply(AR35cfu.dailygi.0to4$stats,2,function(x) quantile(x,prob=c(0.975),na.rm=T))
+printPAR(AR35cfu.dailygi.0to4,colSums(N.age0to4),label="~~Ages 0 to 4")
+printPAR(AR35cfu.dailygi.5to10,colSums(N.age5to10),label="~~Ages 5 to 10")
+printPAR(AR35cfu.dailygi.11plus,colSums(N.age11plus),label="~~Ages >10")
+@
+& \\
+\textbf{Missed Paid} \\
+\textbf{Work$^6$, days} \\
+<<'AR watexp workgi overall',echo=FALSE,results='asis'>>=
+load("~/dropbox/13beaches/aim2-results/rawoutput/aim2-PARentero1600-workgi.Rdata")
+printPAR(AR35cfu.workgi,colSums(N.all),label="All Ages\\textsuperscript{8}")
+@
+& \\
+\textbf{Medical Visits$^7$,} \\
+\textbf{events} \\
+<<'AR watexp medgi overall',echo=FALSE,results='asis'>>=
+load("~/dropbox/13beaches/aim2-results/rawoutput/aim2-PARentero1600-medgi.Rdata")
+printPAR(AR35cfu.medgi,colSums(N.all),label="All Ages\\textsuperscript{8}")
+@
+& \\
+\hline
+\end{tabular}
+\end{center}
+\end{footnotesize}
+\begin{scriptsize}
+\begin{minipage}{\textwidth}
+\begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \item Predicted incidence per 1000 among body immersion swimmers under the empirical distribution of \textit{Enterococcus} exposure (observed) and under a counterfactual scenario where water conditions never exceeded 35 CFU/100ml. Estimates are from a multivariable regression model adjusted for a range of potential confounders and beach level fixed-effects (see statistical analysis plan for details).
+  \item Population Attributable Risk is the number of events per 1000 swimmers that would be prevented if the exposure of swimming in water with \textit{Enterococcus} $\geq$35 CFU/100ml were removed from the population. The proportion of swimmers exposed to water with \textit{Enterococcus} >35 CFU/100ml was: all ages (\Sexpr{pctexp[1]}), ages 0-4 (\Sexpr{pctexp[2]}), ages 5-10 (\Sexpr{pctexp[3]}), ages >10 (\Sexpr{pctexp[4]}). 
+  \item Population Attributable Fraction is the percentage of events among swimmers attributable to swimming in water with \textit{Enterococcus} $\geq$35 CFU/100ml.
+  \item Gastrointestinal illness was defined as (i) diarrhea or (ii) vomiting or (iii) stomach cramps and missed daily activities or (iv) nausea and missed daily activities.
+  \item Includes days of school, work, or vacation missed because of gastrointestinal illness.
+  \item Includes work days missed because of gastrointestinal illness.
+  \item Includes phone consultations, outpatient visits, and emergency room visits due to gastrointestinal illness. 
+  \item Outcome incidence was too rare to calculate age-stratified estimates.
+\end{enumerate}
+\end{minipage}
+\end{scriptsize}
+\end{table}
+
+
+% NOT INCLUDED -- TOO MUCH INFORMATION / NOT NEEDED
+% \clearpage
+% <<'Percent Exp ps Entero 1600',echo=FALSE,results='asis'>>=
+% load("~/dropbox/13beaches/aim2-results/rawoutput/aim2-PARentero1600-diar.Rdata")
+% nswim <- sum(N.all[,2])
+% pctexp.all <- paste(sprintf("%1.0f",(N.all[2,2]/sum(N.all[,2]))*100),"\\%",sep="")
+% pctexp.ps <- paste(sprintf("%1.0f",(N.ps[2,2]/sum(N.ps[,2]))*100),"\\%",sep="")
+% pctexp.nps <- paste(sprintf("%1.0f",(N.nps[2,2]/sum(N.nps[,2]))*100),"\\%",sep="")
+% pctexp <- c(pctexp.all,pctexp.ps,pctexp.nps)
+% @
+% \begin{table}[h!tb]
+% \begin{footnotesize}
+% \begin{center}
+% \begin{minipage}{\textwidth}
+% \caption{Population Attributable Risk Among Body Immersion Swimmers Due to Swimming in Water That Exceeds the EPA Guideline of \textit{Enterococcus} >35 CFU/100ml.  Missed paid work and medical visits due to gastrointestinal illness were too rare to calculate stratified estimates (results in Table \ref{tab:ARwatexp}).   \label{tab:parpointsource}}
+% \end{minipage}
+% \begin{tabular}{l rr cc rl rl}
+%  & \\
+%  &  &  & \multicolumn{2}{c}{Predicted Incidence$^1$}  & \multicolumn{2}{c}{Population}        & \multicolumn{2}{c}{Population}    \\
+%  & &                     & \multicolumn{2}{c}{per 1000}             & \multicolumn{2}{c}{Attributable Risk$^2$} & \multicolumn{2}{c}{Attributable Fraction$^3$} \\
+% \cline{4-5}
+%  & N        & N          & Observed  & All $\leq$35                &  \multicolumn{2}{c}{(95\% CI)}        & \multicolumn{2}{c}{(95\% CI)}   \\
+%  &  Events  &  At Risk   & Exposure  & CFU/100ml  \\
+% \hline
+% & \\
+% \textbf{Diarrhea, episodes} \\
+% <<'AR watexp diarrhea',echo=FALSE,results='asis'>>=
+% load("~/dropbox/13beaches/aim2-results/rawoutput/aim2-PARentero1600-diar.Rdata")
+% printPAR(AR35cfu.diar,colSums(N.all),label="All Conditions")
+% @
+% Pollution Source \\
+% <<'AR watexp diarrhea beachtype',echo=FALSE,results='asis'>>=
+% printPAR(AR35cfu.diar.ps,colSums(N.ps),label="~~Point Source")
+% printPAR(AR35cfu.diar.nps,colSums(N.nps),label="~~Non-point Source")
+% @
+% & \\
+% \textbf{Gastrointestinal} \\
+% \textbf{illness$^4$, episodes} \\
+% <<'AR watexp gi',echo=FALSE,results='asis'>>=
+% load("~/dropbox/13beaches/aim2-results/rawoutput/aim2-PARentero1600-gi.Rdata")
+% printPAR(AR35cfu.gi,colSums(N.all),label="All Conditions")
+% @
+% Pollution Source  \\
+% <<'AR watexp gi beachtype',echo=FALSE,results='asis'>>=
+% printPAR(AR35cfu.gi.ps,colSums(N.ps),label="~~Point Source")
+% printPAR(AR35cfu.gi.nps,colSums(N.nps),label="~~Non-point Source")
+% @
+% & \\
+% \textbf{Missed Daily} \\
+% \textbf{Activities$^5$, days} \\
+% <<'AR watexp dailygi',echo=FALSE,results='asis'>>=
+% load("~/dropbox/13beaches/aim2-results/rawoutput/aim2-PARentero1600-dailygi.Rdata")
+% printPAR(AR35cfu.dailygi,colSums(N.all),label="All Conditions")
+% @
+% Pollution Source  \\
+% <<'AR watexp dailygi beachtype',echo=FALSE,results='asis'>>=
+% printPAR(AR35cfu.dailygi.ps,colSums(N.ps),label="~~Point Source")
+% printPAR(AR35cfu.dailygi.nps,colSums(N.nps),label="~~Non-point Source")
+% @
+% 
+% & \\
+% \hline
+% \end{tabular}
+% \end{center}
+% \end{footnotesize}
+%   %  table footnotes
+% \begin{scriptsize}
+% \begin{minipage}{\textwidth}
+% \begin{enumerate}
+%   \setlength{\itemsep}{1pt}
+%   \item Predicted incidence per 1000 among body immersion swimmers under the empirical distribution of \textit{Enterococcus} exposure (observed) and under a counterfactual scenario where water conditions never exceeded 35 CFU/100ml. Estimates are from a multivariable regression model adjusted for a range of potential confounders and beach level fixed-effects (see statistical analysis plan for details).
+%   \item Population Attributable Risk is the number of events per 1000 swimmers that would be prevented if the exposure of swimming in water with \textit{Enterococcus} $\geq$35 CFU/100ml were removed from the population. The proportion of swimmers exposed to water with \textit{Enterococcus} >35 CFU/100ml was: all conditions (\Sexpr{pctexp[1]}), point source conditions (\Sexpr{pctexp[2]}), non-point source conditions (\Sexpr{pctexp[3]}). 
+%   \item Population Attributable Fraction is the percentage of events among swimmers attributable to swimming in water with \textit{Enterococcus} $\geq$35 CFU/100ml.
+%   \item Gastrointestinal illness was defined as (i) diarrhea or (ii) vomiting or (iii) stomach cramps and missed daily activities or (iv) nausea and missed daily activities.
+%   \item Includes days of school, work, or vacation missed because of gastrointestinal illness.
+% \end{enumerate}
+% \end{minipage}
+% \end{scriptsize}
+% \end{table}
+
+
+
+
+%--------------------------------------------------------
+% References
+%--------------------------------------------------------
+\clearpage
+\printbibliography
+%  \bibliographystyle{/Users/benarnold/Library/texmf/bibtex/vancouver.bst}
+
+
+\end{document}
+
+
