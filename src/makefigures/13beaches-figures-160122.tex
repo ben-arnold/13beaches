@@ -1,0 +1,95 @@
+
+%-------------------------------------------------------------------------------------------
+%%%%%%%% PREAMBLE
+%-------------------------------------------------------------------------------------------
+\documentclass[11pt]{article}
+
+% Load packages
+\usepackage[T1]{fontenc}
+
+\usepackage{aeguill}
+\usepackage{fancyhdr, amssymb, amsmath, geometry,setspace,lastpage,pdflscape}
+\usepackage[pdftex]{graphicx,color}
+\definecolor{dkblue}{rgb}{0,0.08,0.45}
+\usepackage[pdftex]{hyperref}
+\hypersetup{colorlinks}%
+%citecolor=black,%
+%filecolor=black,%
+%linkcolor=black,%
+%urlcolor=black}
+
+%\usepackage{lmodern}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+% Page Setup
+\geometry{ top = 1in, bottom = 1in , left=1in, right=1in}
+\pagestyle{empty}
+\lhead{}
+\chead{}
+\rhead{}
+\lfoot{}
+\cfoot{\footnotesize \thepage  { /}  \pageref{LastPage}}
+\rfoot{}
+
+% Paragraph Setup
+\setlength{\parskip}{\baselineskip}%
+\setlength{\parindent}{0pt}%
+
+% Title Information
+\title{13 Beaches Figures}
+\author{Ben Arnold (benarnold@berkeley.edu)}
+\date{Updated \today}
+
+%-------------------------------------------------------------------------------------------
+%%%%%%%% DOCUMENT BEGINS HERE
+%-------------------------------------------------------------------------------------------
+\begin{document}
+
+%-------------------------------------------------------------------------------------------
+% Figure 1 - Swim Exposure Results
+%-------------------------------------------------------------------------------------------
+\begin{landscape}
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=1.5\textwidth]{/users/benarnold/dropbox/13beaches/aim1-results/figs/aim1-swim-exposure-byage.pdf}
+\begin{minipage}{1.2\textwidth}
+\caption{Incident Diarrhea Associated with Water Exposure Stratified by Age. Adjusted cumulative incidence ratios (CIRs) were estimated with non-swimmers as the reference group.}
+\label{fig:swimex}
+\end{minipage}
+\end{center}
+\end{figure}
+\end{landscape}
+
+%-------------------------------------------------------------------------------------------
+% Figure 2 - Enterococcus  Regulatory Limits
+%-------------------------------------------------------------------------------------------
+\begin{landscape}
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=1.5\textwidth]{/users/benarnold/dropbox/13beaches/aim1-results/figs/aim1-entero1600-noswim35cfu-CI-byage.pdf} \\
+\begin{minipage}{1.2\textwidth}
+\caption{Incident Diarrhea Among Beachgoers Associated with \textit{Enterococcus} Levels Above and Below Regulatory Guidelines, Stratified by Age. Adjusted cumulative incidence ratios (aCIRs) were estimated using two different reference groups: non-swimmers and swimmers exposed below EPA regulatory guidelines for \textit{Enterococcus}: $\leq$35 colony forming units (CFU) per 100ml. }
+\label{fig:enteroregulatory}
+\end{minipage}
+\end{center}
+\end{figure}
+\end{landscape}
+
+
+
+%-------------------------------------------------------------------------------------------
+% Figure 4 - PAR for Enterococcus EPA 1600 Regulatory Limits
+%-------------------------------------------------------------------------------------------
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=0.5\textwidth]{/users/benarnold/dropbox/13beaches/aim2-results/figs/aim2-PAR-entero1600noswim.pdf} 
+\begin{minipage}{0.5\textwidth}
+\caption{Age-stratified attributable risk among beachgoers from swimming in water with \textit{Enterococcus} levels that exceed EPA regulatory guidelines of \textit{Enterococcus}>35 CFU/100ml for A) Diarrhea and B) Gastrointestinal illness.  Circles mark the observed levels of exposure and corresponding population attributable risk estimates with 95\% confidence intervals. Dashed lines show adjusted model predictions over a range of exposure levels assuming the same risk relationship within age strata for different proportions exposed.}
+\label{fig:enteroPAR}
+\end{minipage}
+\end{center}
+\end{figure}
+
+
+\end{document}

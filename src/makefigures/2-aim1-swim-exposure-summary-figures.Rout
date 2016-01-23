@@ -1,5 +1,5 @@
 
-R version 3.2.1 (2015-06-18) -- "World-Famous Astronaut"
+R version 3.2.0 (2015-04-16) -- "Full of Ingredients"
 Copyright (C) 2015 The R Foundation for Statistical Computing
 Platform: x86_64-apple-darwin13.4.0 (64-bit)
 
@@ -26,16 +26,6 @@ Type 'q()' to quit R.
 > # description:
 > # plot CIRs associated with swim exposure
 > # using summary regression output
-> #
-> # version 3 (24 mar 2015)
-> # added pooled results figures
-> # modified forest plot figure code
-> # to accept new output format
-> #
-> # version 2 (18 mar 2015)
-> # streamlined code to simplify scenarios
-> #
-> # version 1 (10 feb 2015)
 > #
 > # --------------------------------------
 > 
@@ -325,4 +315,4 @@ null device
 > 
 > proc.time()
    user  system elapsed 
-  2.242   0.280   2.632 
+  2.876   0.419   4.290 

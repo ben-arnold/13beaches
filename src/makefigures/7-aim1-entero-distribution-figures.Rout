@@ -1,5 +1,5 @@
 
-R version 3.2.1 (2015-06-18) -- "World-Famous Astronaut"
+R version 3.2.0 (2015-04-16) -- "Full of Ingredients"
 Copyright (C) 2015 The R Foundation for Statistical Computing
 Platform: x86_64-apple-darwin13.4.0 (64-bit)
 
@@ -31,15 +31,6 @@ Type 'q()' to quit R.
 > # plot the distributions and summary 
 > # statistics for the Entero EPA 1600
 > # and Entero EPA qPCR 1611 water samples
-> #
-> # version 3 (17 sep 2015)
-> # modified figure labels and scales
-> #
-> # version 2 (13 may 2015)
-> # split off scatter plot into separate figure and
-> # added spearman's rank correlation coeff
-> #
-> # version 1 (24 apr 2015)
 > #
 > # --------------------------------------
 > 
@@ -107,20 +98,20 @@ Mission Bay 3 Mission Bay 4 Mission Bay 5 Mission Bay 6
 > 
 > # restrict the data to individuals who are at risk of GI illness
 > dim(d)
-[1] 88083  1152
+[1] 84411  1152
 > d <- subset(d,gibase!="Yes")
 > dim(d)
-[1] 86058  1152
+[1] 82463  1152
 > 
 > # restrict the data to body immersion swimmers
 > d <- subset(d,bodycontact=="Yes")
 > dim(d)
-[1] 47580  1152
+[1] 46315  1152
 > 
 > # restrict the data to individuals who have water quality measurements
 > d <- subset(d,nowq==0)
 > dim(d)
-[1] 47241  1152
+[1] 46069  1152
 > 
 > # --------------------------------------
 > # Recode the EPA 1600 values at
@@ -254,4 +245,4 @@ null device
 > 
 > proc.time()
    user  system elapsed 
- 63.165   4.646  69.898 
+ 75.776   9.810  90.671 

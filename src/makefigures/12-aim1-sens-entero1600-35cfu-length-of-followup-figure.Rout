@@ -1,5 +1,5 @@
 
-R version 3.2.1 (2015-06-18) -- "World-Famous Astronaut"
+R version 3.2.0 (2015-04-16) -- "Full of Ingredients"
 Copyright (C) 2015 The R Foundation for Statistical Computing
 Platform: x86_64-apple-darwin13.4.0 (64-bit)
 
@@ -28,8 +28,6 @@ Type 'q()' to quit R.
 > # using summary regression output
 > # with varying lengths of follow-up
 > # from 1-10 days
-> #
-> # version 1 (8 apr 2015)
 > #
 > # --------------------------------------
 > 
@@ -93,14 +91,14 @@ Type 'q()' to quit R.
 + 		# make a table below
 + 		mtext("Days of Follow-up",side=1,line=1,at=0,adj=1)
 + 		
-+ 		mtext("Enterococcus 1600 <=35 CFU/100ml",side=1,line=2.5,at=0,adj=1,cex=0.8,col=ncol,font=2)
++ 		mtext("Enterococcus <=35 CFU/100ml",side=1,line=2.5,at=0,adj=1,cex=0.8,col=ncol,font=2)
 + 		mtext("At Risk",side=1,line=3.5,at=0,adj=1,cex=0.8,col=ncol)
 + 		mtext(format(N.all[3,1],big.mark=","),side=1,line=3.5,at=1+0.15,cex=0.8,adj=1,col="gray40")
 + 		mtext("Cumulative Incident Cases",side=1,line=4.5,at=0,adj=1,cex=0.8,col=ncol)
 + 		mtext(format(N.all[1,],big.mark=","),side=1,line=4.5,at=1:10+0.15,cex=0.8,adj=1,col="gray40")
 + 		
 + 		
-+ 		mtext("Enterococcus 1600 >35 CFU/100ml",side=1,line=6,at=0,adj=1,cex=0.8,col=scol,font=2)
++ 		mtext("Enterococcus >35 CFU/100ml",side=1,line=6,at=0,adj=1,cex=0.8,col=scol,font=2)
 + 		mtext("At Risk",side=1,line=7,at=0,adj=1,cex=0.8,col=scol)
 + 		mtext(format(N.all[4,1],big.mark=","),side=1,line=7,at=1+0.15,cex=0.8,adj=1,col="gray40")
 + 		mtext("Cumulative Incident Cases",side=1,line=8,at=0,adj=1,cex=0.8,col=scol)
@@ -131,4 +129,4 @@ null device
 > 
 > proc.time()
    user  system elapsed 
-  0.334   0.034   0.359 
+  0.419   0.046   0.564 

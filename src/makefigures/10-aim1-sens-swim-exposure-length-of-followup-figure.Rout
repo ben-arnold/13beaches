@@ -1,5 +1,5 @@
 
-R version 3.2.1 (2015-06-18) -- "World-Famous Astronaut"
+R version 3.2.0 (2015-04-16) -- "Full of Ingredients"
 Copyright (C) 2015 The R Foundation for Statistical Computing
 Platform: x86_64-apple-darwin13.4.0 (64-bit)
 
@@ -28,11 +28,6 @@ Type 'q()' to quit R.
 > # using summary regression output
 > # with varying lengths of follow-up
 > # from 1-10 days
-> #
-> # version 2 (8 apr 2015)
-> # added primary analysis label to the plot
-> #
-> # version 1 (27 mar 2015)
 > #
 > # --------------------------------------
 > 
@@ -117,4 +112,4 @@ null device
 > 
 > proc.time()
    user  system elapsed 
-  0.273   0.031   0.300 
+  2.805   0.421   4.234 

@@ -157,7 +157,7 @@ CIplot35cfu <- function(pdata,cols) {
 	N.age11plus <- pdata[[12]]
 	
 	op <- par(mar=c(5,8,8,0)+0.1,xpd=TRUE)
-	ytics <- seq(0,120,by=20)
+	ytics <- seq(0,140,by=20)
 	# set up an empty plot
 	MidPts <- barplot(1:4,names.arg=NA,border=NA,col=NA,
 		ylim=range(ytics),ylab="",yaxt="n",
@@ -269,7 +269,7 @@ pdf("~/dropbox/13beaches/aim1-results/figs/aim1-entero1600-noswim35cfu-CI-bypoin
 op <- par(mar=c(5,10,8,0)+0.1,xpd=TRUE)
 cols <- brewer.pal(9,"YlGnBu")[c(8,7,6)]
 # cols <- brewer.pal(9,"YlGn")[c(8,7,6)]
-ytics <- seq(0,100,by=20)
+ytics <- seq(0,80,by=20)
 # set up an empty plot
 MidPts <- barplot(1:3,names.arg=NA,border=NA,col=NA,
 	ylim=range(ytics),ylab="",yaxt="n",
@@ -353,7 +353,7 @@ pdf("~/dropbox/13beaches/aim1-results/figs/aim1-entero1600-noswim35cfu-CI-byage.
 op <- par(mar=c(5,10,8,0)+0.1,xpd=TRUE)
 cols <- brewer.pal(9,"YlGnBu")[c(8,7,6)]
 # cols <- brewer.pal(9,"YlGn")[c(8,7,6)]
-ytics <- seq(0,120,by=20)
+ytics <- seq(0,140,by=20)
 # set up an empty plot
 MidPts <- barplot(1:4,names.arg=NA,border=NA,col=NA,
 	ylim=range(ytics),ylab="",yaxt="n",
@@ -449,7 +449,7 @@ load("~/dropbox/13beaches/aim1-results/rawoutput/aim1-enteroQPCR-470cce-regs-bod
 pdf("~/dropbox/13beaches/aim1-results/figs/aim1-enteroQPCR-470cce-CI-bypointsource.pdf",width=9,height=4)
 op <- par(mar=c(5,9,8,0)+0.1,xpd=TRUE)
 cols <- brewer.pal(9,"YlOrBr")[c(8,6)]
-ytics <- seq(0,100,by=20)
+ytics <- seq(0,120,by=20)
 # set up an empty plot
 MidPts <- barplot(1:3,names.arg=NA,border=NA,col=NA,
 	ylim=range(ytics),ylab="",yaxt="n",
