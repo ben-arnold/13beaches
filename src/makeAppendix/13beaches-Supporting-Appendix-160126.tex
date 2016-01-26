@@ -2,7 +2,56 @@
 % LaTeX preamble
 %--------------------------------------------------------
 
-\documentclass[12pt]{article}
+\documentclass[12pt]{article}\usepackage[]{graphicx}\usepackage[]{color}
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
 
 
 % load packages
@@ -32,8 +81,8 @@
 % \renewcommand{\thefigure}{S\arabic{section}.\arabic{figure}}
 
 % Add an "S" prefix to figures and tables and rename the TOC
-\renewcommand{\contentsname}{Appendix Section}
-\renewcommand{\thesection}{S\arabic{section}} 
+% \renewcommand{\contentsname}{Appendix Section}
+% \renewcommand{\thesection}{S\arabic{section}} 
 \renewcommand{\thetable}{S\arabic{table}}   
 \renewcommand{\thefigure}{S\arabic{figure}}
 % \renewcommand{\figurename}{eFigure}
@@ -47,6 +96,7 @@
 %--------------------------------------------------------
 % Document begins here
 %--------------------------------------------------------
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \begin{document}
 \maketitle
 \tableofcontents
@@ -54,78 +104,7 @@
 %--------------------------------------------------------
 % R preamble
 %--------------------------------------------------------
-<<'R preamble', eval=TRUE, echo=FALSE>>=
-# --------------------------------------
-# R preamble
-# --------------------------------------
 
-rm(list=ls())
-library(xtable)
-
-setwd("~/13beaches/src/makeAppendix/")
-#Sys.setenv(TEXINPUTS=getwd(),
-#           BIBINPUTS="~/dropbox/Library/",
-#           BSTINPUTS="~/library/texmf/bibtex/"
-#          )
-
-# --------------------------------------
-# function to strip row/colnames from 
-# table and output contents only
-# for formatting in latex
-# --------------------------------------
-cleantable <- function(x,digits) {
- print( xtable(x,digits=digits),
-        sanitize.text.function=function(y){y},
-        floating=FALSE,
-        include.rownames=FALSE,
-        include.colnames=FALSE,
-        only.contents=TRUE,
-        hline.after=NULL
- )
-}
-
-
-# --------------------------------------
-# clean table output, including rownames
-# --------------------------------------
-rowtable <- function(x,digits) {
- print( xtable(x,digits=digits),
-        sanitize.text.function=function(y){y},
-        floating=FALSE,
-        include.rownames=TRUE,
-        include.colnames=FALSE,
-        only.contents=TRUE,
-        hline.after=NULL
- )
-}
-
-# --------------------------------------
-# Predicted incidence, PAR and PAF estimate
-# extract from saved results and print
-# into a TeX table row
-# --------------------------------------
-printPAR <- function(x,ns,label) {
-  # x     : Saved Bootstrap Estimates of PAR, PAF, and Predicted incidence
-  # ns    : vector of length 2 with n (events) and N (at risk) for the row
-  # label : text string label for table row
-  n     <- format(ns[1],big.mark=",")
-  N     <- format(ns[2],big.mark=",")
-  CI    <- sprintf("%1.0f",x$bootest[3]*1000)
-  CI0   <- sprintf("%1.0f",x$bootest[4]*1000)
-  CI1   <- sprintf("%1.0f",x$bootest[5]*1000)
-  PAR   <- sprintf("%1.1f",x$bootest[1]*1000)
-  PARci <- paste("(",sprintf("%1.1f",x$boot95lb[1]*1000),", ",sprintf("%1.1f",x$boot95ub[1]*1000),")",sep="")
-  PAF   <- paste(sprintf("%1.0f",x$bootest[2]),"\\%",sep="")
-  PAFci <- paste("(",sprintf("%1.0f",x$boot95lb[2]),"\\%, ",sprintf("%1.0f",x$boot95ub[2]),"\\%)",sep="")
-  # if the PAF is negative, set it to "na"
-    if (x$bootest[2]<0) PAF   <- "na"
-    if (x$bootest[2]<0) PAFci <- ""
-  ar <- cbind(label,n,N,CI,CI0,PAR,PARci,PAF,PAFci)
-  cleantable(ar,digits=0) 
-}
-
-
-@
 
 
 
@@ -134,7 +113,7 @@ printPAR <- function(x,ns,label) {
 % Section 1 - Beach, Water Quality, and Participant Details
 %--------------------------------------------------------
 \clearpage
-\section{Appendix. Beach, Water Quality, and Participant Details}
+\section{Beach, Water Quality, and Participant Details}
 
 All of the primary research studies that contributed to the present meta-analysis have been previously published with extensive details about recruitment, locations, sampling, and laboratory methods. Readers seeking additional details beyond those presented here can refer to those previously published articles and technical reports.\supercite{Colford2005-nb, Colford2007-mc,Wade2006-pp,Wade2008-xj,Wade2010-bb,Wade2010-ps,Colford2012-um,Arnold2013-xd,Yau2014-pl} Figure \ref{fig:beachmap} maps the 13 study beaches and summarizes some of their key characteristics. All 4 freshwater beaches in the study were in the great lakes region. 
 
@@ -194,18 +173,36 @@ At most beaches, we calculated a daily average of log$_{10}$ \textit{Enterococcu
 Beach      & N       & N           & N       & N            \\
 -Locations & Samples & Non-Detects & Samples & Non-Detects   \\
 \hline
-<<'wq table sample counts',echo=FALSE,results='asis'>>=
-load("~/dropbox/13beaches/aim1-results/rawoutput/aim1-wq-summary-tables.Rdata")
-sdata <- cbind(wqtab.1600[,1:2],wqtab.qpcr[,1:2])
-stot <- apply(sdata,2,sum)
-rowtable(sdata,c(0,0,0,0,0))
-@
+% latex table generated in R 3.2.0 by xtable 1.7-4 package
+% Tue Jan 26 11:40:43 2016
+ Avalon-ABC & 675 & 30 & 530 & 63 \\ 
+  Avalon-D & 30 & 18 & 30 & 9 \\ 
+  Boqueron & 600 & 63 & 600 & 333 \\ 
+  Doheny-ABD & 306 & 116 & 234 & 65 \\ 
+  Doheny-C & 33 & 2 & 23 & 0 \\ 
+  Doheny-E & 102 & 52 & 77 & 26 \\ 
+  Edgewater & 395 & 48 & 396 & 1 \\ 
+  Fairhope & 431 & 29 & 438 & 97 \\ 
+  Goddard & 426 & 78 & 426 & 28 \\ 
+  Huntington & 420 & 17 & 420 & 12 \\ 
+  Malibu-ABDE & 306 & 67 & 305 & 37 \\ 
+  Malibu-C & 39 & 0 & 32 & 0 \\ 
+  Mission Bay 1 & 216 & 63 & 86 & 8 \\ 
+  Mission Bay 2 & 324 & 115 & 129 & 4 \\ 
+  Mission Bay 3 & 540 & 145 & 215 & 13 \\ 
+  Mission Bay 4 & 216 & 64 & 86 & 5 \\ 
+  Mission Bay 5 & 324 & 164 & 129 & 14 \\ 
+  Mission Bay 6 & 324 & 76 & 128 & 2 \\ 
+  Silver & 423 & 5 & 423 & 46 \\ 
+  Surfside & 530 & 61 & 532 & 173 \\ 
+  Washington Park & 421 & 0 & 421 & 48 \\ 
+  West & 336 & 39 & 336 & 12 \\ 
+  
 \hline
-<<'wq table sample counts total',echo=FALSE,results='asis'>>=
-stotal <- data.frame(t(stot))
-rownames(stotal) <- "Total"
-rowtable(stotal,c(0,0,0,0,0))
-@
+% latex table generated in R 3.2.0 by xtable 1.7-4 package
+% Tue Jan 26 11:40:43 2016
+ Total & 7417 & 1252 & 5996 & 996 \\ 
+  
 \hline
 \end{tabular}
 
@@ -234,16 +231,36 @@ $^*$ For all beaches, \textit{Enterococcus} was measured using EPA method 1600 e
 Beach              & N       & N           & Min & Max & Geometric  \\
 -Locations & Samples & Non-Detects &     &     & Mean \\
 \hline
-<<'wq table entero1600',echo=FALSE,results='asis'>>=
-load("~/dropbox/13beaches/aim1-results/rawoutput/aim1-wq-summary-tables.Rdata")
-rowtable(wqtab.1600,c(0,0,0,1,0,0))
-@
+% latex table generated in R 3.2.0 by xtable 1.7-4 package
+% Tue Jan 26 11:40:43 2016
+ Avalon-ABC & 675 & 30 & 0.1 & 10000 & 35 \\ 
+  Avalon-D & 30 & 18 & 0.1 & 20 & 1 \\ 
+  Boqueron & 600 & 63 & 0.1 & 580 & 6 \\ 
+  Doheny-ABD & 306 & 116 & 0.1 & 2000 & 4 \\ 
+  Doheny-C & 33 & 2 & 0.1 & 41000 & 1527 \\ 
+  Doheny-E & 102 & 52 & 0.1 & 1900 & 1 \\ 
+  Edgewater & 395 & 48 & 0.1 & 920 & 8 \\ 
+  Fairhope & 431 & 29 & 0.1 & 3000 & 21 \\ 
+  Goddard & 426 & 78 & 0.1 & 960 & 4 \\ 
+  Huntington & 420 & 17 & 0.1 & 48100 & 25 \\ 
+  Malibu-ABDE & 306 & 67 & 0.1 & 1740 & 2 \\ 
+  Malibu-C & 39 & 0 & 18.0 & 6710 & 511 \\ 
+  Mission Bay 1 & 216 & 63 & 0.1 & 644 & 6 \\ 
+  Mission Bay 2 & 324 & 115 & 0.1 & 7030 & 5 \\ 
+  Mission Bay 3 & 540 & 145 & 0.1 & 57940 & 9 \\ 
+  Mission Bay 4 & 216 & 64 & 0.1 & 1043 & 7 \\ 
+  Mission Bay 5 & 324 & 164 & 0.1 & 487 & 1 \\ 
+  Mission Bay 6 & 324 & 76 & 0.1 & 1723 & 12 \\ 
+  Silver & 423 & 5 & 0.1 & 2800 & 31 \\ 
+  Surfside & 530 & 61 & 0.1 & 640 & 3 \\ 
+  Washington Park & 421 & 0 & 1.0 & 750 & 25 \\ 
+  West & 336 & 39 & 0.1 & 3700 & 7 \\ 
+  
 \hline
-<<'wq total entero1600',echo=FALSE,results='asis'>>=
-tot1600 <- data.frame(t(total.1600))
-rownames(tot1600) <- "Total"
-rowtable(tot1600,c(0,0,0,1,0,0))
-@
+% latex table generated in R 3.2.0 by xtable 1.7-4 package
+% Tue Jan 26 11:40:43 2016
+ Total & 7417 & 1252 & 0.1 & 57940 & 9 \\ 
+  
 \hline
 \end{tabular}
 \end{center}
@@ -262,16 +279,36 @@ rowtable(tot1600,c(0,0,0,1,0,0))
 Beach              & N       & N           & Min & Max & Geometric  \\
 -Locations & Samples & Non-Detects &     &     & Mean \\
 \hline
-<<'wq table enteroQPCR',echo=FALSE,results='asis'>>=
-load("~/dropbox/13beaches/aim1-results/rawoutput/aim1-wq-summary-tables.Rdata")
-rowtable(wqtab.qpcr,c(0,0,0,1,0,0))
-@
+% latex table generated in R 3.2.0 by xtable 1.7-4 package
+% Tue Jan 26 11:40:43 2016
+ Avalon-ABC & 530 & 63 & 0.1 & 14696 & 64 \\ 
+  Avalon-D & 30 & 9 & 0.1 & 152 & 5 \\ 
+  Boqueron & 600 & 333 & 0.1 & 983722 & 2 \\ 
+  Doheny-ABD & 234 & 65 & 0.1 & 3198 & 6 \\ 
+  Doheny-C & 23 & 0 & 25.7 & 16531 & 1301 \\ 
+  Doheny-E & 77 & 26 & 0.1 & 113 & 3 \\ 
+  Edgewater & 396 & 1 & 0.1 & 10188 & 361 \\ 
+  Fairhope & 438 & 97 & 0.1 & 98995 & 56 \\ 
+  Goddard & 426 & 28 & 0.1 & 25622 & 111 \\ 
+  Huntington & 420 & 12 & 0.1 & 114286 & 133 \\ 
+  Malibu-ABDE & 305 & 37 & 0.1 & 2829 & 12 \\ 
+  Malibu-C & 32 & 0 & 156.1 & 3656 & 727 \\ 
+  Mission Bay 1 & 86 & 8 & 0.1 & 141093 & 53 \\ 
+  Mission Bay 2 & 129 & 4 & 0.1 & 9004 & 87 \\ 
+  Mission Bay 3 & 215 & 13 & 0.1 & 46867 & 84 \\ 
+  Mission Bay 4 & 86 & 5 & 0.1 & 13837 & 46 \\ 
+  Mission Bay 5 & 129 & 14 & 0.1 & 4502 & 23 \\ 
+  Mission Bay 6 & 128 & 2 & 0.1 & 4309 & 58 \\ 
+  Silver & 423 & 46 & 0.1 & 123483 & 35 \\ 
+  Surfside & 532 & 173 & 0.1 & 109297 & 17 \\ 
+  Washington Park & 421 & 48 & 0.1 & 1986 & 32 \\ 
+  West & 336 & 12 & 0.1 & 15778 & 119 \\ 
+  
 \hline
-<<'wq total enteroQPCR',echo=FALSE,results='asis'>>=
-totqpcr <- data.frame(t(total.qpcr))
-rownames(totqpcr) <- "Total"
-rowtable(totqpcr,c(0,0,0,1,0,0))
-@
+% latex table generated in R 3.2.0 by xtable 1.7-4 package
+% Tue Jan 26 11:40:43 2016
+ Total & 5996 & 996 & 0.1 & 983722 & 38 \\ 
+  
 \hline
 \end{tabular}
 \end{center}
@@ -294,10 +331,68 @@ rowtable(totqpcr,c(0,0,0,1,0,0))
 
 \clearpage
 
-The study included 88,083 individuals across the 13 cohorts with outcome measurements. The studies tended to enroll families with children  -- for this reason the age distribution of the study population was approximately bi-modal (Figure \ref{fig:agedist}). Teenagers were under-represented in the cohorts due to the inclusion criteria that required an adult present from the household. 
+The study included 84,411 individuals across the 13 cohorts with outcome measurements. The studies tended to enroll families with children  -- for this reason the age distribution of the study population was approximately bi-modal (Figure \ref{fig:agedist}). Teenagers were under-represented in the cohorts due to the inclusion criteria that required an adult present from the household. 
 
 Figure \ref{fig:enterodist} summarizes the distribution of \emph{Enterococcus} sample concentrations and swimmer exposure concentrations in the study cohort for the EPA 1600 assay and the EPA 1611 qPCR assay. We excluded from the distribution plots 73 water samples from freshwater lagoons at Dohney and Malibu beaches because although our team collected the water samples, very few individuals were actually exposed to that water -- only 54 (Doheny) and 68 (Malibu) participants were exposed to lagoon water.
 
+% ----------------------------
+% Participant characteristics Table
+% ----------------------------
+\begin{landscape}
+\begin{table}[h!tb]
+\begin{center}
+\caption{Participant Characteristics by Age Category \label{tab:ptable}}
+\begin{scriptsize}
+\begin{tabular}{l rrr rrr rrr rrr}
+ & \\
+  & \multicolumn{3}{c}{All Ages \textsuperscript{a}} & \multicolumn{3}{c}{Age 0 to 4 Years} & \multicolumn{3}{c}{Age 5 to 10 Years} & \multicolumn{3}{c}{Age >10 Years}   \\
+ % & N & \% & Median (IQR) &  N & \% & Median (IQR) & N & \% & Median (IQR) & N & \% & Median (IQR) \\
+    & N & \% & Median &  N & \% & Median & N & \% & Median  & N & \% & Median \\
+  &  &  & (IQR) &  &  &  (IQR) &  &  &  (IQR) &  &  &  (IQR) \\
+\hline
+% latex table generated in R 3.2.0 by xtable 1.7-4 package
+% Tue Jan 26 11:40:43 2016
+ Number of Participants & 84,411 &  &  & 6,580 &  &  & 10,822 &  &  & 65,854 &  &  \\ 
+  Gastrointestinal illness at enrollment &  1,948 & 2.3 &  &   186 & 2.8 &  &    189 & 1.7 &  &  1,559 & 2.4 &  \\ 
+  Individuals at risk for gastrointestinal illness & 82,463 &  &  & 6,394 &  &  & 10,633 &  &  & 64,295 &  &  \\ 
+  Incident diarrhea within 10 days &  3,409 & 4.1 &  &   398 & 6.2 &  &    393 & 3.7 &  &  2,585 & 4.0 &  \\ 
+  Age in years &  &  & 29 (13,43) &  &  & 2 (1,3) &  &  & 8 (6,9) &  &  & 35 (22,46) \\ 
+  Female & 45,562 & 54.0 &  & 3,207 & 48.7 &  &  5,357 & 49.5 &  & 36,454 & 55.4 &  \\ 
+  Race/ethnicity &  &  &  &  &  &  &  &  &  &  &  &  \\ 
+  ~~~White/caucasian & 48,829 & 57.8 &  & 3,429 & 52.1 &  &  5,843 & 54.0 &  & 39,026 & 59.3 &  \\ 
+  ~~~Hispanic & 27,276 & 32.3 &  & 2,279 & 34.6 &  &  3,578 & 33.1 &  & 20,992 & 31.9 &  \\ 
+  ~~~African American &  2,600 & 3.1 &  &   204 & 3.1 &  &    386 & 3.6 &  &  1,960 & 3.0 &  \\ 
+  ~~~Asian &  2,018 & 2.4 &  &   173 & 2.6 &  &    257 & 2.4 &  &  1,564 & 2.4 &  \\ 
+  ~~~American Indian &    240 & 0.3 &  &    13 & 0.2 &  &     23 & 0.2 &  &    202 & 0.3 &  \\ 
+  ~~~Multiple Races &  1,753 & 2.1 &  &   315 & 4.8 &  &    492 & 4.5 &  &    924 & 1.4 &  \\ 
+  ~~~Other &  1,008 & 1.2 &  &   115 & 1.7 &  &    149 & 1.4 &  &    717 & 1.1 &  \\ 
+  ~~~Missing &    687 & 0.8 &  &    52 & 0.8 &  &     94 & 0.9 &  &    469 & 0.7 &  \\ 
+  No water contact & 25,762 & 30.5 &  & 1,557 & 23.7 &  &    963 & 8.9 &  & 22,940 & 34.8 &  \\ 
+  Any water contact & 58,649 & 69.5 &  & 5,023 & 76.3 &  &  9,859 & 91.1 &  & 42,914 & 65.2 &  \\ 
+  Body immersion & 47,287 & 56.0 &  & 3,875 & 58.9 &  &  8,767 & 81.0 &  & 33,951 & 51.6 &  \\ 
+  Head immersion & 36,832 & 43.6 &  & 2,753 & 41.8 &  &  7,646 & 70.7 &  & 25,869 & 39.3 &  \\ 
+  Swallowed water & 10,860 & 12.9 &  & 1,626 & 24.7 &  &  3,055 & 28.2 &  &  6,031 & 9.2 &  \\ 
+  Hours spent in the water \textsuperscript{b} &  &  & 1.0 (0.5,2.0) &  &  & 1.0 (0.5,2.0) &  &  & 2.0 (1.0,3.0) &  &  & 1.0 (0.5,2.0) \\ 
+  Hours spent in the water (cat) \textsuperscript{b} &  &  &  &  &  &  &  &  &  &  &  &  \\ 
+  ~~~0 -- 1 & 26,287 & 54.9 &  & 2,235 & 56.2 &  &  3,424 & 38.4 &  & 20,264 & 59.1 &  \\ 
+  ~~~1.1 -- 2 & 11,281 & 23.6 &  &   958 & 24.1 &  &  2,604 & 29.2 &  &  7,528 & 21.9 &  \\ 
+  ~~~2.1 -- 3 &  5,565 & 11.6 &  &   415 & 10.4 &  &  1,503 & 16.9 &  &  3,584 & 10.4 &  \\ 
+  ~~~3.1 -- 4 &  3,005 & 6.3 &  &   234 & 5.9 &  &    826 & 9.3 &  &  1,909 & 5.6 &  \\ 
+  ~~~4.1 -- 5 &    856 & 1.8 &  &    60 & 1.5 &  &    277 & 3.1 &  &    499 & 1.5 &  \\ 
+  ~~~>5 &    651 & 1.4 &  &    39 & 1.0 &  &    209 & 2.3 &  &    385 & 1.1 &  \\ 
+  ~~~Missing &    249 & 0.5 &  &    37 & 0.9 &  &     66 & 0.7 &  &    137 & 0.4 &  \\ 
+  
+\hline
+\end{tabular}
+\end{scriptsize}
+\end{center}
+\begin{scriptsize}
+\medskip
+\textsuperscript{a} All ages category includes 1,155 individuals with no age information. \\
+\textsuperscript{b} Time spent in the water limited to beachgoers with body immersion, head immersion, or swallowed water exposure.
+\end{scriptsize}
+\end{table}
+\end{landscape}
 
 % ----------------------------
 % Participant age distribution
@@ -329,37 +424,34 @@ Figure \ref{fig:enterodist} summarizes the distribution of \emph{Enterococcus} s
 % Section 2 - Beach Specific Results
 %--------------------------------------------------------
 \clearpage
-\section{Appendix. Beach-Specific Results}
+\section{Beach-Specific Results}
 
-<<'beach homogeneity tests', eval=TRUE, echo=FALSE, results='hide' >>=
-# load the homogeneity test results
-load("~/dropbox/13beaches/aim1-results/rawoutput/aim1-homogeneity-tests.RData")
-@
+
 
 This section reports beach-specific estimates of the association between: i) water exposure and diarrhea risk, and ii) \emph{Enterococcus} exposure and diarrhea risk, corresponding to the first two study objectives.
 
 Figure \ref{fig:swimforest} summarizes the adjusted cumulative incidence ratio (CIR) of diarrhea associated with different levels of water exposure at each beach.  The results are sorted by fresh versus marine water and then by the CIR for body immersion swimmers. There was evidence for effect modification by fresh versus marine water conditions, with stronger associations between water exposure and incident diarrhea at freshwater beaches: $P$-value for effect modification = 0.05 (body immersion), 0.08 (head immersion), 0.05 (swallowed water). Summary statistics of heterogeneity across beaches\supercite{Higgins2002-vr, Higgins2003-bh} were consistent with low to moderate levels of effect hetergeneity in the estimates: body immersion (Cohen's Q =
-\Sexpr{sprintf("%1.2f",bI[1])}, 
-Pr(Q,df=12)=\Sexpr{sprintf("%1.2f",bI[2])},
-$I^2=$ \Sexpr{sprintf("%1.0f",bI[3])}\%),
+18.52, 
+Pr(Q,df=12)=0.10,
+$I^2=$ 35\%),
  head immersion (Cohen's Q=
- \Sexpr{sprintf("%1.2f",hI[1])}, 
-Pr(Q,df=12)=\Sexpr{sprintf("%1.2f",hI[2])},
-$I^2=$ \Sexpr{sprintf("%1.0f",hI[3])}\%),
+ 15.73, 
+Pr(Q,df=12)=0.20,
+$I^2=$ 24\%),
  and swallowed water (Cohen's Q=
- \Sexpr{sprintf("%1.2f",sI[1])}, 
-Pr(Q,df=12)=\Sexpr{sprintf("%1.2f",sI[2])},
-$I^2=$ \Sexpr{sprintf("%1.0f",sI[3])}\%).
+ 21.60, 
+Pr(Q,df=12)=0.04,
+$I^2=$ 44\%).
 
 
 Figure \ref{fig:enteroregforest} summarizes the adjusted CIR of diarrhea associated with exposure to water above EPA regulatory guidlines for body imerssion swimmers at each beach.  We observed more heterogeneity in the effects compared to the swim exposure analysis, particularly for the EPA 1611 qPCR indicator analyses.  Part of this is due to relatively small numbers of individuals exposed above the qPCR regulatory guideline of 470 CCE/100ml (Figure \ref{fig:enterodist}). Indeed, we have not presented the beach-specific CIRs associated with quartiles of \emph{Enterococcus} concentrations due to small sample sizes at each beach for that type of granular analysis. There was some evidence for effect modification by point versus non-point source beaches for the culture method (EPA 1600 or Enterolert) exposure ($P$-value for effect modification = 0.07). The indicator was associated with increased diarrhea incidence only at beaches with known point sources of treated human sewage (Figure \ref{fig:enteroregforest}). In contrast, we observed no effect modification by beach type of the relationship between the EPA 1611 qPCR indicator and diarrhea incidence ($P$-value for effect modification = 0.36). Summary statistics of heterogeneity across beaches\supercite{Higgins2002-vr, Higgins2003-bh} were consistent with high levels of effect hetergeneity in the estimates: EPA 1600 (Cohen's Q =
-\Sexpr{sprintf("%1.2f",entero1600I[1])}, 
-Pr(Q,df=12)=\Sexpr{sprintf("%1.2f",entero1600I[2])},
-$I^2=$ \Sexpr{sprintf("%1.0f",entero1600I[3])}\%),
+35.26, 
+Pr(Q,df=12)=0.00,
+$I^2=$ 72\%),
  EPA qPCR 1611 (Cohen's Q=
- \Sexpr{sprintf("%1.2f",enteroQPCRI[1])}, 
-Pr(Q,df=12)=\Sexpr{sprintf("%1.2f",enteroQPCRI[2])},
-$I^2=$ \Sexpr{sprintf("%1.0f",enteroQPCRI[3])}\%).
+ 70.63, 
+Pr(Q,df=12)=0.00,
+$I^2=$ 86\%).
 
 % Swim exposure forest plot
 \begin{landscape}
@@ -386,7 +478,7 @@ $I^2=$ \Sexpr{sprintf("%1.0f",enteroQPCRI[3])}\%).
 % Section 3 -  Enterococcus Associations with Diarrhea
 %--------------------------------------------------------
 \clearpage
-\section{Appendix. Associations Between \emph{Enterococcus} and Diarrhea Not Presented in the Main Text}
+\section{Associations Between \emph{Enterococcus} and Diarrhea Not Presented in the Main Text}
 
 \underline{Analysis by quartiles of \textit{Enterococcus}}: \\
 In this section we summarize the association between \emph{Enterococcus} levels measured using culture methods (EPA 1600 or Enterolert) and using EPA 1611 qPCR and diarrhea incidence among body immersion swimmers, using quartiles of the indicators.  We present results stratified by age and stratified by type of pollution source -- those with a known point-source of human fecal pollution, and those without (``non-point source'' beaches).  
@@ -460,7 +552,7 @@ When stratified by point-source versus non-point source pollution type (Figure \
 % Section 4 - Swim and enterococcus exposure associations with gastrointestinal illness
 %--------------------------------------------------------
 \clearpage
-\section{Appendix. Gastrointestinal Illness Associated With Swim Exposure and \textit{Enterococcus} Exposure}
+\section{Gastrointestinal Illness Associated With Swim Exposure and \textit{Enterococcus} Exposure}
 
 In addition to our primary outcome of incident diarrhea, we also estimated the association between swim exposure and \textit{Enterococcus} level exposure and gastrointestinal illness. As described in the main text, gastrointestinal illness was defined in the same way as prior studies,\supercite{Wade2010-bb,Wade2010-ps,Colford2012-um,Arnold2013-xd,Yau2014-pl} using the composite definition: i) diarrhea or ii) vomiting or iii) nausea and stomachache, or iv) nausea or stomachache and missed regular activities as a result of illness.  For the gastrointestinal illness outcome, we limited the analyses to our primary exposures delineated in our prespecified analysis plan: levels of swim exposure and \textit{Enterococcus} measured using culture methods.
 
@@ -517,7 +609,7 @@ Overall, the results were highly similar both qualitatively and quantitatively t
 % Section 5 - Negative Control and Sensitivity Analyses
 %--------------------------------------------------------
 \clearpage
-\section{Appendix. Negative Control and Sensitivity Analyses}
+\section{Negative Control and Sensitivity Analyses}
 
 This section includes a summary of pre-specified negative control analyses to test the robustness of the findings to bias from unmeasured confounding or measurement error, as well as pre-specified sensitivity analyses to ensure that our results were not an artifact of decisions made about swim exposure level, choice of modeling strategy (quartiles versus continuous exposure) or length of follow-up period (ranging from 1 to 10 days).
 
@@ -539,56 +631,37 @@ Exposure & N        & N      & Incidence per 1,000 & Adjusted CIR \\
 & \\
 \textbf{Enterococcous} \\
 \textbf{Quartiles} \\
-<<'negative control entero quartiles culture',echo=FALSE,results='asis'>>=
-load("~/dropbox/13beaches/aim1-results/rawoutput/aim1-sens-entero1600-Quartile-regs-noswim.Rdata")
-ciformat <- function(x) {
-  paste(sprintf("%1.0f",x[1]*1000)," (",sprintf("%1.0f",x[2]*1000),", ",sprintf("%1.0f",x[3]*1000),")",sep="")
-}
-CIform <- apply(ci.all,1,ciformat)
-cirformat <- function(x) {
-  paste(sprintf("%1.2f",x[1])," (",sprintf("%1.2f",x[2]),", ",sprintf("%1.2f",x[3]),")",sep="")
-}
-CIRform <- apply(cir.all,1,cirformat)
-CIRform <- c("ref",CIRform)
-
-enteroQtab <- cbind(format(N.all[,c(2,1)],big.mark=","),CIform,CIRform)
-rownames(enteroQtab) <- paste("Q",1:4,sep="")
-rowtable(enteroQtab,digits=0)
-@
+% latex table generated in R 3.2.0 by xtable 1.7-4 package
+% Tue Jan 26 11:40:43 2016
+ Q1 & 4,247 &   139 & 33 (28, 39) & ref \\ 
+  Q2 & 6,992 &   222 & 32 (28, 36) & 0.99 (0.79, 1.25) \\ 
+  Q3 & 6,809 &   253 & 37 (33, 42) & 1.06 (0.83, 1.37) \\ 
+  Q4 & 6,555 &   250 & 38 (34, 43) & 1.05 (0.80, 1.38) \\ 
+  
 & \\
 \textbf{Enterococcus} \\
-<<'negative control entero 35cfu culture',echo=FALSE,results='asis'>>=
-load("~/dropbox/13beaches/aim1-results/rawoutput/aim1-sens-entero1600-35cfu-regs-noswim.Rdata")
-CIform <- apply(ci.all,1,ciformat)
-CIRform <- cirformat(cir.all)
-CIRform <- c("ref",CIRform)
-entero35tab <- cbind(format(N.all[,c(2,1)],big.mark=","),CIform,CIRform)
-rownames(entero35tab) <- c("$\\leq35$ CFU/100ml",">35 CFU/100ml")
-rowtable(entero35tab,digits=0)
-@
+% latex table generated in R 3.2.0 by xtable 1.7-4 package
+% Tue Jan 26 11:40:43 2016
+ $\leq35$ CFU/100ml & 19,804 &    677 & 34 (32, 37) & ref \\ 
+  >35 CFU/100ml &  4,799 &    187 & 39 (34, 45) & 1.02 (0.85, 1.23) \\ 
+  
 & \\
 \textbf{Enterococcous qPCR} \\
 \textbf{Quartiles} \\
-<<'negative control entero quartiles qpcr',echo=FALSE,results='asis'>>=
-load("~/dropbox/13beaches/aim1-results/rawoutput/aim1-sens-enteroQPCR-Quartile-regs-noswim-negcontrol.Rdata")
-CIform <- apply(ci.all,1,ciformat)
-CIRform <- apply(cir.all,1,cirformat)
-CIRform <- c("ref",CIRform)
-enteroqpcrQtab <- cbind(format(N.all[,c(2,1)],big.mark=","),CIform,CIRform)
-rownames(enteroqpcrQtab) <- paste("Q",1:4,sep="")
-rowtable(enteroqpcrQtab,digits=0)
-@
+% latex table generated in R 3.2.0 by xtable 1.7-4 package
+% Tue Jan 26 11:40:43 2016
+ Q1 & 6,276 &   203 & 32 (28, 37) & ref \\ 
+  Q2 & 6,433 &   242 & 38 (33, 43) & 1.03 (0.82, 1.29) \\ 
+  Q3 & 5,466 &   191 & 35 (30, 41) & 1.01 (0.78, 1.32) \\ 
+  Q4 & 5,138 &   188 & 37 (32, 42) & 0.92 (0.70, 1.20) \\ 
+  
 & \\
 \textbf{Enterococcus qPCR} \\
-<<'negative control entero 470cce qpcr',echo=FALSE,results='asis'>>=
-load("~/dropbox/13beaches/aim1-results/rawoutput/aim1-sens-enteroQPCR-470cce-regs-noswim-negcontrol.Rdata")
-CIform <- apply(ci.all,1,ciformat)
-CIRform <- cirformat(cir.all)
-CIRform <- c("ref",CIRform)
-entero470tab <- cbind(format(N.all[,c(2,1)],big.mark=","),CIform,CIRform)
-rownames(entero470tab) <- c("$\\leq470$ CCE/100ml",">470 CCE/100ml")
-rowtable(entero470tab,digits=0)
-@
+% latex table generated in R 3.2.0 by xtable 1.7-4 package
+% Tue Jan 26 11:40:43 2016
+ $\leq470$ CCE/100ml & 22,253 &    779 & 35 (33, 38) & ref \\ 
+  >470 CCE/100ml &  1,060 &     45 & 42 (31, 57) & 0.97 (0.70, 1.34) \\ 
+  
 & \\
 \hline
 \end{tabular}
@@ -725,7 +798,7 @@ The increase in dirrhea incidence associated with a log$_{10}$ increase in \emph
 % Section 6  PAR results
 %--------------------------------------------------------
 \clearpage
-\section{Appendix. Population Attributable Risk Results for \textit{Enterococcus} Exposure}
+\section{Population Attributable Risk Results for \textit{Enterococcus} Exposure}
 
 This section includes detailed estimates of population attributable risk (PAR) and population attributable fraction (PAF) among swimmers for exposure to \textit{Enterococcus} levels above 35 colony forming units (CFU) per 100ml (the current EPA regulatory guideline). There are two separate calculations in this section. 
 
@@ -735,15 +808,7 @@ Second, we estimated the population attributable risk for exposure to water >35 
 
 
 \clearpage
-<<'Percent Exp age Entero 1600 noswim',echo=FALSE,results='asis'>>=
-load("~/dropbox/13beaches/aim2-results/rawoutput/aim2-PARentero1600noswim-diar.Rdata")
-nswim <- sum(N.all[,2])
-pctexp.all <- paste(sprintf("%1.0f",(N.all[3,2]/sum(N.all[,2]))*100),"\\%",sep="")
-pctexp.0to4 <- paste(sprintf("%1.0f",(N.age0to4[3,2]/sum(N.age0to4[,2]))*100),"\\%",sep="")
-pctexp.5to10 <- paste(sprintf("%1.0f",(N.age5to10[3,2]/sum(N.age5to10[,2]))*100),"\\%",sep="")
-pctexp.11plus <- paste(sprintf("%1.0f",(N.age11plus[3,2]/sum(N.age11plus[,2]))*100),"\\%",sep="")
-pctexp <- c(pctexp.all,pctexp.0to4,pctexp.5to10,pctexp.11plus)
-@
+
 \begin{table}[h!tb]
 \begin{footnotesize}
 \begin{center}
@@ -760,56 +825,71 @@ pctexp <- c(pctexp.all,pctexp.0to4,pctexp.5to10,pctexp.11plus)
 \hline
 & \\
 \textbf{Diarrhea, episodes} \\
-<<'AR watexp noswim diarrhea overall',echo=FALSE,results='asis'>>=
-load("~/dropbox/13beaches/aim2-results/rawoutput/aim2-PARentero1600noswim-diar.Rdata")
-printPAR(AR35noswim.diar,colSums(N.all),label="All Ages")
-@
+% latex table generated in R 3.2.0 by xtable 1.7-4 package
+% Tue Jan 26 11:40:43 2016
+ All Ages & 3,389 & 82,021 & 41 & 39 & 2.0 & (1.4, 2.6) & 5\% & (3\%, 6\%) \\ 
+  
 Age Stratified \\
-<<'AR watexp noswim diarrhea overall ages',echo=FALSE,results='asis'>>=
-printPAR(AR35noswim.diar.0to4,colSums(N.age0to4),label="~~Ages 0 to 4")
-printPAR(AR35noswim.diar.5to10,colSums(N.age5to10),label="~~Ages 5 to 10")
-printPAR(AR35noswim.diar.11plus,colSums(N.age11plus),label="~~Ages >10")
-@
+% latex table generated in R 3.2.0 by xtable 1.7-4 package
+% Tue Jan 26 11:40:43 2016
+ ~~Ages 0 to 4 & 396 & 6,344 & 62 & 57 & 5.5 & (2.1, 8.7) & 9\% & (3\%, 14\%) \\ 
+  % latex table generated in R 3.2.0 by xtable 1.7-4 package
+% Tue Jan 26 11:40:43 2016
+ ~~Ages 5 to 10 & 389 & 10,496 & 37 & 33 & 4.5 & (1.9, 6.8) & 12\% & (5\%, 18\%) \\ 
+  % latex table generated in R 3.2.0 by xtable 1.7-4 package
+% Tue Jan 26 11:40:43 2016
+ ~~Ages >10 & 2,571 & 64,041 & 40 & 39 & 1.4 & (0.8, 2.0) & 3\% & (2\%, 5\%) \\ 
+  
 & \\
 \textbf{Gastrointestinal} \\
 \textbf{illness$^4$, episodes} \\
-<<'AR watexp noswim gi overall',echo=FALSE,results='asis'>>=
-load("~/dropbox/13beaches/aim2-results/rawoutput/aim2-PARentero1600noswim-gi.Rdata")
-printPAR(AR35noswim.gi,colSums(N.all),label="All Ages")
-@
+% latex table generated in R 3.2.0 by xtable 1.7-4 package
+% Tue Jan 26 11:40:43 2016
+ All Ages & 4,992 & 82,021 & 61 & 59 & 2.0 & (1.3, 2.8) & 3\% & (2\%, 5\%) \\ 
+  
 Age Stratified \\
-<<'AR watexp noswim gi overall ages',echo=FALSE,results='asis'>>=
-printPAR(AR35noswim.gi.0to4,colSums(N.age0to4),label="~~Ages 0 to 4")
-printPAR(AR35noswim.gi.5to10,colSums(N.age5to10),label="~~Ages 5 to 10")
-printPAR(AR35noswim.gi.11plus,colSums(N.age11plus),label="~~Ages >10")
-@
+% latex table generated in R 3.2.0 by xtable 1.7-4 package
+% Tue Jan 26 11:40:43 2016
+ ~~Ages 0 to 4 & 560 & 6,344 & 88 & 81 & 7.3 & (3.5, 11.1) & 8\% & (4\%, 12\%) \\ 
+  % latex table generated in R 3.2.0 by xtable 1.7-4 package
+% Tue Jan 26 11:40:43 2016
+ ~~Ages 5 to 10 & 689 & 10,496 & 66 & 62 & 3.3 & (-0.1, 6.4) & 5\% & (-0\%, 10\%) \\ 
+  % latex table generated in R 3.2.0 by xtable 1.7-4 package
+% Tue Jan 26 11:40:43 2016
+ ~~Ages >10 & 3,694 & 64,041 & 58 & 56 & 1.5 & (0.8, 2.2) & 3\% & (1\%, 4\%) \\ 
+  
 & \\
 \textbf{Missed Daily} \\
 \textbf{Activities$^5$, days} \\
-<<'AR watexp noswim dailygi overall',echo=FALSE,results='asis'>>=
-load("~/dropbox/13beaches/aim2-results/rawoutput/aim2-PARentero1600noswim-dailygi.Rdata")
-printPAR(AR35noswim.dailygi,colSums(N.all),label="All Ages")
-@
+% latex table generated in R 3.2.0 by xtable 1.7-4 package
+% Tue Jan 26 11:40:43 2016
+ All Ages & 4,509 & 82,021 & 55 & 54 & 1.3 & (0.2, 2.4) & 2\% & (0\%, 4\%) \\ 
+  
 Age Stratified \\
-<<'AR watexp noswim dailygi overall ages',echo=FALSE,results='asis'>>=
-printPAR(AR35noswim.dailygi.0to4,colSums(N.age0to4),label="~~Ages 0 to 4")
-printPAR(AR35noswim.dailygi.5to10,colSums(N.age5to10),label="~~Ages 5 to 10")
-printPAR(AR35noswim.dailygi.11plus,colSums(N.age11plus),label="~~Ages >10")
-@
+% latex table generated in R 3.2.0 by xtable 1.7-4 package
+% Tue Jan 26 11:40:43 2016
+ ~~Ages 0 to 4 & 438 & 6,344 & 70 & 62 & 7.8 & (2.5, 13.4) & 11\% & (4\%, 19\%) \\ 
+  % latex table generated in R 3.2.0 by xtable 1.7-4 package
+% Tue Jan 26 11:40:43 2016
+ ~~Ages 5 to 10 & 676 & 10,496 & 64 & 63 & 1.5 & (-3.0, 6.3) & 2\% & (-5\%, 10\%) \\ 
+  % latex table generated in R 3.2.0 by xtable 1.7-4 package
+% Tue Jan 26 11:40:43 2016
+ ~~Ages >10 & 3,357 & 64,041 & 52 & 51 & 1.0 & (-0.0, 2.1) & 2\% & (-0\%, 4\%) \\ 
+  
 & \\
 \textbf{Missed Paid} \\
 \textbf{Work$^6$, days} \\
-<<'AR watexp noswim workgi overall',echo=FALSE,results='asis'>>=
-load("~/dropbox/13beaches/aim2-results/rawoutput/aim2-PARentero1600noswim-workgi.Rdata")
-printPAR(AR35noswim.workgi,colSums(N.all),label="All Ages\\textsuperscript{8}")
-@
+% latex table generated in R 3.2.0 by xtable 1.7-4 package
+% Tue Jan 26 11:40:43 2016
+ All Ages\textsuperscript{8} & 1,043 & 82,021 & 13 & 13 & -0.0 & (-0.4, 0.4) & na &  \\ 
+  
 & \\
 \textbf{Medical Visits$^7$,} \\
 \textbf{events} \\
-<<'AR watexp noswim medgi overall',echo=FALSE,results='asis'>>=
-load("~/dropbox/13beaches/aim2-results/rawoutput/aim2-PARentero1600noswim-medgi.Rdata")
-printPAR(AR35noswim.medgi,colSums(N.all),label="All Ages\\textsuperscript{8}")
-@
+% latex table generated in R 3.2.0 by xtable 1.7-4 package
+% Tue Jan 26 11:40:43 2016
+ All Ages\textsuperscript{8} & 915 & 82,021 & 11 & 11 & 0.1 & (-0.2, 0.4) & 1\% & (-2\%, 4\%) \\ 
+  
 & \\
 \hline
 \end{tabular}
@@ -820,7 +900,7 @@ printPAR(AR35noswim.medgi,colSums(N.all),label="All Ages\\textsuperscript{8}")
 \begin{enumerate}
   \setlength{\itemsep}{1pt}
   \item Predicted incidence per 1000 among body immersion swimmers under the empirical distribution of \textit{Enterococcus} exposure (observed) and under a counterfactual scenario where nobody entered the water in conditions >35 CFU/100ml. Estimates are from a multivariable regression model adjusted for a range of potential confounders and beach level fixed-effects (see statistical analysis plan for details).
-  \item Population Attributable Risk is the number of events per 1000 swimmers that would be prevented if the exposure of swimming in water with \textit{Enterococcus} $\geq$35 CFU/100ml were removed from the population. The proportion of beachgoers who swam in water with \textit{Enterococcus} >35 CFU/100ml was: all ages (\Sexpr{pctexp[1]}), ages 0-4 (\Sexpr{pctexp[2]}), ages 5-10 (\Sexpr{pctexp[3]}), ages >10 (\Sexpr{pctexp[4]}). 
+  \item Population Attributable Risk is the number of events per 1000 swimmers that would be prevented if the exposure of swimming in water with \textit{Enterococcus} $\geq$35 CFU/100ml were removed from the population. The proportion of beachgoers who swam in water with \textit{Enterococcus} >35 CFU/100ml was: all ages (10\%), ages 0-4 (12\%), ages 5-10 (15\%), ages >10 (8\%). 
   \item Population Attributable Fraction is the percentage of events among beachgoers attributable to swimming in water with \textit{Enterococcus} $\geq$35 CFU/100ml.
   \item Gastrointestinal illness was defined as (i) diarrhea or (ii) vomiting or (iii) stomach cramps and missed daily activities or (iv) nausea and missed daily activities.
   \item Includes days of school, work, or vacation missed because of gastrointestinal illness.
@@ -835,15 +915,7 @@ printPAR(AR35noswim.medgi,colSums(N.all),label="All Ages\\textsuperscript{8}")
 
 
 \clearpage
-<<'Percent Exp age Entero 1600',echo=FALSE,results='asis'>>=
-load("~/dropbox/13beaches/aim2-results/rawoutput/aim2-PARentero1600-diar.Rdata")
-nswim <- sum(N.all[,2])
-pctexp.all <- paste(sprintf("%1.0f",(N.all[2,2]/sum(N.all[,2]))*100),"\\%",sep="")
-pctexp.0to4 <- paste(sprintf("%1.0f",(N.age0to4[2,2]/sum(N.age0to4[,2]))*100),"\\%",sep="")
-pctexp.5to10 <- paste(sprintf("%1.0f",(N.age5to10[2,2]/sum(N.age5to10[,2]))*100),"\\%",sep="")
-pctexp.11plus <- paste(sprintf("%1.0f",(N.age11plus[2,2]/sum(N.age11plus[,2]))*100),"\\%",sep="")
-pctexp <- c(pctexp.all,pctexp.0to4,pctexp.5to10,pctexp.11plus)
-@
+
 \begin{table}[h!tb]
 \begin{footnotesize}
 \begin{center}
@@ -860,62 +932,71 @@ pctexp <- c(pctexp.all,pctexp.0to4,pctexp.5to10,pctexp.11plus)
 \hline
 & \\
 \textbf{Diarrhea, episodes} \\
-<<'AR watexp diarrhea overall',echo=FALSE,results='asis'>>=
-load("~/dropbox/13beaches/aim2-results/rawoutput/aim2-PARentero1600-diar.Rdata")
-printPAR(AR35cfu.diar,colSums(N.all),label="All Ages")
-@
+% latex table generated in R 3.2.0 by xtable 1.7-4 package
+% Tue Jan 26 11:40:44 2016
+ All Ages & 2,041 & 46,069 & 44 & 43 & 1.3 & (0.4, 2.3) & 3\% & (1\%, 5\%) \\ 
+  
 Age Stratified \\
-<<'AR watexp diarrhea overall ages',echo=FALSE,results='asis'>>=
-printPAR(AR35cfu.diar.0to4,colSums(N.age0to4),label="~~Ages 0 to 4")
-printPAR(AR35cfu.diar.5to10,colSums(N.age5to10),label="~~Ages 5 to 10")
-printPAR(AR35cfu.diar.11plus,colSums(N.age11plus),label="~~Ages >10")
-@
+% latex table generated in R 3.2.0 by xtable 1.7-4 package
+% Tue Jan 26 11:40:44 2016
+ ~~Ages 0 to 4 & 266 & 3,761 & 71 & 66 & 5.0 & (0.7, 9.5) & 7\% & (1\%, 14\%) \\ 
+  % latex table generated in R 3.2.0 by xtable 1.7-4 package
+% Tue Jan 26 11:40:44 2016
+ ~~Ages 5 to 10 & 335 & 8,530 & 39 & 37 & 1.9 & (-0.4, 4.5) & 5\% & (-1\%, 11\%) \\ 
+  % latex table generated in R 3.2.0 by xtable 1.7-4 package
+% Tue Jan 26 11:40:44 2016
+ ~~Ages >10 & 1,415 & 33,088 & 43 & 42 & 0.8 & (-0.3, 1.9) & 2\% & (-1\%, 4\%) \\ 
+  
 & \\
 \textbf{Gastrointestinal} \\
 \textbf{illness$^4$, episodes} \\
-<<'AR watexp gi overall',echo=FALSE,results='asis'>>=
-load("~/dropbox/13beaches/aim2-results/rawoutput/aim2-PARentero1600-gi.Rdata")
-printPAR(AR35cfu.gi,colSums(N.all),label="All Ages")
-@
+% latex table generated in R 3.2.0 by xtable 1.7-4 package
+% Tue Jan 26 11:40:44 2016
+ All Ages & 2,942 & 46,069 & 64 & 63 & 1.0 & (-0.2, 2.2) & 2\% & (-0\%, 3\%) \\ 
+  
 Age Stratified \\
-<<'AR watexp gi overall ages',echo=FALSE,results='asis'>>=
-printPAR(AR35cfu.gi.0to4,colSums(N.age0to4),label="~~Ages 0 to 4")
-printPAR(AR35cfu.gi.5to10,colSums(N.age5to10),label="~~Ages 5 to 10")
-printPAR(AR35cfu.gi.11plus,colSums(N.age11plus),label="~~Ages >10")
-@
+% latex table generated in R 3.2.0 by xtable 1.7-4 package
+% Tue Jan 26 11:40:44 2016
+ ~~Ages 0 to 4 & 379 & 3,761 & 101 & 95 & 5.6 & (0.6, 10.8) & 6\% & (1\%, 11\%) \\ 
+  % latex table generated in R 3.2.0 by xtable 1.7-4 package
+% Tue Jan 26 11:40:44 2016
+ ~~Ages 5 to 10 & 575 & 8,530 & 67 & 66 & 1.4 & (-1.5, 4.3) & 2\% & (-2\%, 6\%) \\ 
+  % latex table generated in R 3.2.0 by xtable 1.7-4 package
+% Tue Jan 26 11:40:44 2016
+ ~~Ages >10 & 1,950 & 33,088 & 59 & 58 & 0.5 & (-0.6, 1.8) & 1\% & (-1\%, 3\%) \\ 
+  
 & \\
 \textbf{Missed Daily} \\
 \textbf{Activities$^5$, days} \\
-<<'AR watexp dailygi overall',echo=FALSE,results='asis'>>=
-load("~/dropbox/13beaches/aim2-results/rawoutput/aim2-PARentero1600-dailygi.Rdata")
-printPAR(AR35cfu.dailygi,colSums(N.all),label="All Ages")
-@
+% latex table generated in R 3.2.0 by xtable 1.7-4 package
+% Tue Jan 26 11:40:44 2016
+ All Ages & 2,677 & 46,069 & 58 & 57 & 1.1 & (-0.7, 3.0) & 2\% & (-1\%, 5\%) \\ 
+  
 Age Stratified \\
-<<'AR watexp dailygi overall ages',echo=FALSE,results='asis'>>=
-# TEMP CODE
-# zero-out a few unrealistic estimates that weren't filtered in ARboot
-#AR35cfu.dailygi.0to4$stats[(AR35cfu.dailygi.0to4$stats[,3]>10), ] <- NA
-  AR35cfu.dailygi.0to4$bootest  <- apply(AR35cfu.dailygi.0to4$stats,2,function(x) mean(x,na.rm=T))
-  AR35cfu.dailygi.0to4$boot95lb <- apply(AR35cfu.dailygi.0to4$stats,2,function(x) quantile(x,prob=c(0.025),na.rm=T))
-  AR35cfu.dailygi.0to4$boot95ub <- apply(AR35cfu.dailygi.0to4$stats,2,function(x) quantile(x,prob=c(0.975),na.rm=T))
-printPAR(AR35cfu.dailygi.0to4,colSums(N.age0to4),label="~~Ages 0 to 4")
-printPAR(AR35cfu.dailygi.5to10,colSums(N.age5to10),label="~~Ages 5 to 10")
-printPAR(AR35cfu.dailygi.11plus,colSums(N.age11plus),label="~~Ages >10")
-@
+% latex table generated in R 3.2.0 by xtable 1.7-4 package
+% Tue Jan 26 11:40:44 2016
+ ~~Ages 0 to 4 & 328 & 3,761 & 87 & 78 & 8.6 & (0.7, 17.3) & 10\% & (1\%, 19\%) \\ 
+  % latex table generated in R 3.2.0 by xtable 1.7-4 package
+% Tue Jan 26 11:40:44 2016
+ ~~Ages 5 to 10 & 557 & 8,530 & 65 & 65 & -0.0 & (-4.1, 4.0) & na &  \\ 
+  % latex table generated in R 3.2.0 by xtable 1.7-4 package
+% Tue Jan 26 11:40:44 2016
+ ~~Ages >10 & 1,770 & 33,088 & 54 & 53 & 0.7 & (-1.2, 2.9) & 1\% & (-2\%, 5\%) \\ 
+  
 & \\
 \textbf{Missed Paid} \\
 \textbf{Work$^6$, days} \\
-<<'AR watexp workgi overall',echo=FALSE,results='asis'>>=
-load("~/dropbox/13beaches/aim2-results/rawoutput/aim2-PARentero1600-workgi.Rdata")
-printPAR(AR35cfu.workgi,colSums(N.all),label="All Ages\\textsuperscript{8}")
-@
+% latex table generated in R 3.2.0 by xtable 1.7-4 package
+% Tue Jan 26 11:40:44 2016
+ All Ages\textsuperscript{8} & 596 & 46,069 & 13 & 13 & 0.1 & (-0.6, 0.8) & 1\% & (-5\%, 6\%) \\ 
+  
 & \\
 \textbf{Medical Visits$^7$,} \\
 \textbf{events} \\
-<<'AR watexp medgi overall',echo=FALSE,results='asis'>>=
-load("~/dropbox/13beaches/aim2-results/rawoutput/aim2-PARentero1600-medgi.Rdata")
-printPAR(AR35cfu.medgi,colSums(N.all),label="All Ages\\textsuperscript{8}")
-@
+% latex table generated in R 3.2.0 by xtable 1.7-4 package
+% Tue Jan 26 11:40:44 2016
+ All Ages\textsuperscript{8} & 583 & 46,069 & 13 & 13 & 0.1 & (-0.4, 0.7) & 1\% & (-3\%, 5\%) \\ 
+  
 & \\
 \hline
 \end{tabular}
@@ -926,7 +1007,7 @@ printPAR(AR35cfu.medgi,colSums(N.all),label="All Ages\\textsuperscript{8}")
 \begin{enumerate}
   \setlength{\itemsep}{1pt}
   \item Predicted incidence per 1000 among body immersion swimmers under the empirical distribution of \textit{Enterococcus} exposure (observed) and under a counterfactual scenario where water conditions never exceeded 35 CFU/100ml. Estimates are from a multivariable regression model adjusted for a range of potential confounders and beach level fixed-effects (see statistical analysis plan for details).
-  \item Population Attributable Risk is the number of events per 1000 swimmers that would be prevented if the exposure of swimming in water with \textit{Enterococcus} $\geq$35 CFU/100ml were removed from the population. The proportion of swimmers exposed to water with \textit{Enterococcus} >35 CFU/100ml was: all ages (\Sexpr{pctexp[1]}), ages 0-4 (\Sexpr{pctexp[2]}), ages 5-10 (\Sexpr{pctexp[3]}), ages >10 (\Sexpr{pctexp[4]}). 
+  \item Population Attributable Risk is the number of events per 1000 swimmers that would be prevented if the exposure of swimming in water with \textit{Enterococcus} $\geq$35 CFU/100ml were removed from the population. The proportion of swimmers exposed to water with \textit{Enterococcus} >35 CFU/100ml was: all ages (13\%), ages 0-4 (15\%), ages 5-10 (16\%), ages >10 (11\%). 
   \item Population Attributable Fraction is the percentage of events among swimmers attributable to swimming in water with \textit{Enterococcus} $\geq$35 CFU/100ml.
   \item Gastrointestinal illness was defined as (i) diarrhea or (ii) vomiting or (iii) stomach cramps and missed daily activities or (iv) nausea and missed daily activities.
   \item Includes days of school, work, or vacation missed because of gastrointestinal illness.
@@ -1010,7 +1091,7 @@ printPAR(AR35cfu.medgi,colSums(N.all),label="All Ages\\textsuperscript{8}")
 % \begin{enumerate}
 %   \setlength{\itemsep}{1pt}
 %   \item Predicted incidence per 1000 among body immersion swimmers under the empirical distribution of \textit{Enterococcus} exposure (observed) and under a counterfactual scenario where water conditions never exceeded 35 CFU/100ml. Estimates are from a multivariable regression model adjusted for a range of potential confounders and beach level fixed-effects (see statistical analysis plan for details).
-%   \item Population Attributable Risk is the number of events per 1000 swimmers that would be prevented if the exposure of swimming in water with \textit{Enterococcus} $\geq$35 CFU/100ml were removed from the population. The proportion of swimmers exposed to water with \textit{Enterococcus} >35 CFU/100ml was: all conditions (\Sexpr{pctexp[1]}), point source conditions (\Sexpr{pctexp[2]}), non-point source conditions (\Sexpr{pctexp[3]}). 
+%   \item Population Attributable Risk is the number of events per 1000 swimmers that would be prevented if the exposure of swimming in water with \textit{Enterococcus} $\geq$35 CFU/100ml were removed from the population. The proportion of swimmers exposed to water with \textit{Enterococcus} >35 CFU/100ml was: all conditions (pctexp[1]), point source conditions (pctexp[2]), non-point source conditions (pctexp[3]). 
 %   \item Population Attributable Fraction is the percentage of events among swimmers attributable to swimming in water with \textit{Enterococcus} $\geq$35 CFU/100ml.
 %   \item Gastrointestinal illness was defined as (i) diarrhea or (ii) vomiting or (iii) stomach cramps and missed daily activities or (iv) nausea and missed daily activities.
 %   \item Includes days of school, work, or vacation missed because of gastrointestinal illness.
