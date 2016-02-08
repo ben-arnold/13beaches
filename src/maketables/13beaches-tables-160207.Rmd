@@ -92,7 +92,7 @@ pctexp <- paste(sprintf("%1.0f",(N.body[,2]/N.total[,2])*100),"\\%",sep="")
 \begin{table}[h!tb]
 \begin{center}
 \begin{minipage}{0.8\textwidth}
-\caption{Population Attributable Risk Among Beachgoers Due to Body Immersion Swimming. \label{tab:ARswimexp}}
+\caption{Population Attributable Risk Among Beachgoers Due to Body Immersion Swimming. Estimates from a pooled analysis of 13 prospective cohorts in the United States, 2003-2009. \label{tab:ARswimexp}}
 \end{minipage}
 \begin{tabular}{l rr cc rl rl}
  & \\

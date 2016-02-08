@@ -100,7 +100,7 @@ pdf("~/dropbox/13beaches/aim1-results/figs/aim1-sens-swim-exposure-GI-illness-by
 op <- par(mar=c(4,7,8,0)+0.1,xpd=FALSE)
 # cols <- c(brewer.pal(9,"YlGn")[6],brewer.pal(9,"YlOrRd")[5:7])
 cols <- c(brewer.pal(9,"BuGn")[7],brewer.pal(9,"YlGnBu")[6:8])
-ytics <- seq(0,120,by=20)
+ytics <- seq(0,140,by=20)
 # set up an empty plot
 MidPts <- barplot(1:4,names.arg=NA,border=NA,col=NA,
 	ylim=range(ytics),ylab="",yaxt="n",
