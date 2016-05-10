@@ -1,0 +1,1235 @@
+% $ biblatex auxiliary file $
+% $ biblatex version 1.7 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated as
+% required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+\entry{Colford2005-nb}{report}{}
+  \name{author}{7}{}{%
+    {{}%
+     {Colford}{C}%
+     {John~M}{JM}%
+     {}{}%
+     {Jr.}{J}}%
+    {{}%
+     {Wade}{W}%
+     {Timothy~J}{TJ}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Schiff}{S}%
+     {Kenneth~C}{KC}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Wright}{W}%
+     {Catherine}{C}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Griffith}{G}%
+     {John~F}{JF}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Sandhu}{S}%
+     {Sukhminder~K}{SK}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Weisberg}{W}%
+     {Stephen~B}{SB}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{CJJMWTJSKC+1}
+  \strng{fullhash}{CJJMWTJSKCWCGJFSSKWSB1}
+  \field{number}{449}
+  \field{title}{Recreational Water Contact and Illness in Mission Bay,
+  California}
+  \list{institution}{1}{%
+    {SCCWRP}%
+  }
+  \field{type}{techreport}
+  \field{year}{2005}
+\endentry
+
+\entry{Colford2007-mc}{article}{}
+  \name{author}{10}{}{%
+    {{}%
+     {Colford}{C}%
+     {John~M}{JM}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Wade}{W}%
+     {Timothy~J}{TJ}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Schiff}{S}%
+     {K~C}{KC}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Sobsey}{S}%
+     {M~D}{MD}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Wright}{W}%
+     {C~C}{CC}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Griffith}{G}%
+     {J~F}{JF}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Sandhu}{S}%
+     {S~K}{SK}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Burns}{B}%
+     {S}{S}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Lovelace}{L}%
+     {G}{G}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Weisberg}{W}%
+     {S~B}{SB}%
+     {}{}%
+     {}{}}%
+  }
+  \keyw{Adolescent Adult Bacteroides/genetics/isolation
+  \&,Infectious/epidemiology Swimming Water Pollution/,Preschool Cohort Studies
+  Dysentery Enterobacteria}
+  \strng{namehash}{CJMWTJSKC+1}
+  \strng{fullhash}{CJMWTJSKCSMDWCCGJFSSKBSLGWSB1}
+  \field{abstract}{%
+  BACKGROUND: Indicator bacteria are a good predictor of illness at marine
+  beaches that have point sources of pollution with human fecal content. Few
+  studies have addressed the utility of indicator bacteria where nonpoint
+  sources are the dominant fecal input. Extrapolating current water-quality
+  thresholds to such locations is uncertain. METHODS: In a cohort of 8797
+  beachgoers at Mission Bay, California, we measured baseline health at the
+  time of exposure and 2 weeks later. Water samples were analyzed for bacterial
+  indicators (enterococcus, fecal coliforms, total coliforms) using both
+  traditional and nontraditional methods, ie, chromogenic substrate or
+  quantitative polymerase chain reaction. A novel bacterial indicator
+  (Bacteroides) and viruses (coliphage, adenovirus, norovirus) also were
+  measured. Associations of 14 health outcomes with both water exposure and
+  water quality indicators were assessed. RESULTS: Diarrhea and skin rash
+  incidence were the only symptoms that were increased in swimmers compared
+  with nonswimmers. The incidence of illness was not associated with any of the
+  indicators that traditionally are used to monitor beaches. Among
+  nontraditional water quality indicators, associations with illness were
+  observed only for male-specific coliphage, although a low number of
+  participants were exposed to water at times when coliphage was detected.
+  CONCLUSIONS: Traditional fecal indicators currently used to monitor these
+  beaches were not associated with health risks. These results suggest a need
+  for alternative indicators of water quality where nonpoint sources are
+  dominant fecal contributors.%
+  }
+  \field{number}{1}
+  \field{pages}{27\bibrangedash 35}
+  \field{title}{{Water quality indicators and the risk of illness at beaches
+  with nonpoint sources of fecal contamination}}
+  \field{volume}{18}
+  \field{journaltitle}{Epidemiology}
+  \field{year}{2007}
+\endentry
+
+\entry{Wade2006-pp}{article}{}
+  \name{author}{7}{}{%
+    {{}%
+     {Wade}{W}%
+     {Timothy~J}{TJ}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Calderon}{C}%
+     {Rebecca~L}{RL}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Sams}{S}%
+     {Elizabeth}{E}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Beach}{B}%
+     {Michael}{M}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Brenner}{B}%
+     {Kristen~P}{KP}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Williams}{W}%
+     {Ann~H}{AH}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Dufour}{D}%
+     {Alfred~P}{AP}%
+     {}{}%
+     {}{}}%
+  }
+  \list{language}{1}{%
+    {eng}%
+  }
+  \keyw{Adult; Bacteroides, genetics/isolation /\&/ purification; Bathing
+  Beaches; DNA, Bacterial, analysis; Enterococcus, genetics/isolation /\&/
+  purification; Environmental Monitoring, methods; Feces, microbiology; Fresh
+  Water, microbiology; Gastrointestinal Diseases, epidemiology/microbiology;
+  Humans; Indiana; Interviews as Topic; Ohio; Polymerase Chain Reaction,
+  methods; Swimming; Water Microbiology; Water Pollution, adverse effects}
+  \strng{namehash}{WTJCRLSE+1}
+  \strng{fullhash}{WTJCRLSEBMBKPWAHDAP1}
+  \field{abstract}{%
+  Standard methods to measure recreational water quality require at least 24 hr
+  to obtain results, making it impossible to assess the quality of water within
+  a single day. Methods to measure recreational water quality in <or=2 hr have
+  been developed. Application of rapid methods could give considerably more
+  accurate and timely assessments of recreational water quality. We conducted a
+  prospective study of beachgoers at two Great Lakes beaches to examine the
+  association between recreational water quality, obtained using rapid methods,
+  and gastrointestinal (GI) illness after swimming. Beachgoers were asked about
+  swimming and other beach activities and 10-12 days later were asked about the
+  occurrence of GI symptoms. We tested water samples for Enterococcus and
+  Bacteroides species using the quantitative polymerase chain reaction (PCR)
+  method. We observed significant trends between increased GI illness and
+  Enterococcus at the Lake Michigan beach and a positive trend for Enterococcus
+  at the Lake Erie beach. The association remained significant for Enterococcus
+  when the two beaches were combined. We observed a positive trend for
+  Bacteroides at the Lake Erie beach, but no trend was observed at the Lake
+  Michigan beach. Enterococcus samples collected at 0800 hr were predictive of
+  GI illness that day. The association between Enterococcus and illness
+  strengthened as time spent swimming in the water increased. This is the first
+  study to show that water quality measured by rapid methods can predict
+  swimming-associated health effects.%
+  }
+  \field{number}{1}
+  \field{pages}{24\bibrangedash 28}
+  \field{title}{Rapidly measured indicators of recreational water quality are
+  predictive of swimming-associated gastrointestinal illness}
+  \field{volume}{114}
+  \field{journaltitle}{Environ. Health Perspect.}
+  \field{month}{01}
+  \field{year}{2006}
+\endentry
+
+\entry{Wade2008-xj}{article}{}
+  \name{author}{8}{}{%
+    {{}%
+     {Wade}{W}%
+     {Timothy~J}{TJ}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Calderon}{C}%
+     {R~L}{RL}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Brenner}{B}%
+     {K~P}{KP}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Sams}{S}%
+     {E}{E}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Beach}{B}%
+     {M}{M}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Haugland}{H}%
+     {R}{R}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Wymer}{W}%
+     {L}{L}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Dufour}{D}%
+     {A~P}{AP}%
+     {}{}%
+     {}{}}%
+  }
+  \keyw{Newborn Male Middle Aged Models, Preschool Enterococcus/*isolation \&
+  purification , Statistical Polymerase Chain Reaction/*methods Pr,Adolescent
+  Adult *Bathing Beaches Child Child}
+  \strng{namehash}{WTJCRLBKP+1}
+  \strng{fullhash}{WTJCRLBKPSEBMHRWLDAP1}
+  \field{abstract}{%
+  BACKGROUND: Culture-based methods of monitoring fecal pollution in
+  recreational waters require 24 to 48 hours to obtain results. This delay
+  leads to potentially inaccurate management decisions regarding beach safety.
+  We evaluated the quantitative polymerase chain reaction (QPCR) as a faster
+  method to assess recreational water quality and predict swimming-associated
+  illnesses. METHODS: We enrolled visitors at 4 freshwater Great Lakes beaches,
+  and contacted them 10 to 12 days later to ask about health symptoms
+  experienced since the visit. Water at the beaches was polluted by point
+  sources that carried treated sewage. We tested water samples daily for
+  Enterococcus using QPCR and membrane filtration (EPA Method 1600). RESULTS:
+  We completed 21,015 interviews and tested 1359 water samples. Enterococcus
+  QPCR cell equivalents (CEs) were positively associated with
+  swimming-associated gastrointestinal (GI) illness (adjusted odds ratio per 1
+  log10 QPCR CE =1.26; 95\% confidence interval = 1.06-1.51). The association
+  between GI illness and QPCR CE was stronger among children aged 10 years and
+  below (1.69; 1.24-2.30). Nonenteric illnesses were not consistently
+  associated with Enterococcus QPCR CE exposure, although rash and earache
+  occurred more frequently among swimmers. Enterococcus QPCR CE exposure was
+  more strongly associated with GI illness than Enterococcus measured by
+  membrane filtration. CONCLUSIONS: Measurement of the indicator bacteria
+  Enterococci in recreational water using a rapid QPCR method predicted
+  swimming-associated GI illness at freshwater beaches polluted by sewage
+  discharge. Children at 10 years or younger were at greater risk for GI
+  illness following exposure.%
+  }
+  \field{number}{3}
+  \field{pages}{375\bibrangedash 383}
+  \field{title}{{High sensitivity of children to swimming-associated
+  gastrointestinal illness: results using a rapid assay of recreational water
+  quality}}
+  \field{volume}{19}
+  \field{journaltitle}{Epidemiology}
+  \field{year}{2008}
+\endentry
+
+\entry{Wade2010-bb}{article}{}
+  \name{author}{12}{}{%
+    {{}%
+     {Wade}{W}%
+     {Timothy~J}{TJ}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Sams}{S}%
+     {Elizabeth}{E}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Brenner}{B}%
+     {Kristen~P}{KP}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Haugland}{H}%
+     {Richard}{R}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Chern}{C}%
+     {Eunice}{E}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Beach}{B}%
+     {Michael}{M}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Wymer}{W}%
+     {Larry}{L}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Rankin}{R}%
+     {Clifford~C}{CC}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Love}{L}%
+     {David}{D}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Li}{L}%
+     {Quanlin}{Q}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Noble}{N}%
+     {Rachel}{R}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Dufour}{D}%
+     {Alfred~P}{AP}%
+     {}{}%
+     {}{}}%
+  }
+  \list{language}{1}{%
+    {eng}%
+  }
+  \keyw{Adolescent; Adult; Bathing Beaches, standards/statistics /\&/ numerical
+  data; Child; Child, Preschool; Cohort Studies; Enterococcus, isolation /\&/
+  purific/ation; Environmental Monitoring, methods; Feces, microbiology;
+  Female; Gastrointestinal Diseases, microbiology; Humans; Infant; Infant,
+  Newborn; Male; Polymerase Chain Reaction; Prospective Studies; Recreation;
+  Seawater, adverse effects/microbiology; Sewage, adverse effects/microbiology;
+  Swimming; United States; Young Adult}
+  \strng{namehash}{WTJSEBKP+1}
+  \strng{fullhash}{WTJSEBKPHRCEBMWLRCCLDLQNRDAP1}
+  \field{abstract}{%
+  In the United States and elsewhere, recreational water quality is monitored
+  for fecal indicator bacteria to help prevent swimming-associated illnesses.
+  Standard methods to measure these bacteria take at least 24 hours to obtain
+  results. Molecular approaches such as quantitative polymerase chain reaction
+  (qPCR) can estimate these bacteria faster, in under 3 hours. Previously, we
+  demonstrated that measurements of the fecal indicator bacteria Enterococcus
+  using qPCR were associated with gastrointestinal (GI) illness among swimmers
+  at freshwater beaches. In this paper, we report on results from three marine
+  beach sites.We interviewed beach-goers and collected water samples at marine
+  beaches affected by treated sewage discharges in Mississippi in 2005, and
+  Rhode Island and Alabama in 2007. Ten to twelve days later, we obtained
+  information about gastrointestinal, respiratory, eye, ear and skin symptoms
+  by telephone. We tested water samples for fecal indicator organisms using
+  qPCR and other methods.We enrolled 6,350 beach-goers. The occurrence of GI
+  illness among swimmers was associated with a log10-increase in exposure to
+  qPCR-determined estimates of fecal indicator organisms in the genus
+  Enterococcus (AOR = 2.6, 95\% CI 1.3-5.1) and order Bacteroidales (AOR = 1.9,
+  95\% CI 1.3-2.9). Estimates of organisms related to Clostridium perfringens
+  and a subgroup of organisms in the genus Bacteroides were also determined by
+  qPCR in 2007, as was F+ coliphage, but relationships between these indicators
+  and illness were not statistically significant.This study provides the first
+  evidence of a relationship between gastrointestinal illness and estimates of
+  fecal indicator organisms determined by qPCR at marine beaches.%
+  }
+  \field{pages}{66}
+  \field{title}{Rapidly measured indicators of recreational water quality and
+  swimming-associated illness at marine beaches: a prospective cohort study}
+  \field{volume}{9}
+  \field{journaltitle}{Environ. Health}
+  \field{year}{2010}
+\endentry
+
+\entry{Wade2010-ps}{report}{}
+  \name{author}{9}{}{%
+    {{}%
+     {Wade}{W}%
+     {T~J}{TJ}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Sams}{S}%
+     {E~A}{EA}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Haugland}{H}%
+     {R}{R}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Brenner}{B}%
+     {K~P}{KP}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Li}{L}%
+     {Q}{Q}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Wymer}{W}%
+     {L}{L}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Molina}{M}%
+     {M}{M}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Oshima}{O}%
+     {K}{K}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Dufour}{D}%
+     {A~P}{AP}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{WTJSEAHR+1}
+  \strng{fullhash}{WTJSEAHRBKPLQWLMMOKDAP1}
+  \field{number}{EPA/600/R-10/168}
+  \field{title}{Report on 2009 National Epidemiologic and Environmental
+  Assessment of Recreational Water Epidemiology Studies}
+  \list{institution}{1}{%
+    {United States Environmental Protection Agency}%
+  }
+  \field{type}{techreport}
+  \field{year}{2010}
+\endentry
+
+\entry{Colford2012-um}{article}{}
+  \name{author}{16}{}{%
+    {{}%
+     {Colford}{C}%
+     {John~M}{JM}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Schiff}{S}%
+     {Kenneth~C}{KC}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Griffith}{G}%
+     {John~F}{JF}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Yau}{Y}%
+     {Vince}{V}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Arnold}{A}%
+     {Benjamin~F}{BF}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Wright}{W}%
+     {Catherine~C}{CC}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Gruber}{G}%
+     {Joshua~S}{JS}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Wade}{W}%
+     {Timothy~J}{TJ}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Burns}{B}%
+     {Susan}{S}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Hayes}{H}%
+     {Jacqueline}{J}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {McGee}{M}%
+     {Charles}{C}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Gold}{G}%
+     {Mark}{M}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Cao}{C}%
+     {Yiping}{Y}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Noble}{N}%
+     {Rachel~T}{RT}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Haugland}{H}%
+     {Richard}{R}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Weisberg}{W}%
+     {Stephen~B}{SB}%
+     {}{}%
+     {}{}}%
+  }
+  \list{language}{1}{%
+    {eng}%
+  }
+  \strng{namehash}{CJMSKCGJF+1}
+  \strng{fullhash}{CJMSKCGJFYVABFWCCGJSWTJBSHJMCGMCYNRTHRWSB1}
+  \field{abstract}{%
+  Traditional fecal indicator bacteria (FIB) measurement is too slow (>18 h)
+  for timely swimmer warnings.Assess relationship of rapid indicator methods
+  (qPCR) to illness at a marine beach impacted by urban runoff.We measured
+  baseline and two-week health in 9525 individuals visiting Doheny Beach
+  2007-08. Illness rates were compared (swimmers vs. non-swimmers). FIB
+  measured by traditional (Enterococcus spp. by EPA Method 1600 or Enterolert?,
+  fecal coliforms, total coliforms) and three rapid qPCR assays for
+  Enterococcus spp. (Taqman, Scorpion-1, Scorpion-2) were compared to health.
+  Primary bacterial source was a creek flowing untreated into ocean; the creek
+  did not reach the ocean when a sand berm formed. This provided a natural
+  experiment for examining FIB-health relationships under varying conditions.We
+  observed significant increases in diarrhea (OR 1.90, 95\% CI 1.29-2.80 for
+  swallowing water) and other outcomes in swimmers compared to non-swimmers.
+  Exposure (body immersion, head immersion, swallowed water) was associated
+  with increasing risk of gastrointestinal illness (GI). Daily GI incidence
+  patterns were different: swimmers (2-day peak) and non-swimmers (no peak).
+  With berm-open, we observed associations between GI and traditional and rapid
+  methods for Enterococcus; fewer associations occurred when berm status was
+  not considered.We found increased risk of GI at this urban runoff beach. When
+  FIB source flowed freely (berm-open), several traditional and rapid
+  indicators were related to illness. When FIB source was weak (berm-closed)
+  fewer illness associations were seen. These different relationships under
+  different conditions at a single beach demonstrate the difficulties using
+  these indicators to predict health risk.%
+  }
+  \field{number}{7}
+  \field{pages}{2176\bibrangedash 2186}
+  \field{title}{Using rapid indicators for Enterococcus to assess the risk of
+  illness after exposure to urban runoff contaminated marine water}
+  \field{volume}{46}
+  \field{journaltitle}{Water Res.}
+  \field{month}{05}
+  \field{year}{2012}
+\endentry
+
+\entry{Arnold2013-xd}{article}{}
+  \name{author}{14}{}{%
+    {{}%
+     {Arnold}{A}%
+     {Benjamin~F}{BF}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Schiff}{S}%
+     {Kenneth~C}{KC}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Griffith}{G}%
+     {John~F}{JF}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Gruber}{G}%
+     {Joshua~S}{JS}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Yau}{Y}%
+     {Vincent}{V}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Wright}{W}%
+     {Catherine~C}{CC}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Wade}{W}%
+     {Timothy~J}{TJ}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Burns}{B}%
+     {Susan}{S}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Hayes}{H}%
+     {Jacqueline~M}{JM}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {McGee}{M}%
+     {Charles}{C}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Gold}{G}%
+     {Mark}{M}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Cao}{C}%
+     {Yiping}{Y}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Weisberg}{W}%
+     {Stephen~B}{SB}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Colford}{C}%
+     {John~M}{JM}%
+     {}{}%
+     {Jr}{J}}%
+  }
+  \list{language}{1}{%
+    {eng}%
+  }
+  \strng{namehash}{ABFSKCGJF+1}
+  \strng{fullhash}{ABFSKCGJFGJSYVWCCWTJBSHJMMCGMCYWSBCJJM1}
+  \field{abstract}{%
+  Studies of health risks associated with recreational water exposure require
+  investigators to make choices about water quality indicator averaging
+  techniques, exposure definitions, follow-up periods, and model
+  specifications; however, investigators seldom describe the impact of these
+  choices on reported results. Our objectives are to report illness risk from
+  swimming at a marine beach affected by nonpoint sources of urban runoff,
+  measure associations between fecal indicator bacteria levels and subsequent
+  illness among swimmers, and investigate the sensitivity of results to a range
+  of exposure and outcome definitions.In 2009, we enrolled 5674 people in a
+  prospective cohort at Malibu Beach, a coastal marine beach in California, and
+  measured daily health symptoms 10-19 days later. Concurrent water quality
+  samples were analyzed for indicator bacteria using culture and molecular
+  methods. We compared illness risk between nonswimmers and swimmers, and among
+  swimmers exposed to various levels of fecal indicator bacteria.Diarrhea was
+  more common among swimmers than nonswimmers (adjusted odds ratio = 1.88 [95\%
+  confidence interval = 1.09-3.24]) within 3 days of the beach visit. Water
+  quality was generally good (fecal indicator bacteria levels exceeded water
+  quality guidelines for only 7\% of study samples). Fecal indicator bacteria
+  levels were not consistently associated with swimmer illness. Sensitivity
+  analyses demonstrated that overall inference was not substantially affected
+  by the choice of exposure and outcome definitions.This study suggests that
+  the 3 days following a beach visit may be the most relevant period for health
+  outcome measurement in recreational water studies. Under the water quality
+  conditions observed in this study, fecal indicator bacteria levels were not
+  associated with swimmer illness.%
+  }
+  \field{number}{6}
+  \field{pages}{845\bibrangedash 853}
+  \field{title}{Swimmer illness associated with marine water exposure and water
+  quality indicators: impact of widely used assumptions}
+  \field{volume}{24}
+  \field{journaltitle}{Epidemiology}
+  \field{month}{11}
+  \field{year}{2013}
+\endentry
+
+\entry{Yau2014-pl}{article}{}
+  \name{author}{15}{}{%
+    {{}%
+     {Yau}{Y}%
+     {Vincent~M}{VM}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Schiff}{S}%
+     {Kenneth~C}{KC}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Arnold}{A}%
+     {Benjamin~F}{BF}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Griffith}{G}%
+     {John~F}{JF}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Gruber}{G}%
+     {Joshua~S}{JS}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Wright}{W}%
+     {Catherine~C}{CC}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Wade}{W}%
+     {Timothy~J}{TJ}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Burns}{B}%
+     {Susan}{S}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Hayes}{H}%
+     {Jacqueline~M}{JM}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {McGee}{M}%
+     {Charles}{C}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Gold}{G}%
+     {Mark}{M}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Cao}{C}%
+     {Yiping}{Y}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Boehm}{B}%
+     {Alexandria~B}{AB}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Weisberg}{W}%
+     {Stephen~B}{SB}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Colford}{C}%
+     {John~M}{JM}%
+     {}{}%
+     {Jr}{J}}%
+  }
+  \list{language}{1}{%
+    {eng}%
+  }
+  \strng{namehash}{YVMSKCABF+1}
+  \strng{fullhash}{YVMSKCABFGJFGJSWCCWTJBSHJMMCGMCYBABWSBCJJM1}
+  \field{abstract}{%
+  Use of fecal indicator bacteria (FIB) for monitoring beach water quality is
+  based on their co-occurrence with human pathogens, a relationship that can be
+  dramatically altered by fate and transport processes after leaving the human
+  intestine. We conducted a prospective cohort study at Avalon Beach,
+  California (USA), where the indicator relationship is potentially affected by
+  the discharge of sewage-contaminated groundwater and by solar radiation
+  levels at this shallow, relatively quiescent beach. The goals of this study
+  were to determine: 1) if swimmers exposed to marine water were at higher risk
+  of illness than non-swimmers; 2) if FIB measured in marine water were
+  associated with swimmer illness, and; 3) if the associations between FIB and
+  swimmer health were modified by either submarine groundwater discharge or
+  solar radiation levels. There were 7317 individuals recruited during the
+  summers of 2007-08, 6165 (84\%) of whom completed follow-up within two weeks
+  of the beach visit. A total of 703 water quality samples were collected
+  across multiple sites and time periods during recruitment days and analyzed
+  for FIB using both culture-based and molecular methods. Adjusted odds ratios
+  (AOR) indicated that swimmers who swallowed water were more likely to
+  experience Gastrointestinal Illness (GI Illness) within three days of their
+  beach visit than non-swimmers, and that this risk was significantly elevated
+  when either submarine groundwater discharge was high (AOR [95\% CI]:2.18
+  [1.22-3.89]) or solar radiation was low (2.45 [1.25-4.79]). The risk of GI
+  Illness was not significantly elevated for swimmers who swallowed water when
+  groundwater discharge was low or solar radiation was high. Associations
+  between GI Illness incidence and FIB levels (Enterococcus EPA Method 1600)
+  among swimmers who swallowed water were not significant when we did not
+  account for groundwater discharge, but were strongly associated when
+  groundwater discharge was high (1.85 [1.06, 3.23]) compared to when it was
+  low (0.77 [0.42, 1.42]; test of interaction: P = 0.03). These results
+  demonstrate the need to account for local environmental conditions when
+  monitoring for, and making decisions about, public health at recreational
+  beaches. The views expressed in this article are those of the authors and do
+  not necessarily reflect the views or policies of the U.S. Environmental
+  Protection Agency.%
+  }
+  \field{pages}{23\bibrangedash 36}
+  \field{title}{Effect of submarine groundwater discharge on bacterial
+  indicators and swimmer health at Avalon Beach, {CA}, {USA}}
+  \field{volume}{59}
+  \field{journaltitle}{Water Res.}
+  \field{month}{08}
+  \field{year}{2014}
+\endentry
+
+\entry{Epa2009-dm}{report}{}
+  \name{author}{1}{}{%
+    {{}%
+     {{EPA}}{E}%
+     {}{}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{E1}
+  \strng{fullhash}{E1}
+  \field{number}{EPA-821-R-09-016}
+  \field{title}{Method 1600: Enterococci in Water by Membrane Filtration Using
+  membrane- Enterococcus {Indoxyl-Beta-D-Glucoside} Agar ({mEI})}
+  \list{institution}{1}{%
+    {U.S. Environmental Protection Agency}%
+  }
+  \field{type}{techreport}
+  \field{year}{2009}
+\endentry
+
+\entry{Epa2012-fb}{report}{}
+  \name{author}{1}{}{%
+    {{}%
+     {{EPA}}{E}%
+     {}{}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{E1}
+  \strng{fullhash}{E1}
+  \field{number}{EPA-821-R-12-008}
+  \field{title}{Method 1611: Enterococci in Water by {TaqMan\textregistered{}}
+  Quantitative Polymerase Chain Reaction ({qPCR}) Assay}
+  \list{institution}{1}{%
+    {U.S. Environmental Protection Agency}%
+  }
+  \field{type}{techreport}
+  \field{year}{2012}
+\endentry
+
+\entry{Siefring2008-au}{article}{}
+  \name{author}{5}{}{%
+    {{}%
+     {Siefring}{S}%
+     {S}{S}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Varma}{V}%
+     {M}{M}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Atikovic}{A}%
+     {E}{E}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Wymer}{W}%
+     {L}{L}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Haugland}{H}%
+     {R~A}{RA}%
+     {}{}%
+     {}{}}%
+  }
+  \list{language}{1}{%
+    {eng}%
+  }
+  \keyw{Bacteroidetes, isolation /\&/ purification; Base Sequence;
+  Enterococcus, isolation /\&/ purification; Feces, microbiology; Filtration;
+  Fresh Water, microbiology; Humans; Molecular Sequence Data; Polymerase Chain
+  Reaction; Reagent Kits, Diagnostic; Sensitivity and Specificity}
+  \strng{namehash}{SSVMAEWLHRA1}
+  \strng{fullhash}{SSVMAEWLHRA1}
+  \field{abstract}{%
+  Previously reported and redesigned primer and probe assays were evaluated for
+  the quantitative analysis of the fecal indicator bacterial groups,
+  Enterococcus and Bacteroidetes with three real-time PCR instrument and
+  reagent systems. The efficiency and sensitivity of the original assays varied
+  between systems in analyses of DNA extracts from pure cultures of
+  Enterococcus faecalis and Bacteroides fragilis, whereas the modified assays
+  gave more consistent results. Distinctions between original and modified
+  assays also occurred in analyses of known spike levels of E. faecalis and B.
+  fragilis cells on filters with diverse surface water retentates. Percentages
+  of samples causing PCR failures due to inhibition were lower using the
+  modified assays. The accuracy and precision of spiked bacteria measurements
+  were also generally higher, although mean measurements of both target
+  organisms were still significantly different between systems (p < 0.05). The
+  accuracy and precision of spiked bacteria measurements by both modified
+  assays were further improved using a new sample matrix control spike
+  consisting of cultured Lactococcus lactis cells and a reference assay for
+  this organism. Corrections provided by the L. lactis assay eliminated
+  significant differences in E. faecalis measurements between all three systems
+  and between two of the three systems in B. fragilis measurements.%
+  }
+  \field{number}{2}
+  \field{pages}{225\bibrangedash 237}
+  \field{title}{Improved real-time {PCR} assays for the detection of fecal
+  indicator bacteria in surface waters with different instrument and reagent
+  systems}
+  \field{volume}{6}
+  \field{journaltitle}{J. Water Health}
+  \field{month}{06}
+  \field{year}{2008}
+\endentry
+
+\entry{Higgins2002-vr}{article}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Higgins}{H}%
+     {Julian}{J}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Thompson}{T}%
+     {Simon~G}{SG}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {Wiley Online Library}%
+  }
+  \strng{namehash}{HJTSG1}
+  \strng{fullhash}{HJTSG1}
+  \field{number}{11}
+  \field{pages}{1539\bibrangedash 1558}
+  \field{title}{Quantifying heterogeneity in a meta-analysis}
+  \field{volume}{21}
+  \field{journaltitle}{Stat. Med.}
+  \field{year}{2002}
+\endentry
+
+\entry{Higgins2003-bh}{article}{}
+  \name{author}{4}{}{%
+    {{}%
+     {Higgins}{H}%
+     {Julian P~T}{JPT}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Thompson}{T}%
+     {Simon~G}{SG}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Deeks}{D}%
+     {Jonathan~J}{JJ}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Altman}{A}%
+     {Douglas~G}{DG}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{HJPTTSGDJJADG1}
+  \strng{fullhash}{HJPTTSGDJJADG1}
+  \field{number}{7414}
+  \field{pages}{557\bibrangedash 560}
+  \field{title}{Measuring inconsistency in meta-analyses}
+  \field{volume}{327}
+  \field{journaltitle}{BMJ}
+  \field{year}{2003}
+  \warn{\item Invalid format of field 'month'}
+\endentry
+
+\entry{Lipsitch2010-kq}{article}{}
+  \name{author}{3}{}{%
+    {{}%
+     {Lipsitch}{L}%
+     {Marc}{M}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Tchetgen}{T}%
+     {Eric~Tchetgen}{ET}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Cohen}{C}%
+     {Ted}{T}%
+     {}{}%
+     {}{}}%
+  }
+  \list{language}{1}{%
+    {eng}%
+  }
+  \keyw{Bias (Epidemiology); Causality; Confounding Factors (Epidemiology);
+  Humans; Observation}
+  \strng{namehash}{LMTETCT1}
+  \strng{fullhash}{LMTETCT1}
+  \field{abstract}{%
+  Noncausal associations between exposures and outcomes are a threat to
+  validity of causal inference in observational studies. Many techniques have
+  been developed for study design and analysis to identify and eliminate such
+  errors. Such problems are not expected to compromise experimental studies,
+  where careful standardization of conditions (for laboratory work) and
+  randomization (for population studies) should, if applied properly, eliminate
+  most such noncausal associations. We argue, however, that a routine
+  precaution taken in the design of biologic laboratory experiments--the use of
+  ``negative controls''--is designed to detect both suspected and unsuspected
+  sources of spurious causal inference. In epidemiology, analogous negative
+  controls help to identify and resolve confounding as well as other sources of
+  error, including recall bias or analytic flaws. We distinguish 2 types of
+  negative controls (exposure controls and outcome controls), describe examples
+  of each type from the epidemiologic literature, and identify the conditions
+  for the use of such negative controls to detect confounding. We conclude that
+  negative controls should be more commonly employed in observational studies,
+  and that additional work is needed to specify the conditions under which
+  negative controls will be sensitive detectors of other sources of error in
+  observational studies.%
+  }
+  \field{number}{3}
+  \field{pages}{383\bibrangedash 388}
+  \field{title}{Negative controls: a tool for detecting confounding and bias in
+  observational studies}
+  \field{volume}{21}
+  \field{journaltitle}{Epidemiology}
+  \field{month}{05}
+  \field{year}{2010}
+\endentry
+
+\entry{Arnold2016-yr}{article}{}
+  \name{author}{4}{}{%
+    {{}%
+     {Arnold}{A}%
+     {Benjamin~F}{BF}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Ercumen}{E}%
+     {Ayse}{A}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Benjamin-Chung}{BC}%
+     {Jade}{J}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Colford}{C}%
+     {John~M}{JM}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{ABFEABCJCJM1}
+  \strng{fullhash}{ABFEABCJCJM1}
+  \field{title}{Negative controls to detect selection bias and measurement bias
+  in epidemiologic studies}
+  \field{volume}{(in press)}
+  \field{journaltitle}{Epidemiology}
+  \field{year}{2016}
+\endentry
+
+\entry{Ahern2009-cv}{article}{}
+  \name{author}{3}{}{%
+    {{}%
+     {Ahern}{A}%
+     {Jennifer}{J}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Hubbard}{H}%
+     {Alan}{A}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Galea}{G}%
+     {Sandro}{S}%
+     {}{}%
+     {}{}}%
+  }
+  \keyw{Adult; Causality; Chronic Disease, epidemiology/prevention /\&/
+  control; Confidence Intervals; Data Interpretation, Statistical;
+  Epidemiologic Methods; Health Promotion; Humans; Intervention Studies;
+  Interviews as Topic; Logistic Models; New York City, epidemiology; Residence
+  Characteristics; Smoking, epidemiology; Young Adult}
+  \strng{namehash}{AJHAGS1}
+  \strng{fullhash}{AJHAGS1}
+  \field{abstract}{%
+  Causal inference methods allow estimation of the effects of potential public
+  health interventions on the population burden of disease. Motivated by calls
+  for epidemiologic research to be presented in ways that are more informative
+  for intervention, the authors present a didactic discussion of the steps
+  required to estimate the population effect of a potential intervention using
+  an imputation-based causal inference method and discuss the assumptions of
+  and limitations to its use. An analysis of neighborhood smoking norms and
+  individual smoking behavior is used as an illustration. The implementation
+  steps include the following: 1) modeling the adjusted exposure and outcome
+  association, 2) imputing the outcome probability for each individual while
+  manipulating the exposure by ``setting'' it to different values, 3) averaging
+  these probabilities across the population, and 4) bootstrapping confidence
+  intervals. Imputed probabilities represent counterfactual estimates of the
+  population smoking prevalence if neighborhood smoking norms could be
+  manipulated through intervention. The degree to which temporal ordering,
+  randomization, stability, and experimental treatment assignment assumptions
+  are met in the illustrative example is discussed, along with ways that future
+  studies could be designed to better meet the assumptions. With this approach,
+  the potential effects of an intervention targeting neighborhoods,
+  individuals, or other units can be estimated.%
+  }
+  \field{number}{9}
+  \field{pages}{1140\bibrangedash 1147}
+  \field{title}{Estimating the effects of potential public health interventions
+  on population disease burden: a step-by-step illustration of causal inference
+  methods}
+  \field{volume}{169}
+  \field{journaltitle}{Am. J. Epidemiol.}
+  \field{month}{05}
+  \field{year}{2009}
+\endentry
+
+\entry{Muller2014-xn}{article}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Muller}{M}%
+     {Clemma~J}{CJ}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {MacLehose}{M}%
+     {Richard~F}{RF}%
+     {}{}%
+     {}{}}%
+  }
+  \list{language}{1}{%
+    {eng}%
+  }
+  \keyw{Confounding Factors (Epidemiology); Epidemiologic Research Design;
+  Logistic Models; Models, Statistical; Probability}
+  \strng{namehash}{MCJMRF1}
+  \strng{fullhash}{MCJMRF1}
+  \field{abstract}{%
+  We review three common methods to estimate predicted probabilities following
+  confounder-adjusted logistic regression: marginal standardization (predicted
+  probabilities summed to a weighted average reflecting the confounder
+  distribution in the target population); prediction at the modes (conditional
+  predicted probabilities calculated by setting each confounder to its modal
+  value); and prediction at the means (predicted probabilities calculated by
+  setting each confounder to its mean value). That each method corresponds to a
+  different target population is underappreciated in practice. Specifically,
+  prediction at the means is often incorrectly interpreted as estimating
+  average probabilities for the overall study population, and furthermore
+  yields nonsensical estimates in the presence of dichotomous confounders.
+  Default commands in popular statistical software packages often lead to
+  inadvertent misapplication of prediction at the means.Using an applied
+  example, we demonstrate discrepancies in predicted probabilities across these
+  methods, discuss implications for interpretation and provide syntax for SAS
+  and Stata.Marginal standardization allows inference to the total population
+  from which data are drawn. Prediction at the modes or means allows inference
+  only to the relevant stratum of observations. With dichotomous confounders,
+  prediction at the means corresponds to a stratum that does not include any
+  real-life observations.Marginal standardization is the appropriate method
+  when making inference to the overall population. Other methods should be used
+  with caution, and prediction at the means should not be used with binary
+  confounders. Stata, but not SAS, incorporates simple methods for marginal
+  standardization.%
+  }
+  \field{number}{3}
+  \field{pages}{962\bibrangedash 970}
+  \field{title}{Estimating predicted probabilities from logistic regression:
+  different methods correspond to different target populations}
+  \field{volume}{43}
+  \field{journaltitle}{Int. J. Epidemiol.}
+  \field{month}{06}
+  \field{year}{2014}
+\endentry
+
+\lossort
+\endlossort
+
+\endinput
