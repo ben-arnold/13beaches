@@ -19,6 +19,8 @@
 #	aim1-entero1600-35cfu-CI-byage.pdf
 #	aim1-enteroQPCR-470cce-CI-bypointsource.pdf
 #	aim1-enteroQPCR-470cce-CI-byage.pdf
+#
+#	aim1-entero1600-35cfu-CI-byage-AJPH.pdf
 # --------------------------------------
 
 # --------------------------------------
@@ -432,6 +434,89 @@ mtext(  format(Ns,big.mark=","),side=1,line=3.25,at=allxs+0.06,adj=1,cex=0.75   
 
 par(op)
 dev.off()
+
+
+# --------------------------------------
+# Plot Enterococcus 1600 non-swimmers / <=35 / >35 Results
+# Stratified by Age Group
+#
+# REDUCED FORMAT REQUIRED BY AJPH
+# --------------------------------------
+
+pdf("~/dropbox/13beaches/aim1-results/figs/aim1-entero1600-noswim35cfu-CI-byage-AJPH.pdf",width=9,height=5)
+op <- par(mar=c(5,10,8,0)+0.1,xpd=TRUE)
+cols <- brewer.pal(9,"YlGnBu")[c(8,7,6)]
+# cols <- brewer.pal(9,"YlGn")[c(8,7,6)]
+ytics <- seq(0,140,by=20)
+# set up an empty plot
+MidPts <- barplot(1:2,names.arg=NA,border=NA,col=NA,
+                  ylim=range(ytics),ylab="",yaxt="n",
+                  las=1,bty="n"
+)
+segments(x0=0.1,x1=max(MidPts+0.5),y0=ytics,lty=2,lwd=1,col="gray80")
+segments(x0=mean(MidPts[1:2]),y0=min(ytics)-8,y1=max(ytics)+30,lwd=2,col="gray80")
+axis(2,at=ytics,las=1)
+mtext("Diarrhea\nIncidence\nper 1000",side=2,line=3,las=1)
+
+# calculate X coordinates relative to the mid points for each group
+xspan <- 0.39
+xplus <- c(-xspan, 0, xspan)  # evenly distribute 3 datapoints around each midpoint
+x0to4   <- xplus+MidPts[1]
+xall    <- xplus+MidPts[2]
+allxs   <- c(x0to4,xall)  # for table and category labels in header/footer
+labx    <- MidPts[1]-xspan*1.5  # for left-hand labels in the header/footer
+
+# age 0 to 4
+segments(x0=x0to4,y0=ci.0to4[,"CIlb"]*1000,y1=ci.0to4[,"CIub"]*1000,lwd=2,col=cols)
+points(x0to4,ci.0to4[,"CI"]*1000,pch=16,cex=1.25,lwd=2,col=cols)
+text(x= x0to4,y=ci.0to4[,"CI"]*1000,sprintf("%1.0f",ci.0to4[,"CI"]*1000),pos=4,cex=0.7,col=cols,font=2)
+
+# plot all conditions estimates
+segments(x0=xall,y0=ci.all[,"CIlb"]*1000,y1=ci.all[,"CIub"]*1000,lwd=2,col=cols)
+points(xall,ci.all[,"CI"]*1000,pch=16,cex=1.25,lwd=2,col=cols)
+text(x=xall,y=ci.all[,"CI"]*1000,sprintf("%1.0f",ci.all[,"CI"]*1000),pos=4,cex=0.7,col=cols,font=2)
+
+# print header labels
+mtext(c("Ages 0 to 4","All Ages"),at=MidPts,side=3,line=6  )
+
+mtext(expression(paste(italic("Enterococcus"))),side=3,line=4,at=labx,adj=1,col=cols[2],cex=0.8)
+mtext("Exposure Category",side=3,line=3,at=labx,adj=1,col=cols[2],cex=0.8)
+mtext(expression("Non",""<= 35,""> 35),side=3,line=4,at=allxs,col=cols,cex=c(0.75,1,1),font=2)
+mtext(rep(c("Swimmers","CFU/100ml","CFU/100ml"),3),side=3,line=3,at=allxs,col=cols,cex=0.75)
+
+
+# Print adjusted CIRs and 95% CIs (formatted)
+circiform <- function(x) {
+  paste(sprintf("%1.2f",x[1])," (",sprintf("%1.2f",x[2]),",",sprintf("%1.2f",x[3]),")",sep="")
+}
+cir.ages <- rbind(cir.age0to4["Overall",],cir.all["Overall",])
+# Non-swimmers as reference group
+mtext("Non-swimmer ref, aCIR (95% CI)",side=3,line=2,at=labx,adj=1,cex=0.75,col="gray30")
+# mtext("(95% CI)",side=3,line=1,at=labx,adj=1,cex=0.8,col="gray30")
+mtext(c("ref",circiform(cir.ages[1,1:3]),circiform(cir.ages[1,4:6]),"ref",circiform(cir.ages[2,1:3]),circiform(cir.ages[2,4:6])),side=3,line=2,at=allxs,cex=0.7)
+
+# swimmers as reference group
+mtext(expression(paste("Swimmers",""<= 35," ref, aCIR (95% CI)")),side=3,line=0.75,at=labx,adj=1,cex=0.75,col="gray30")
+mtext(c("","ref",circiform(cir35cfu.ages[1,]),"","ref",circiform(cir35cfu.ages[4,])),side=3,line=0.75,at=allxs,cex=0.7)
+
+# print footer labels
+mtext(expression("Non",""<= 35,""> 35),side=1,line=0.25,at=allxs,col=cols,cex=c(0.75,1,1),font=2)
+mtext(c("Swimmers","CFU/100ml","CFU/100ml"),side=1,line=1.25,at=allxs,col=cols,cex=0.75)
+
+# print table with Ns
+mtext("Incident Diarrhea Cases",side=1,line=2.25,at=labx,adj=1,cex=0.8,col="gray30")
+ns <- c(N.age0to4[,1],N.all[,1])
+mtext(  format(ns,big.mark=","),side=1,line=2.25,at=allxs+0.06,adj=1,cex=0.75    )
+
+mtext("Population At Risk",side=1,line=3.25,at=labx,adj=1,cex=0.8,col="gray30")
+Ns <- c(N.age0to4[,2],N.all[,2])
+mtext(  format(Ns,big.mark=","),side=1,line=3.25,at=allxs+0.06,adj=1,cex=0.75    )
+
+par(op)
+dev.off()
+
+
+
 
 #---------------------------------------
 # QPCR PLOTS

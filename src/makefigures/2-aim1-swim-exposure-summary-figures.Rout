@@ -1,5 +1,5 @@
 
-R version 3.2.0 (2015-04-16) -- "Full of Ingredients"
+R version 3.2.3 (2015-12-10) -- "Wooden Christmas-Tree"
 Copyright (C) 2015 The R Foundation for Statistical Computing
 Platform: x86_64-apple-darwin13.4.0 (64-bit)
 
@@ -38,6 +38,8 @@ Type 'q()' to quit R.
 > # output files:
 > #	aim1-swim-exposure-byage.pdf
 > #	aim1-swim-exposure-bywatertype.pdf
+> #
+> #	aim1-swim-exposure-byage-AJPH.pdf
 > # --------------------------------------
 > 
 > # --------------------------------------
@@ -199,6 +201,85 @@ Type 'q()' to quit R.
 null device 
           1 
 > 
+> # --------------------------------------
+> # Summary of Swim Exposure Risk
+> # Pooled Estimates, Stratified by Age
+> # REDUCED FIGURE REQUESTED BY AJPH
+> # --------------------------------------
+> pdf("~/dropbox/13beaches/aim1-results/figs/aim1-swim-exposure-byage-AJPH.pdf",width=9,height=5)
+> op <- par(mar=c(4,7,8,0)+0.1,xpd=TRUE)
+> # cols <- c(brewer.pal(9,"YlGn")[6],brewer.pal(9,"YlOrRd")[5:7])
+> cols <- c(brewer.pal(9,"BuGn")[7],brewer.pal(9,"YlGnBu")[6:8])
+> ytics <- seq(0,100,by=20)
+> # set up an empty plot
+> MidPts <- barplot(1:2,names.arg=NA,border=NA,col=NA,
++                   ylim=range(ytics),ylab="",yaxt="n",
++                   las=1,bty="n"
++ )
+> segments(x0=0.1,x1=max(MidPts+0.5),y0=ytics,lty=2,lwd=1,col="gray80")
+> segments(x0=mean(MidPts[1:2]),y0=min(ytics)-10,y1=max(ytics)+30,lwd=2,col="gray80")
+> axis(2,at=ytics,las=1)
+> mtext("Diarrhea\nIncidence\nper 1000",side=2,line=3,las=1)
+> 
+> # calculate X coordinates relative to the mid points for each group
+> xspan <- 0.37
+> xplus <- c(-xspan, -xspan/3, xspan/3, xspan)  # evenly distribute 4 datapoints around each midpoint
+> 
+> 
+> x0to4   <- xplus+MidPts[1]
+> xall    <- xplus+MidPts[2]
+> allxs   <- c(x0to4,xall)  # for table and quartile labels in header/footer
+> labx <- MidPts[1]-xspan*1.5  # for left-hand labels in the header/footer
+> 
+> # plot age 0 to 4 estimates
+> segments(x0=x0to4,y0=ci.0to4[,"CIlb"]*1000,y1=ci.0to4[,"CIub"]*1000,lwd=2,col=cols)
+> points(x0to4,ci.0to4[,"CI"]*1000,pch=16,cex=1.25,lwd=2,col=cols)
+> text(x=x0to4,y=ci.0to4[,"CI"]*1000,sprintf("%1.0f",ci.0to4[,"CI"]*1000),pos=4,cex=0.7,col=cols,font=2)
+> 
+> # plot all age estimates
+> segments(x0=xall,y0=ci.all[,"CIlb"]*1000,y1=ci.all[,"CIub"]*1000,lwd=2,col=cols)
+> points(xall,ci.all[,"CI"]*1000,pch=16,cex=1.25,lwd=2,col=cols)
+> text(x=xall,y=ci.all[,"CI"]*1000,sprintf("%1.0f",ci.all[,"CI"]*1000),pos=4,cex=0.7,col=cols,font=2)
+> 
+> 
+> # print header labels
+> mtext(c("Ages 0 to 4","All Ages"),at=MidPts,side=3,line=6  )
+> 
+> mtext("Swim\nExposure",side=3,line=3.5,at=labx,adj=1,col="gray30",cex=0.8)
+> mtext(c("Non\nSwimmers","Body\nImmersion","Head\nImmersion","Swallowed\nWater"),side=3,line=3.5,at=allxs,col=cols,cex=0.8,font=1)
+> 
+> 
+> # Print adjusted CIRs and 95% CIs (formatted)
+> cirform <- function(cirs) {
++   paste(sprintf("%1.2f",cirs),sep="")
++ }
+> circiform <- function(circi) {
++   apply(circi,1,function(x) paste("(",sprintf("%1.2f",x["CIRlb"]),", ",sprintf("%1.2f",x["CIRub"]),")",sep="") )
++ }
+> mtext("Adjusted CIR",side=3,line=2,at=labx,adj=1,cex=0.8,col="gray30")
+> mtext(c("ref",cirform(cir.0to4[2:4,1]),"ref",cirform(cir.all[2:4,1])),side=3,line=2,at=allxs,cex=0.75)
+> 
+> mtext("(95% CI)",side=3,line=1,at=labx,adj=1,cex=0.8,col="gray30")
+> mtext(c("",circiform(cir.0to4[2:4,2:3]),"",circiform(cir.all[2:4,2:3])),side=3,line=1,at=allxs,cex=0.7)
+> 
+> 
+> # print footer labels
+> mtext(c("Non\nSwimmers","Body\nImmersion","Head\nImmersion","Swallowed\nWater"),side=1,line=1,at=allxs,col=cols,cex=0.8,font=1)
+> 
+> # print table with Ns
+> mtext("Incident Diarrhea Cases",side=1,line=2,at=labx,adj=1,cex=0.8,col="gray30")
+> ns <- c(N.0to4[,1],N.all[,1])
+> mtext(  format(ns,big.mark=","),side=1,line=2,at=allxs+0.03,adj=1,cex=0.75    )
+> 
+> mtext("Population At Risk",side=1,line=3,at=labx,adj=1,cex=0.8,col="gray30")
+> Ns <- c(N.0to4[,2],N.all[,2])
+> mtext(  format(Ns,big.mark=","),side=1,line=3,at=allxs+0.03,adj=1,cex=0.75    )
+> 
+> par(op)
+> dev.off()
+null device 
+          1 
+> 
 > 
 > 
 > # --------------------------------------
@@ -315,4 +396,4 @@ null device
 > 
 > proc.time()
    user  system elapsed 
-  2.876   0.419   4.290 
+  0.359   0.041   0.639 
