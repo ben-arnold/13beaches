@@ -311,6 +311,11 @@ mf.fit <- glm(diarrheaci10~swim35*marine +agecat+female+racewhite+gichron+anim_a
 	summary(mf.fit)
 	lrtest(mf.ref,mf.fit)
 	
+	# test for additive interaction
+	amf.ref <- glm(diarrheaci10~swim35 +marine +agecat+female+racewhite+gichron+anim_any+gicontactbase+rawfood+beach,family=gaussian,data=ad)
+	amf.fit <- glm(diarrheaci10~swim35*marine +agecat+female+racewhite+gichron+anim_any+gicontactbase+rawfood+beach,family=gaussian,data=ad)
+	lrtest(amf.ref,amf.fit)
+	
 # Interaction model with point v. non-point source beaches
 ps.ref <- glm(diarrheaci10~swim35 +pointsource +agecat+female+racewhite+gichron+anim_any+gicontactbase+rawfood+beach,family=poisson(link="log"),data=ad)
 ps.fit <- glm(diarrheaci10~swim35*pointsource +agecat+female+racewhite+gichron+anim_any+gicontactbase+rawfood+beach,family=poisson(link="log"),data=ad)
@@ -318,6 +323,11 @@ ps.fit <- glm(diarrheaci10~swim35*pointsource +agecat+female+racewhite+gichron+a
 	ps.body <- coeftest(ps.fit, ps.VC) 
 	summary(ps.fit)
 	lrtest(ps.ref,ps.fit)
+	
+	# test for additive interaction
+	aps.ref <- glm(diarrheaci10~swim35 +pointsource +agecat+female+racewhite+gichron+anim_any+gicontactbase+rawfood+beach,family=gaussian,data=ad)
+	aps.fit <- glm(diarrheaci10~swim35*pointsource +agecat+female+racewhite+gichron+anim_any+gicontactbase+rawfood+beach,family=gaussian,data=ad)
+	lrtest(aps.ref,aps.fit)
 	
 # --------------------------------------
 # Age-stratified estimates and LR tests of
@@ -332,6 +342,11 @@ agestrat.fit <- glm(diarrheaci10~ swim35*agestrat +female+racewhite+gichron+anim
 	# agestrat.VC <- cl(ad,fm=agestrat.fit,cluster=ad$hhid)
 	# agestrat.body <- coeftest(agestrat.fit, agestrat.VC) 
 	lrtest(agestrat.ref,agestrat.fit)
+	
+	# test for additive interaction
+	aage.ref <- glm(diarrheaci10~swim35 +agestrat+female+racewhite+gichron+anim_any+gicontactbase+rawfood+beach,family=gaussian,data=ad)
+	aage.fit <- glm(diarrheaci10~ swim35*agestrat +female+racewhite+gichron+anim_any+gicontactbase+rawfood+beach,family=gaussian,data=ad)
+	lrtest(aage.ref,aage.fit)
 
 # --------------------------------------
 # Stratified Models 

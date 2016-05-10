@@ -1,5 +1,5 @@
 
-R version 3.2.0 (2015-04-16) -- "Full of Ingredients"
+R version 3.2.3 (2015-12-10) -- "Wooden Christmas-Tree"
 Copyright (C) 2015 The R Foundation for Statistical Computing
 Platform: x86_64-apple-darwin13.4.0 (64-bit)
 
@@ -64,7 +64,7 @@ The following objects are masked from ‘package:base’:
 
 > 
 > # source the base functions
-> source("~/dropbox/13beaches/src/aim1/0-aim1-base-functions.R")
+> source("~/13beaches/src/aim1/0-aim1-base-functions.R")
 > 
 > # --------------------------------------
 > # load the and pre-preprocess the 
@@ -1590,6 +1590,22 @@ Model 2: diarrheaci10 ~ swim35 * marine + agecat + female + racewhite +
 1  33 -11905                     
 2  35 -11903  2 4.0918     0.1293
 > 	
+> 	# test for additive interaction
+> 	amf.ref <- glm(diarrheaci10~swim35 +marine +agecat+female+racewhite+gichron+anim_any+gicontactbase+rawfood+beach,family=gaussian,data=ad)
+> 	amf.fit <- glm(diarrheaci10~swim35*marine +agecat+female+racewhite+gichron+anim_any+gicontactbase+rawfood+beach,family=gaussian,data=ad)
+> 	lrtest(amf.ref,amf.fit)
+Likelihood ratio test
+
+Model 1: diarrheaci10 ~ swim35 + marine + agecat + female + racewhite + 
+    gichron + anim_any + gicontactbase + rawfood + beach
+Model 2: diarrheaci10 ~ swim35 * marine + agecat + female + racewhite + 
+    gichron + anim_any + gicontactbase + rawfood + beach
+  #Df LogLik Df  Chisq Pr(>Chisq)  
+1  34  14554                       
+2  36  14558  2 6.7417    0.03436 *
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+> 	
 > # Interaction model with point v. non-point source beaches
 > ps.ref <- glm(diarrheaci10~swim35 +pointsource +agecat+female+racewhite+gichron+anim_any+gicontactbase+rawfood+beach,family=poisson(link="log"),data=ad)
 > ps.fit <- glm(diarrheaci10~swim35*pointsource +agecat+female+racewhite+gichron+anim_any+gicontactbase+rawfood+beach,family=poisson(link="log"),data=ad)
@@ -1666,6 +1682,22 @@ Model 2: diarrheaci10 ~ swim35 * pointsource + agecat + female + racewhite +
 1  33 -11905                     
 2  35 -11903  2 3.7057     0.1568
 > 	
+> 	# test for additive interaction
+> 	aps.ref <- glm(diarrheaci10~swim35 +pointsource +agecat+female+racewhite+gichron+anim_any+gicontactbase+rawfood+beach,family=gaussian,data=ad)
+> 	aps.fit <- glm(diarrheaci10~swim35*pointsource +agecat+female+racewhite+gichron+anim_any+gicontactbase+rawfood+beach,family=gaussian,data=ad)
+> 	lrtest(aps.ref,aps.fit)
+Likelihood ratio test
+
+Model 1: diarrheaci10 ~ swim35 + pointsource + agecat + female + racewhite + 
+    gichron + anim_any + gicontactbase + rawfood + beach
+Model 2: diarrheaci10 ~ swim35 * pointsource + agecat + female + racewhite + 
+    gichron + anim_any + gicontactbase + rawfood + beach
+  #Df LogLik Df  Chisq Pr(>Chisq)  
+1  34  14554                       
+2  36  14557  2 4.8219    0.08973 .
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+> 	
 > # --------------------------------------
 > # Age-stratified estimates and LR tests of
 > # interaction
@@ -1688,6 +1720,22 @@ Model 2: diarrheaci10 ~ swim35 * agestrat + female + racewhite + gichron +
   #Df LogLik Df  Chisq Pr(>Chisq)  
 1  27 -11944                       
 2  33 -11938  6 11.297    0.07962 .
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+> 	
+> 	# test for additive interaction
+> 	aage.ref <- glm(diarrheaci10~swim35 +agestrat+female+racewhite+gichron+anim_any+gicontactbase+rawfood+beach,family=gaussian,data=ad)
+> 	aage.fit <- glm(diarrheaci10~ swim35*agestrat +female+racewhite+gichron+anim_any+gicontactbase+rawfood+beach,family=gaussian,data=ad)
+> 	lrtest(aage.ref,aage.fit)
+Likelihood ratio test
+
+Model 1: diarrheaci10 ~ swim35 + agestrat + female + racewhite + gichron + 
+    anim_any + gicontactbase + rawfood + beach
+Model 2: diarrheaci10 ~ swim35 * agestrat + female + racewhite + gichron + 
+    anim_any + gicontactbase + rawfood + beach
+  #Df LogLik Df  Chisq Pr(>Chisq)  
+1  28  14515                       
+2  34  14523  6 16.392     0.0118 *
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 > 
@@ -2760,4 +2808,4 @@ Overall              1.795588
 > 
 > proc.time()
    user  system elapsed 
-179.974  16.999 201.974 
+167.698  23.916 213.167 
