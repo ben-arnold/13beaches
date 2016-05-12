@@ -31,8 +31,8 @@ library(RColorBrewer)
 library(scales)
 
 # source the base functions
-source("~/dropbox/13beaches/src/aim1/0-aim1-base-functions.R")
-source("~/dropbox/13beaches/src/aim2/0-aim2-base-functions.R")
+source("~/13beaches/src/aim1/0-aim1-base-functions.R")
+source("~/13beaches/src/aim2/0-aim2-base-functions.R")
 
 # --------------------------------------
 # PAF and PAR functions (NOT USED)
@@ -302,10 +302,12 @@ dailygi.noswim.par100/2
 # C) Missed daily activities (omitted)
 # --------------------------------------
 
-pdf("~/dropbox/13beaches/aim2-results/figs/aim2-PAR-entero1600noswim.pdf",width=6,height=10)
-lo <- layout(mat=matrix(1:2,nrow=2,ncol=1))
-op <- par(mar=c(4,4,4,2)+0.1,cex.axis=1.2)
-cols <- brewer.pal(5,"Dark2")
+pdf("~/dropbox/13beaches/aim2-results/figs/aim2-PAR-entero1600noswim.pdf",width=12,height=5)
+lo <- layout(mat=matrix(1:2,nrow=1,ncol=2))
+op <- par(mar=c(4,3,4,5)+0.1,cex.axis=1.2)
+# cols <- brewer.pal(5,"Dark2")
+cbPalette <- c("#000000","#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+cols <- cbPalette[c(3,4,5)]
 xtics <- seq(0,0.5,by=0.1)
 
 # justification of titles relative to the Y-axis
@@ -324,18 +326,18 @@ plot(1,1,type="n",
 	mtext("Proportion of Beachgoers Exposed >35 Enterococcus CFU/100ml (%)",side=1,line=3,cex=cexscale)
 	mtext("Episodes of Diarrhea per 1,000",side=3,line=1,at=xjust,adj=0,cex=cexscale)
 	mtext("Attributable to Exposure Above Regulatory Guidelines",side=3,line=0,at=xjust,adj=0,cex=cexscale)
-	mtext("A)",side=3,line=2,at=xjust,adj=0,font=1,cex=1.2)
+	mtext("a",side=3,line=1,at=xjust-0.04,adj=0,font=2,cex=1.4)
 
-	segments(x0=0,x1=max(xtics),y0=0,lty=1,col="gray90")
+	# segments(x0=0,x1=max(xtics),y0=0,lty=1,col="gray90")
 
-	segments(x0=rep(0,3),x1=rep(0.5,3),y0=rep(0,3),y1=diar.noswim.par100/2,lty=2,lwd=1,col=alpha(cols,0.5))
+	segments(x0=rep(0,3),x1=rep(0.5,3),y0=rep(0,3),y1=diar.noswim.par100/2,lty=2,lwd=2,col=alpha(cols,1))
 
 	segments(x0=pe.noswim,y0=pars.noswim.diar.lb,y1=pars.noswim.diar.ub,lwd=2,col=cols[1:3])
 	points(pe.noswim,pars.noswim.diar,pch=21,bg="white",lwd=2,cex=1.4,col=cols[1:3])
 
-	text(pe.noswim[1],pars.noswim.diar[1],"Ages 0 - 4",pos=2,col=cols[1],font=2,cex=cexscale)
-	text(pe.noswim[2],pars.noswim.diar[2],"Ages 5 - 10",pos=4,col=cols[2],font=2,cex=cexscale)
-	text(pe.noswim[3],pars.noswim.diar[3],"Ages >10",pos=2,col=cols[3],font=2,cex=cexscale)
+	mtext("Ages 0 - 4",side=4,line=-0.25,at=diar.noswim.par100[1]/2,col=cols[1],cex=cexscale,las=1)
+	mtext("Ages 5 - 10",side=4,line=-0.25,at=diar.noswim.par100[2]/2,col=cols[2],cex=cexscale,las=1)
+	mtext("Ages >10",side=4,line=-0.25,at=diar.noswim.par100[3]/2,col=cols[3],cex=cexscale,las=1)
 	
 	# ytics <- seq(0,14,by=2)
 plot(1,1,type="n",
@@ -349,18 +351,19 @@ plot(1,1,type="n",
 	mtext("Proportion of Beachgoers Exposed >35 Enterococcus CFU/100ml (%)",side=1,line=3,cex=cexscale)
 	mtext("Episodes of Gastrointestinal illness per 1,000",side=3,line=1,at=xjust,adj=0,cex=cexscale)
 	mtext("Attributable to Exposure Above Regulatory Guidelines",side=3,line=0,at=xjust,adj=0,cex=cexscale)
-	mtext("B)",side=3,line=2,at=xjust,adj=0,font=1,cex=1.2)
+	mtext("b",side=3,line=1,at=xjust-0.04,adj=0,font=2,cex=1.4)
 	
-	segments(x0=0,x1=max(xtics),y0=0,lty=1,col="gray90")
+	# segments(x0=0,x1=max(xtics),y0=0,lty=1,col="gray90")
 
-	segments(x0=rep(0,3),x1=rep(0.5,3),y0=rep(0,3),y1=gi.noswim.par100/2,lty=2,lwd=1,col=alpha(cols,0.5))
+	segments(x0=rep(0,3),x1=rep(0.5,3),y0=rep(0,3),y1=gi.noswim.par100/2,lty=2,lwd=2,col=alpha(cols,1))
 
 	segments(x0=pe.noswim,y0=pars.noswim.gi.lb,y1=pars.noswim.gi.ub,lwd=2,col=cols[1:3])
 	points(pe.noswim,pars.noswim.gi,pch=21,bg="white",lwd=2,cex=1.4,col=cols[1:3])
 
-	text(pe.noswim[1],pars.noswim.gi[1],"Ages 0 - 4",pos=2,col=cols[1],font=2,cex=cexscale)
-	text(pe.noswim[2],pars.noswim.gi[2]+2,"Ages 5 - 10",pos=4,col=cols[2],font=2,cex=cexscale)
-	text(pe.noswim[3],pars.noswim.gi[3]+0.5,"Ages >10",pos=2,col=cols[3],font=2,cex=cexscale)
+	mtext("Ages 0 - 4",side=4,line=-0.25,at=gi.noswim.par100[1]/2,col=cols[1],cex=cexscale,las=1)
+	mtext("Ages 5 - 10",side=4,line=-0.25,at=gi.noswim.par100[2]/2,col=cols[2],cex=cexscale,las=1)
+	mtext("Ages >10",side=4,line=-0.25,at=gi.noswim.par100[3]/2,col=cols[3],cex=cexscale,las=1)
+	
 
 	# ytics <- seq(0,14,by=2)
 # plot(1,1,type="n",
