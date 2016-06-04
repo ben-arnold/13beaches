@@ -4,7 +4,7 @@
 #
 # description:
 # plot CIRs associated with Enterococcus
-# EPA 1600  and EPA qPCR 1611 
+# EPA 1600  and EPA qPCR 1611
 # above and below regulatory guidelines
 #
 # --------------------------------------
@@ -126,12 +126,12 @@ dev.off()
 
 ### Basic Figure Shell for Age-Stratified Entero 35 CFU plots
 ### could be called repeatedly for different additional stratifications beyond age (point source, non-point source, overall)
-### the function is pretty idiosyncratic -- just trying to avoid repeating all 50+ lines of code 
+### the function is pretty idiosyncratic -- just trying to avoid repeating all 50+ lines of code
 ### don't end up actually using the generalization -- carryover from a legacy idea of presenting double-stratified results, but
 ### the Ns  are really too small to justify that approach.
 
 CIplot35cfu <- function(pdata,cols) {
-	
+
 	# pdata is a list of 12 data plotting objects in this order:
 		# ci.all    : Matrix of cumulative incidence estimates w/ 95% CIs -- All ages
 		# ci.0to4   : Matrix of cumulative incidence estimates w/ 95% CIs -- Age 0 to 4
@@ -157,7 +157,7 @@ CIplot35cfu <- function(pdata,cols) {
 	N.age0to4   <- pdata[[10]]
 	N.age5to10  <- pdata[[11]]
 	N.age11plus <- pdata[[12]]
-	
+
 	op <- par(mar=c(5,8,8,0)+0.1,xpd=TRUE)
 	ytics <- seq(0,140,by=20)
 	# set up an empty plot
@@ -169,11 +169,11 @@ CIplot35cfu <- function(pdata,cols) {
 	segments(x0=mean(MidPts[3:4]),y0=min(ytics)-8,y1=max(ytics)+23,lwd=2,col="gray80")
 	axis(2,at=ytics,las=1)
 	mtext("Diarrhea\nIncidence\nper 1000",side=2,line=3,las=1)
-	
+
 	# calculate X coordinates relative to the mid points for each group
 	xspan <- 0.25
 	xplus <- c(-xspan, xspan)  # evenly distribute 2 datapoints around each midpoint
-	
+
 	x0to4   <- xplus+MidPts[1]
 	x5to10  <- xplus+MidPts[2]
 	x11plus <- xplus+MidPts[3]
@@ -181,37 +181,37 @@ CIplot35cfu <- function(pdata,cols) {
 	allxs   <- c(x0to4,x5to10,x11plus,xall)  # for table and category labels in header/footer
 	labx <- MidPts[1]-xspan*2.5  # for left-hand labels in the header/footer
 
-	
+
 	# plot age 0 to 4 estimates
 	segments(x0=x0to4,y0=ci.0to4[,"CIlb"]*1000,y1=ci.0to4[,"CIub"]*1000,lwd=2,col=cols)
 	points(x0to4,ci.0to4[,"CI"]*1000,pch=16,cex=1.25,lwd=2,col=cols)
 	text(x=x0to4,y=ci.0to4[,"CI"]*1000,sprintf("%1.0f",ci.0to4[,"CI"]*1000),pos=4,cex=0.7,col=cols,font=2)
-	
+
 	# plot age 5 to 10 estimates
 	segments(x0=x5to10,y0=ci.5to10[,"CIlb"]*1000,y1=ci.5to10[,"CIub"]*1000,lwd=2,col=cols)
 	points(x5to10,ci.5to10[,"CI"]*1000,pch=16,cex=1.25,lwd=2,col=cols)
 	text(x=x5to10,y=ci.5to10[,"CI"]*1000,sprintf("%1.0f",ci.5to10[,"CI"]*1000),pos=4,cex=0.7,col=cols,font=2)
-	
+
 	# plot age > 10 estimates
 	segments(x0=x11plus,y0=ci.11plus[,"CIlb"]*1000,y1=ci.11plus[,"CIub"]*1000,lwd=2,col=cols)
 	points(x11plus,ci.11plus[,"CI"]*1000,pch=16,cex=1.25,lwd=2,col=cols)
 	text(x=x11plus,y=ci.11plus[,"CI"]*1000,sprintf("%1.0f",ci.11plus[,"CI"]*1000),pos=4,cex=0.7,col=cols,font=2)
-	
+
 	# plot all age estimates
 	segments(x0=xall,y0=ci.all[,"CIlb"]*1000,y1=ci.all[,"CIub"]*1000,lwd=2,col=cols)
 	points(xall,ci.all[,"CI"]*1000,pch=16,cex=1.25,lwd=2,col=cols)
 	text(x=xall,y=ci.all[,"CI"]*1000,sprintf("%1.0f",ci.all[,"CI"]*1000),pos=4,cex=0.7,col=cols,font=2)
-	
-	
+
+
 	# print header labels
 	mtext(c("Ages\n0 to 4","Ages\n5 to 10","Ages\n>10","All\nAges"),at=MidPts,side=3,line=5.5  )
-	
+
 	mtext(expression(paste(italic("Enterococcus"))),side=3,line=4,at=labx,adj=1,col=cols[2],cex=0.8)
 	mtext("Category",side=3,line=3,at=labx,adj=1,col=cols[2],cex=0.8)
 	mtext(expression(""<= 35,""> 35),side=3,line=4,at=allxs,col=cols,cex=1,font=2)
 	mtext("CFU/100ml",side=3,line=3,at=allxs,col=cols,cex=0.75)
-	
-	
+
+
 	# Print adjusted CIRs and 95% CIs (formatted)
 	cirform <- function(cirs) {
 		paste(sprintf("%1.2f",cirs),sep="")
@@ -221,26 +221,26 @@ CIplot35cfu <- function(pdata,cols) {
 	}
 	mtext("Adjusted CIR",side=3,line=2,at=labx,adj=1,cex=0.8,col="gray30")
 	mtext(c("ref",cirform(cir.age0to4[1]),"ref",cirform(cir.age5to10[1]),"ref",cirform(cir.age11plus[1]),"ref",cirform(cir.all[1])),side=3,line=2,at=allxs,cex=0.75)
-	
+
 	mtext("(95% CI)",side=3,line=1,at=labx,adj=1,cex=0.8,col="gray30")
 	mtext(c("",circiform(cir.age0to4[2:3]),"",circiform(cir.age5to10[2:3]),"",circiform(cir.age11plus[2:3]),"",circiform(cir.all[2:3])),side=3,line=1,at=allxs,cex=0.7)
-	
+
 
 	# print footer labels
 	mtext(expression(""<= 35,""> 35),side=1,line=0.25,at=allxs,col=cols,cex=1,font=2)
 	mtext("CFU/100ml",side=1,line=1.25,at=allxs,col=cols,cex=0.75)
-	
+
 	# print table with Ns
 	mtext("Incident Diarrhea Cases",side=1,line=2.25,at=labx,adj=1,cex=0.8,col="gray30")
 	ns <- c(N.age0to4[,1],N.age5to10[,1],N.age11plus[,1],N.all[,1])
 	mtext(  format(ns,big.mark=","),side=1,line=2.25,at=allxs+0.06,adj=1,cex=0.75    )
-	
+
 	mtext("Population At Risk",side=1,line=3.25,at=labx,adj=1,cex=0.8,col="gray30")
 	Ns <- c(N.age0to4[,2],N.age5to10[,2],N.age11plus[,2],N.all[,2])
 	mtext(  format(Ns,big.mark=","),side=1,line=3.25,at=allxs+0.06,adj=1,cex=0.75    )
-	
+
 	par(op)
-	
+
 }  # end of CIplot35cfu function
 
 ## Age-stratified Plot
@@ -445,8 +445,9 @@ dev.off()
 
 pdf("~/dropbox/13beaches/aim1-results/figs/aim1-entero1600-noswim35cfu-CI-byage-AJPH.pdf",width=9,height=5)
 op <- par(mar=c(5,10,8,0)+0.1,xpd=TRUE)
-cols <- brewer.pal(9,"YlGnBu")[c(8,7,6)]
+# cols <- brewer.pal(9,"YlGnBu")[c(8,7,6)]
 # cols <- brewer.pal(9,"YlGn")[c(8,7,6)]
+cols <- rep("black",3)
 ytics <- seq(0,140,by=20)
 # set up an empty plot
 MidPts <- barplot(1:2,names.arg=NA,border=NA,col=NA,
@@ -622,12 +623,12 @@ cir470cce.ages <- rbind(cir.age0to4["Overall",],cir.age5to10["Overall",],cir.age
 
 ### Basic Figure Shell for the Entero qPCR 470 CCE plots
 ### called repeatedly for different stratifications (point source, non-point source, overall)
-### the function is pretty idiosyncratic -- just trying to avoid repeating all 50+ lines of code 
+### the function is pretty idiosyncratic -- just trying to avoid repeating all 50+ lines of code
 ### don't end up actually using the generalization -- carryover from a legacy idea of presenting double-stratified results, but
 ### the Ns  are really too small to justify that approach.
 
 CIplot470cce <- function(pdata,cols) {
-	
+
 	# pdata is a list of 12 data plotting objects in this order:
 		# ci.all    : Matrix of cumulative incidence estimates w/ 95% CIs -- All ages
 		# ci.0to4   : Matrix of cumulative incidence estimates w/ 95% CIs -- Age 0 to 4
@@ -653,7 +654,7 @@ CIplot470cce <- function(pdata,cols) {
 	N.age0to4   <- pdata[[10]]
 	N.age5to10  <- pdata[[11]]
 	N.age11plus <- pdata[[12]]
-	
+
 	op <- par(mar=c(5,8,8,0)+0.1,xpd=FALSE)
 	ytics <- seq(0,120,by=20)
 	# set up an empty plot
@@ -665,11 +666,11 @@ CIplot470cce <- function(pdata,cols) {
 	segments(x0=mean(MidPts[3:4]),y0=min(ytics)-8,y1=max(ytics)+23,lwd=2,col="gray80")
 	axis(2,at=ytics,las=1)
 	mtext("Diarrhea\nIncidence\nper 1000",side=2,line=3,las=1)
-	
+
 	# calculate X coordinates relative to the mid points for each group
 	xspan <- 0.25
 	xplus <- c(-xspan, xspan)  # evenly distribute 2 datapoints around each midpoint
-	
+
 	x0to4   <- xplus+MidPts[1]
 	x5to10  <- xplus+MidPts[2]
 	x11plus <- xplus+MidPts[3]
@@ -677,37 +678,37 @@ CIplot470cce <- function(pdata,cols) {
 	allxs   <- c(x0to4,x5to10,x11plus,xall)  # for table and category labels in header/footer
 	labx <- MidPts[1]-xspan*2.5  # for left-hand labels in the header/footer
 
-	
+
 	# plot age 0 to 4 estimates
 	segments(x0=x0to4,y0=ci.0to4[,"CIlb"]*1000,y1=ci.0to4[,"CIub"]*1000,lwd=2,col=cols)
 	points(x0to4,ci.0to4[,"CI"]*1000,pch=16,cex=1.25,lwd=2,col=cols)
 	text(x=x0to4,y=ci.0to4[,"CI"]*1000,sprintf("%1.0f",ci.0to4[,"CI"]*1000),pos=4,cex=0.7,col=cols,font=2)
-	
+
 	# plot age 5 to 10 estimates
 	segments(x0=x5to10,y0=ci.5to10[,"CIlb"]*1000,y1=ci.5to10[,"CIub"]*1000,lwd=2,col=cols)
 	points(x5to10,ci.5to10[,"CI"]*1000,pch=16,cex=1.25,lwd=2,col=cols)
 	text(x=x5to10,y=ci.5to10[,"CI"]*1000,sprintf("%1.0f",ci.5to10[,"CI"]*1000),pos=4,cex=0.7,col=cols,font=2)
-	
+
 	# plot age > 10 estimates
 	segments(x0=x11plus,y0=ci.11plus[,"CIlb"]*1000,y1=ci.11plus[,"CIub"]*1000,lwd=2,col=cols)
 	points(x11plus,ci.11plus[,"CI"]*1000,pch=16,cex=1.25,lwd=2,col=cols)
 	text(x=x11plus,y=ci.11plus[,"CI"]*1000,sprintf("%1.0f",ci.11plus[,"CI"]*1000),pos=4,cex=0.7,col=cols,font=2)
-	
+
 	# plot all age estimates
 	segments(x0=xall,y0=ci.all[,"CIlb"]*1000,y1=ci.all[,"CIub"]*1000,lwd=2,col=cols)
 	points(xall,ci.all[,"CI"]*1000,pch=16,cex=1.25,lwd=2,col=cols)
 	text(x=xall,y=ci.all[,"CI"]*1000,sprintf("%1.0f",ci.all[,"CI"]*1000),pos=4,cex=0.7,col=cols,font=2)
-	
-	
+
+
 	# print header labels
 	mtext(c("Ages\n0 to 4","Ages\n5 to 10","Ages\n>10","All\nAges"),at=MidPts,side=3,line=5.5  )
-	
+
 	mtext(expression(paste(italic("Enterococcus")," qPCR")),side=3,line=4,at=labx,adj=1,col=cols[2],cex=0.8)
 	mtext("Category",side=3,line=3,at=labx,adj=1,col=cols[2],cex=0.8)
 	mtext(expression(""<= 470,""> 470),side=3,line=4,at=allxs,col=cols,cex=1,font=2)
 	mtext("CCE/100ml",side=3,line=3,at=allxs,col=cols,cex=0.75)
-	
-	
+
+
 	# Print adjusted CIRs and 95% CIs (formatted)
 	cirform <- function(cirs) {
 		paste(sprintf("%1.2f",cirs),sep="")
@@ -717,25 +718,25 @@ CIplot470cce <- function(pdata,cols) {
 	}
 	mtext("Adjusted CIR",side=3,line=2,at=labx,adj=1,cex=0.8,col="gray30")
 	mtext(c("ref",cirform(cir.age0to4[1]),"ref",cirform(cir.age5to10[1]),"ref",cirform(cir.age11plus[1]),"ref",cirform(cir.all[1])),side=3,line=2,at=allxs,cex=0.75)
-	
+
 	mtext("(95% CI)",side=3,line=1,at=labx,adj=1,cex=0.8,col="gray30")
 	mtext(c("",circiform(cir.age0to4[2:3]),"",circiform(cir.age5to10[2:3]),"",circiform(cir.age11plus[2:3]),"",circiform(cir.all[2:3])),side=3,line=1,at=allxs,cex=0.7)
-	
+
 	# print footer labels
 	mtext(expression(""<= 470,""> 470),side=1,line=0.25,at=allxs,col=cols,cex=1,font=2)
 	mtext("CCE/100ml",side=1,line=1.25,at=allxs,col=cols,cex=0.75)
-	
+
 	# print table with Ns
 	mtext("Incident Diarrhea Cases",side=1,line=2.25,at=labx,adj=1,cex=0.8,col="gray30")
 	ns <- c(N.age0to4[,1],N.age5to10[,1],N.age11plus[,1],N.all[,1])
 	mtext(  format(ns,big.mark=","),side=1,line=2.25,at=allxs+0.06,adj=1,cex=0.75    )
-	
+
 	mtext("Population At Risk",side=1,line=3.25,at=labx,adj=1,cex=0.8,col="gray30")
 	Ns <- c(N.age0to4[,2],N.age5to10[,2],N.age11plus[,2],N.all[,2])
 	mtext(  format(Ns,big.mark=","),side=1,line=3.25,at=allxs+0.06,adj=1,cex=0.75    )
-	
+
 	par(op)
-	
+
 }  # end of CIplot35cfu function
 
 
