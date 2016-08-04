@@ -2,7 +2,7 @@ capture log close
 set more off
 clear all
 
-log using "~/dropbox/13beaches/src/dm/10-make-analysis-dataset.log", text replace
+log using "~/13beaches/src/dm/10-make-analysis-dataset.log", text replace
 
 *----------------------------------------
 * 10-make-analysis-dataset.do
@@ -63,7 +63,7 @@ replace teledate = mdy(7,21,2009) if indid=="BB1001675701"
 gen fudays = teledate - intdate
 	label var fudays "Days between beach visit and CATI interview"
 
-local symps "diarrhea nausea stomach vomiting rash eyeinfection earache fever urinarytractinfection cough sorethroat runnynose cold"
+local symps "diarrhea nausea stomach vomiting rash eyeinfection earache fever urinarytractinfection cough sorethroat runnynose cold cut"
 
 foreach symp of local symps {
 
@@ -114,7 +114,7 @@ foreach symp of local symps {
 * and symptoms that were not measured in that
 * cohort
 *---------------------------------------------
-local symps "diarrhea nausea stomach vomiting rash eyeinfection earache fever urinarytractinfection cough sorethroat runnynose cold"
+local symps "diarrhea nausea stomach vomiting rash eyeinfection earache fever urinarytractinfection cough sorethroat runnynose cold cut"
 foreach symp of local symps {
 	* Mission Bay has no information about which days an indiv was ill,
 	* so we cannot extract information about daily prevalence

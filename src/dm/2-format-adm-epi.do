@@ -149,7 +149,9 @@ rename publicpooly publicpool
 rename differentbeachy differentbeach
 rename prob skinchron
 
-rename whoswam swam
+gen swam = aftdays >=1
+	label var swam "went bathing or swimming anywhere since the beach interview?"
+
 
 rename racecat1 race
 

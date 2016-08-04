@@ -2,7 +2,7 @@ capture log close
 set more off
 clear all
 
-log using "~/dropbox/13beaches/src/dm/4-append-epi-data.log", text replace
+log using "~/13beaches/src/dm/4-append-epi-data.log", text replace
 
 *----------------------------------------
 * 4-append-epi-data.do
@@ -139,7 +139,7 @@ log close
 * variable reconciliation
 *---------------------------------------------
 
-log using "~/dropbox/13beaches/src/dm/4-append-epi-data.log", text append
+log using "~/13beaches/src/dm/4-append-epi-data.log", text append
 
 
 use "~/dropbox/13beaches/data/temp/neear-epi-vars.dta", clear
