@@ -7,6 +7,7 @@ There is an associated repository in the Open Science Framework with the analysi
 ## Additional information
 
 The primary outcomes article from this work was published open access in AJPH:
+
 Arnold BF, Wade TJ, Benjamin-Chung J, Schiff KC, Griffith JF, Dufour AP, et al. Acute Gastroenteritis and Recreational Water: Highest Burden Among Young US Children. _Am J Public Health_. 2016;106: 1690–1697.
 https://www.ncbi.nlm.nih.gov/pubmed/27459461
 
