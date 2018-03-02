@@ -2,7 +2,7 @@
 Repository for source code for the data management and primary analysis of the study funded by NIH grant R03-HD076066 to the University of California, Berkeley.
 
 ## Associated repository
-There is an associated repo in the Open Science Framework with the analysis protocol, additional background, and all (staged) analysis datasets. Note: at this time the datasets are not publicly available because we are negotiating how best to make that possible for the 9 US-EPA cohorts that contributed to the study. See the OSF repo for additional details and contact information:  https://osf.io/i3742/
+There is an associated repository in the Open Science Framework with the analysis protocol, additional background, and analysis datasets. See the OSF repo for additional details and contact information:  https://osf.io/i3742/
 
 ## Additional information
 
