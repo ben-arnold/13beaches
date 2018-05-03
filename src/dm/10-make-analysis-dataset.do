@@ -54,6 +54,35 @@ use "~/dropbox/13beaches/data/final/13beaches-epi.dta", clear
 * Create daily prevalence, incidence, and 
 * at risk indicators for 0 to 14 days for
 * each symptom
+*
+* Note that the outcome variables created below
+* are derived from daily symptom indicators and
+* do not use information from a global question
+* related to each symptom such as: 
+* "Have you had X since your visit to the beach?"
+* The rationale for this decision was to enable
+* us to examine daily incidence patterns and to
+* standarize the risk period used in the cumulative
+* incidence calculations, which could vary slightly
+* by study and by individual participant. For example
+* some participants were followed up after 10 days, while
+* others may have been followed up after 14 days. 
+* Using daily indicators enabled us to rely on a
+* standard, 10 day follow-up period across all studies.
+*
+* The calculations assume that if an individual's start
+* and end dates for a symptom are missing, that the 
+* individual did not have disease. For diarrhea, our
+* primary outcome, this influenced 256 out of 84,411
+* observations (0.3%).
+*  
+* By relying on the daily indicators, there were
+* a very limited number of cases where outcome coding
+* was at-odds with the global "Have you had X since your visit"
+* question. For diarrhea, our primary outcome, the
+* discordance occurred for 61 out of 84,411 observations (0.1%)
+* across the 13 studies. We therefore relied on
+* the daily indicators.
 *---------------------------------------------
 
 * calculate length of follow-up
